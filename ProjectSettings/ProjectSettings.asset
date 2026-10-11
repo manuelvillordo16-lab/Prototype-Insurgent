@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 01ba89e416b70fb4a81c478525c9f4cf
+  productGUID: 4b178c9083ae1a64999d26b8472ba968
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: PrototypeInsurgent
+  productName: Prototype Insurgent
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -846,14 +846,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: PrototypeInsurgent
+  metroPackageName: Prototype Insurgent
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: PrototypeInsurgent
+  metroApplicationDescription: Prototype Insurgent
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -924,11 +924,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 72ac83f0-1099-48e4-8d25-471faa7be95e
+  cloudProjectId: 2aa2a2b4-9727-4655-ac9f-622565453729
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: PrototypeInsurgent
-  organizationId: scovt
+  projectName: Prototype Insurgent 2026-10-05_01-06-51
+  organizationId: unity_38b5004da66fd1714f6c
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
