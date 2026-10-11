@@ -1,0 +1,1131 @@
+# Blender 4.5.5 LTS MTL File: 'office pack for uploading.blend'
+# www.blender.org
+
+newmtl Binder_Black
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 3 Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 3 Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 3 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 3 Normal.png
+
+newmtl Binder_Blue
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 2 Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 2 Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 2 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 2 Normal.png
+
+newmtl Binder_red
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 1 Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 1 Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 1 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Binder 1 Normal.png
+
+newmtl Black
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Black.001
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Black_Lamp
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Black Lamp Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Black Lamp Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Black Lamp Roughness.png
+map_Ke /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Black Lamp Emission Color.exr
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Lamp_Normal.png
+
+newmtl Cabinet_Metal
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Cardboard_Box
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cardboard Box Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cardboard Box Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cardboard Box Normal.png
+
+newmtl Cardboard_Box_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.800000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cardboard Box White Color.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Cardboard Box White Bevel Normal.png
+
+newmtl Clock_Back
+Kd 0.063302 0.063302 0.063302
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Clock_face
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Clock face Color.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Clock face Normal.png
+
+newmtl Cooler
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cooler Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cooler Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Cooler Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Cooler Bevel Normal.png
+
+newmtl Creme_Lamp
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Creme Lamp Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Creme Lamp Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Creme Lamp Roughness.png
+map_Ke /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Creme Lamp Emission Color.exr
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Lamp_Normal.png
+
+newmtl DefaultMaterial
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint DefaultMaterial Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint DefaultMaterial Roughness.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint DefaultMaterial Color.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/DefaultMaterial_Normal.png
+
+newmtl Fan_Brand
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan Brand Color.png
+
+newmtl Fan_Head
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Fan Head_BaseColor.png
+
+newmtl Fan_Head_Brand_Placement
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Fan_Metal
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan_Metal Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan_Metal Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan_Metal Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Fan Metal_Normal.png
+
+newmtl Fan_Metal.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan_Metal Color.webp
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Fan_Metal Normal.webp
+
+newmtl Files
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Files.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd -s 4.66 0.0001 1.66 /Users/yeshelove/Blender/Office Pack for uploading/textures/Paper color 512.webp
+
+newmtl Generic_Glass
+Kd 0.753581 0.800032 0.793325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.204545
+illum 9
+Pr 0.131818
+Pm 0.000000
+Ps 1.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Keyboard_Black
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Black Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Black Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Creme_Normal.png
+
+newmtl Keyboard_Black.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Black Color.webp
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Black Normal.webp
+
+newmtl Keyboard_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard White.001 Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard White.001 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Creme_Normal.png
+
+newmtl Monitor_Cream
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor Cream Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor Cream Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor Cream Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Cream_Normal.png
+
+newmtl Monitor_Glass
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_BaseColor.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_Normal.png
+
+newmtl Monitor_Glass
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_Normal.png
+
+newmtl Monitor_Glass.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Glass_Normal.png
+
+newmtl Monitor_Plastic
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor Black Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor Black Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Cream_Normal.png
+
+newmtl Monitor_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor White Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Monitor White Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Monitor Cream_Normal.png
+
+newmtl Mouse_Black
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Color.001.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Roughness.001.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mouse 2_Normal.png
+
+newmtl Mouse_Black.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Color.001.webp
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Normal.001.webp
+
+newmtl Mouse_Cream
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mouse 2_Normal.png
+
+newmtl Mouse_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Color.002.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Roughness.002.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mouse Creme Normal.002.png
+
+newmtl Mug
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mug_Normal.png
+
+newmtl Mug_2
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 2 Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 2 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mug 2_Normal.png
+
+newmtl Mug_2_Logo
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 2 Logo Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 2 Logo Color.png
+
+newmtl Mug_3
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 3 Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 3 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mug 3_Normal.png
+
+newmtl Mug_3_Logo
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 3 Logo Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 3 Logo Color.png
+
+newmtl Mug_4
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 4 Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 4 Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 4 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Mug 4_Normal.png
+
+newmtl Mug_4_Logo
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 4 Logo.001 Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug 4 Logo.001 Alpha.png
+
+newmtl Mug_Logo
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug Logo Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Mug Logo Alpha.png
+
+newmtl Note
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.875000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Note Color.png
+
+newmtl Note.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.875000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Note Color.webp
+
+newmtl Office_Chair_Leather.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Leather_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Leather_Normal.png
+
+newmtl Office_Chair_Metal.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Metal_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Metal_Normal.png
+
+newmtl Office_Chair_Plastic.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Plastic_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Office Chair Plastic_Normal.png
+
+newmtl PC.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Black Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Black Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC_Normal.png
+
+newmtl PC_Cream
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC.002_Normal.png
+
+newmtl PC_Front_Cream
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Front Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Front Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC_Front.001_Normal.png
+
+newmtl PC_Front_White
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl PC_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC White Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC White Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC_Front.001_Normal.png
+
+newmtl Pc_Feet
+Kd 0.031899 0.031899 0.031899
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.350000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Phone
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Phone Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Phone Roughness.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Phone Alpha.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Phone_Normal.png
+
+newmtl Pot
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Pot Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Pot Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Pot Normal.png
+
+newmtl Printer_Base
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Printer Base_Normal.png
+
+newmtl Printer_Base_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base White Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base White Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Printer Base_Normal.png
+
+newmtl Printer_Screen
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base White Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Base White Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Printer Base_Normal.png
+
+newmtl Printer_Top
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Top Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Top Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Printer Top_Normal.png
+
+newmtl Printer_Top_White
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Top White Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Printer Top White Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Printer Top_Normal.png
+
+newmtl Table
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Table_BaseColor.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Table_Normal.png
+
+newmtl Transparent_blue_plastic_procedural
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.000000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Transparent blue plastic procedural Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Transparent blue plastic procedural Color.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Transparent blue plastic procedural Normal.png
+
+newmtl Trash_can
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+Pr 0.402256
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Trash can Color.png
+map_d /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Trash can Color.png
+
+newmtl Ucupaint_Keyboard_Creme
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Creme.001 Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Creme.001 Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint Keyboard Creme_Normal.png
+
+newmtl Ucupaint_PC_Black_Front
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Black Front Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Front Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC_Front.001_Normal.png
+
+newmtl Ucupaint_PC_White_Front_new
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC White Front Color.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint PC Creme Front Roughness.png
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/PC_Front.001_Normal.png
+
+newmtl White_Lamp
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint White Lamp Color.png
+map_Pm /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint White Lamp Metallic.png
+map_Pr /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint White Lamp Roughness.png
+map_Ke /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint White Lamp Emission Color.exr
+map_Bump -bm 1.000000 /Users/yeshelove/Blender/Office Pack for uploading/textures/Lamp_Normal.png
+
+newmtl paper_
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint paper 1 Color.png
+
+newmtl paper_.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint paper 1 Color.webp
+
+newmtl paper_2
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint paper 2 Color.png
+
+newmtl paper_3
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pr 0.500000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd /Users/yeshelove/Blender/Office Pack for uploading/textures/Ucupaint paper 3 Color.png
