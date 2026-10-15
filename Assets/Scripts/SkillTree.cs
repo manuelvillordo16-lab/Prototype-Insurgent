@@ -6,54 +6,53 @@ public class SkillTree : MonoBehaviour
 {
     public int exp = 100;
     public int costoJunior = 50;
-    public int costoMid = 100;
     public int costoSenior = 150;
     public TextMeshProUGUI textoExp;
-
     public Button botonJunior;
-    public Button botonMid;
     public Button botonSenior;
-
     public Image fondoJunior;
-    public Image fondoMid;
     public Image fondoSenior;
+
+    public GameObject panelJunior;
+    public Button[] botonesCuadros;
+    public Image[] fondosCuadros;
 
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
     bool menuAbierto = false;
+    bool[] cuadrosComprados = new bool[3];
+    bool seniorComprada = false;
 
-    bool juniorComprada;
-    bool midComprada;
-    bool seniorComprada;
     void Start()
     {
         ActualizarPantalla();
+        panelJunior.SetActive(false);
         panelSkills.SetActive(false);
     }
 
-    public void ComprarJunior()
+    public void AbrirJunior()
     {
-        if (!juniorComprada && exp >= costoJunior)
-        {
-            exp = exp - costoJunior;
-            juniorComprada = true;
-            ActualizarPantalla();
-        }
+        panelJunior.SetActive(true);
     }
 
-    public void ComprarMid()
+    public void CerrarJunior()
     {
-        if (!midComprada && exp >= costoMid)
+        panelJunior.SetActive(false);
+    }
+
+    public void ComprarJunior(int numero)
+    {
+        if (!cuadrosComprados[numero] && exp >= costoCuadro)
         {
-            exp = exp - costoMid;
-            midComprada = true;
+            exp = exp - costoCuadro;
+            cuadrosComprados[numero] = true;
             ActualizarPantalla();
         }
     }
 
     public void ComprarSenior()
     {
-        if (!seniorComprada && exp >= costoSenior)
+        if (juniorComprada && !seniorComprada && exp >= costoSenior)
         {
             exp = exp - costoSenior;
             seniorComprada = true;
@@ -64,10 +63,9 @@ public class SkillTree : MonoBehaviour
 
     void ActualizarPantalla()
     {
-        textoExp.text = "EXP" + exp;
-        PintarTarjeta(fondoJunior, botonJunior, juniorComprada, true);
-        PintarTarjeta(fondoMid, botonMid, midComprada, juniorComprada);
-        PintarTarjeta(fondoSenior,botonSenior,seniorComprada,midComprada);
+        textoExp.text = "EXP " + exp;
+        PintarTarjeta(fondoJunior, botonJunior, juniorComprada, exp >= costoJunior);
+        PintarTarjeta(fondoSenior, botonSenior, seniorComprada, juniorComprada && exp >= costoSenior);
     }
 
     void PintarTarjeta(Image fondo, Button boton, bool comprada, bool disponible)
