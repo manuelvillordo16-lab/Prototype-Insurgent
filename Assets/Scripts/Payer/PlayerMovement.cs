@@ -129,6 +129,13 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal and Vertical Movement
         Vector3 finalMove = move * targetSpeed + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
+
+        //Character looks where it moves
+        if (move.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
     }
 
     private void HandleCrouch()
