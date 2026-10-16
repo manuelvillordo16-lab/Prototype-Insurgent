@@ -32,10 +32,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minVerticalAngle = -40f;
     [SerializeField] private float maxVerticalAngle = 80f;
 
-    [Header("Animación")]
-    [SerializeField] private Animator animator;
-
-
     private float currentYaw;
     private float currentPitch;
 
@@ -59,16 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (lookTarget == null)
             lookTarget = transform.Find("LookTarget");
-
-        if (animator == null)
-            animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         HandleMovement();
         HandleCrouch();
-        UpdateAnimator();
     }
 
     //Inputs
@@ -199,20 +191,5 @@ public class PlayerMovement : MonoBehaviour
         {
             lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
         }
-    }
-    private void UpdateAnimator()
-    {
-        if (animator == null) return;
-
-        // Velocidad para el Animator
-        float speedPercent = moveInput.magnitude;
-
-        if (isSprinting && speedPercent > 0.1f)
-            speedPercent = 1f;          // Run
-        else if (speedPercent > 0.1f)
-            speedPercent = 0.5f;        // Walk
-
-        animator.SetFloat("Speed", speedPercent);
-        animator.SetBool("IsCrouching", isCrouching);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SkillTree : MonoBehaviour
 {
     public int exp = 100;
-    public int costoJunior = 50;
+    public int costoCuadro = 50;
     public int costoSenior = 150;
     public TextMeshProUGUI textoExp;
     public Button botonJunior;
@@ -52,7 +52,7 @@ public class SkillTree : MonoBehaviour
 
     public void ComprarSenior()
     {
-        if (juniorComprada && !seniorComprada && exp >= costoSenior)
+        if (JuniorCompleto() && !seniorComprada && exp >= costoSenior)
         {
             exp = exp - costoSenior;
             seniorComprada = true;
@@ -60,12 +60,32 @@ public class SkillTree : MonoBehaviour
         }
 
     }
+     
+    bool JuniorCompleto()
+    {
+        for (int i = 0; i < cuadrosComprados.Length; i++)
+        {
+            if (!cuadrosComprados[i]) return false;
+        }
+        return true;
+
+    }
 
     void ActualizarPantalla()
     {
         textoExp.text = "EXP " + exp;
-        PintarTarjeta(fondoJunior, botonJunior, juniorComprada, exp >= costoJunior);
-        PintarTarjeta(fondoSenior, botonSenior, seniorComprada, juniorComprada && exp >= costoSenior);
+        
+        for (int i = 0; i < cuadrosComprados.Length; i++)
+        {
+            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costoCuadro);
+        }
+
+        if (JuniorCompleto()) fondoJunior.color = Color.yellow;
+        else fondoJunior.color = Color.green;
+        botonJunior.interactable = true;
+
+        PintarTarjeta(fondoSenior, botonSenior, seniorComprada, JuniorCompleto() && exp >= costoSenior);
+
     }
 
     void PintarTarjeta(Image fondo, Button boton, bool comprada, bool disponible)
