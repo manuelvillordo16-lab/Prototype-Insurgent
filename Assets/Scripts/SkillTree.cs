@@ -40,7 +40,7 @@ public class SkillTree : MonoBehaviour
         panelJunior.SetActive(false);
     }
 
-    public void ComprarJunior(int numero)
+    public void ComprarCuadro(int numero)
     {
         if (!cuadrosComprados[numero] && exp >= costoCuadro)
         {

@@ -201,19 +201,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 198311216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1143741599}
-        m_TargetAssemblyTypeName: SkillTree, Assembly-CSharp
-        m_MethodName: ComprarJunior
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &198311216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,7 +1459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 970915090}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1143741598}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &970915090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,8 +2501,13 @@ MonoBehaviour:
   fondoSenior: {fileID: 574206947}
   panelJunior: {fileID: 1548123019}
   botonesCuadros:
-  - {fileID: 0}
-  fondosCuadros: []
+  - {fileID: 970915089}
+  - {fileID: 1099564920}
+  - {fileID: 1917231490}
+  fondosCuadros:
+  - {fileID: 970915090}
+  - {fileID: 1099564921}
+  - {fileID: 1917231491}
   panelSkills: {fileID: 1241195098}
   teclaAbrir: 107
 --- !u!4 &1143741600
@@ -3522,7 +3527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768803158}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31194565, y: 0.120011136, z: -0.03975671, w: 0.94165105}
+  m_LocalRotation: {x: 0.31194562, y: 0.12001112, z: -0.039756697, w: 0.9416511}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3692,7 +3697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885956053}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31194568, y: 0.12001114, z: -0.039756723, w: 0.94165105}
+  m_LocalRotation: {x: 0.31194562, y: 0.12001113, z: -0.039756704, w: 0.94165105}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
