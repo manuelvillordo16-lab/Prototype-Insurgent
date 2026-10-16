@@ -9,8 +9,8 @@ public class Enemy2 : MonoBehaviour
     [Header("Patrol")]
     public Transform guardPoint;
     public float guardRadius = 10f;
-    public float guardSpeed = 20f;   
-    public float chaseSpeed = 30f;   
+    public float guardSpeed = 3.5f;   
+    public float chaseSpeed = 6.0f;   
 
     [Header("Combat and Ranges")]
     public Transform player;
