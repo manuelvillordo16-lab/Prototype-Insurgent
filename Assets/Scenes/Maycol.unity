@@ -2492,15 +2492,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillTree
   exp: 500
-  costoJunior: 50
+  costoCuadro: 50
   costoSenior: 150
   textoExp: {fileID: 1231157522}
   botonJunior: {fileID: 198311215}
   botonSenior: {fileID: 730688744}
   fondoJunior: {fileID: 748954215}
   fondoSenior: {fileID: 574206947}
-  panelJunior: {fileID: 0}
-  botonesCuadros: []
+  panelJunior: {fileID: 1548123019}
+  botonesCuadros:
+  - {fileID: 0}
   fondosCuadros: []
   panelSkills: {fileID: 1241195098}
   teclaAbrir: 107
@@ -3521,7 +3522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768803158}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31195402, y: 0.11981315, z: -0.039691128, w: 0.94167626}
+  m_LocalRotation: {x: 0.31194565, y: 0.120011136, z: -0.03975671, w: 0.94165105}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3691,7 +3692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885956053}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31195405, y: 0.11981316, z: -0.039691135, w: 0.94167626}
+  m_LocalRotation: {x: 0.31194568, y: 0.12001114, z: -0.039756723, w: 0.94165105}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
