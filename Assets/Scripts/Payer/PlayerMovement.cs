@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animación")]
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform characterModel;
 
 
     private float currentYaw;
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleCrouch();
         UpdateAnimator();
+        RotateCharacterModel();
     }
 
     //Inputs
@@ -129,6 +131,22 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal and Vertical Movement
         Vector3 finalMove = move * targetSpeed + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
+
+    }
+
+    private void RotateCharacterModel()
+    {
+        if (characterModel == null) return;
+
+        // Siempre mira hacia donde apunta la cámara (solo rotación horizontal)
+        float targetYRotation = Camera.main.transform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
+
+        characterModel.rotation = Quaternion.Slerp(
+            characterModel.rotation,
+            targetRotation,
+            8f * Time.deltaTime
+        );
     }
 
     private void HandleCrouch()
