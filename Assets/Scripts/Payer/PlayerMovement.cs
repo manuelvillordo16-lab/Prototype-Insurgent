@@ -216,6 +216,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (animator == null) return;
 
+        //Relativ camera movement
+        float moveX = moveInput.x;
+        float moveY = moveInput.y;
+
+        animator.SetFloat("MoveX", moveX);
+        animator.SetFloat("MoveY", moveY);
+        animator.SetFloat("Speed", moveInput.magnitude > 0.1f ? (isSprinting ? 1f : 0.5f) : 0f);
+
         // Velocidad para el Animator
         float speedPercent = moveInput.magnitude;
 
