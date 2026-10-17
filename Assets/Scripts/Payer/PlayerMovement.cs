@@ -230,4 +230,5 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsGrounded", controller.isGrounded);
     }
+    private bool wasGrounded;
 }
