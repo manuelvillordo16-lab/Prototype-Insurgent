@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
             jumpPressed = true;
+        animator.SetTrigger("Jump");
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -219,11 +220,14 @@ public class PlayerMovement : MonoBehaviour
         float speedPercent = moveInput.magnitude;
 
         if (isSprinting && speedPercent > 0.1f)
-            speedPercent = 1f;          // Run
+            speedPercent = 1f;         // Run
         else if (speedPercent > 0.1f)
-            speedPercent = 0.5f;        // Walk
+            speedPercent = 0.5f;       // Walk
+        else
+            speedPercent = 0f;         // Idle
 
         animator.SetFloat("Speed", speedPercent);
         animator.SetBool("IsCrouching", isCrouching);
+        animator.SetBool("IsGrounded", controller.isGrounded);
     }
 }
