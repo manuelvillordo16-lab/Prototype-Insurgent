@@ -227,7 +227,8 @@ public class PlayerMovement : MonoBehaviour
         // Velocidad para el Animator
         float speedPercent = moveInput.magnitude;
 
-        if (isSprinting && speedPercent > 0.1f)
+        if (isSprinting && !isCrouching)
+            
             speedPercent = 1f;         // Run
         else if (speedPercent > 0.1f)
             speedPercent = 0.5f;       // Walk
