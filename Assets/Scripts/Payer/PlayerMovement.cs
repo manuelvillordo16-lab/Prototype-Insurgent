@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
             jumpPressed = true;
+        animator.SetTrigger("Jump");
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -244,7 +245,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", speedPercent);
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsGrounded", controller.isGrounded);
-        animator.SetTrigger("Jump");
     }
     private bool wasGrounded;
 }
