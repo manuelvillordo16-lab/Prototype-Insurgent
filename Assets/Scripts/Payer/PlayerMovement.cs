@@ -84,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
             jumpPressed = true;
-        animator.SetTrigger("Jump");
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -139,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (characterModel == null) return;
 
-        // Siempre mira hacia donde apunta la cámara (solo rotación horizontal)
+        // Always looks at where camera points
         float targetYRotation = Camera.main.transform.eulerAngles.y;
         Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
 
@@ -212,32 +211,40 @@ public class PlayerMovement : MonoBehaviour
             lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
         }
     }
+
     private void UpdateAnimator()
     {
         if (animator == null) return;
 
-        //Relativ camera movement
-        float moveX = moveInput.x;
-        float moveY = moveInput.y;
+        Vector2 input = moveInput;
+        if (input.magnitude > 0.1f)
+        {
+            // Dominant direction
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+                input.y *= 0.4f;   // Reduces minor component
+            else
+                input.x *= 0.4f;
+        }
 
-        animator.SetFloat("MoveX", moveX);
-        animator.SetFloat("MoveY", moveY);
-        animator.SetFloat("Speed", moveInput.magnitude > 0.1f ? (isSprinting ? 1f : 0.5f) : 0f);
+        // Movement direction
+        animator.SetFloat("MoveX", moveInput.x);
+        animator.SetFloat("MoveY", moveInput.y);
 
-        // Velocidad para el Animator
-        float speedPercent = moveInput.magnitude;
+        // Speed
+        float speedPercent = 0f;
 
-        if (isSprinting && !isCrouching)
-            
-            speedPercent = 1f;         // Run
-        else if (speedPercent > 0.1f)
-            speedPercent = 0.5f;       // Walk
-        else
-            speedPercent = 0f;         // Idle
+        if (moveInput.magnitude > 0.1f)
+        {
+            if (isSprinting && !isCrouching)
+                speedPercent = 1f;      // Runs when not crouching
+            else
+                speedPercent = 0.5f;    // Walk
+        }
 
         animator.SetFloat("Speed", speedPercent);
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsGrounded", controller.isGrounded);
+        animator.SetTrigger("Jump");
     }
     private bool wasGrounded;
 }
