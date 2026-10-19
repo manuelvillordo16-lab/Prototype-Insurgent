@@ -10,6 +10,12 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float lightAttackCooldown = 0.6f;
     [SerializeField] private float heavyAttackCooldown = 1.2f;
 
+    [Header("Daño")]
+    [SerializeField] private float lightAttackDamage = 15f;
+    [SerializeField] private float heavyAttackDamage = 35f;
+    [SerializeField] private float criticalChance = 0.15f;
+    [SerializeField] private float citicalMultiplier = 2f;
+
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
 
@@ -19,7 +25,7 @@ public class PlayerCombat : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
     }
 
-    // --- Ataque Rápido (Click Izquierdo) ---
+    // Light Attack
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -28,7 +34,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    // --- Ataque Pesado (Click Derecho) ---
+    // Heavy Attack
     public void OnHeavyAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -42,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastLightAttackTime < lightAttackCooldown) return;
 
         lastLightAttackTime = Time.time;
-        animator.SetTrigger("Attack");          // Trigger del ataque rápido
+        animator.SetTrigger("Attack");          // Light Attack Trigger
         Debug.Log("Ataque Rápido");
     }
 
@@ -51,7 +57,7 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastHeavyAttackTime < heavyAttackCooldown) return;
 
         lastHeavyAttackTime = Time.time;
-        animator.SetTrigger("HeavyAttack");     // Trigger del ataque pesado
+        animator.SetTrigger("HeavyAttack");     // Heavy Attack Trigger
         Debug.Log("Ataque Pesado");
     }
 }
