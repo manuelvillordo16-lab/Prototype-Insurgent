@@ -6,8 +6,9 @@ public class SkillTree : MonoBehaviour
 {
     public int exp = 100;
     public int[] costosCuadros = {50,100,150};
-    public int costoSenior = 150;
+    public int[] costosSenior = {200,250,300};
     public TextMeshProUGUI textoExp;
+    public TextMeshProUGUI textoNivel;
     public Button botonJunior;
     public Button botonSenior;
     public Image fondoJunior;
@@ -16,12 +17,15 @@ public class SkillTree : MonoBehaviour
     public GameObject panelJunior;
     public Button[] botonesCuadros;
     public Image[] fondosCuadros;
+    public GameObject panelSenior;
+    public Button[] botonesSenior;
+    public Image[] fondosSenior;
 
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
     bool menuAbierto = false;
     bool[] cuadrosComprados = new bool[3];
-    bool seniorComprada = false;
+    bool[] seniorComprados = new bool[3]; 
     public Hacker hacker;
 
     void Start()
@@ -29,6 +33,7 @@ public class SkillTree : MonoBehaviour
         hacker.enabled = false;
         ActualizarPantalla();
         panelJunior.SetActive(false);
+        panelSenior.SetActive(false);
         panelSkills.SetActive(false);
     }
 
@@ -42,6 +47,15 @@ public class SkillTree : MonoBehaviour
         panelJunior.SetActive(false);
     }
 
+    public void AbrirSenior()
+    {
+        if (JuniorCompleto()) panelSenior.SetActive(true);
+    }
+
+    public void CerrarSenior()
+    {
+        panelSenior.SetActive(false);
+    }
     public void ComprarCuadro(int numero)
     {
         if (!cuadrosComprados[numero] && exp >= costosCuadros[numero])
@@ -52,12 +66,12 @@ public class SkillTree : MonoBehaviour
         }
     }
 
-    public void ComprarSenior()
+    public void ComprarCuadroSenior(int numero)
     {
-        if (JuniorCompleto() && !seniorComprada && exp >= costoSenior)
+        if (JuniorCompleto() && !seniorComprados[numero] && exp >= costosSenior[numero])
         {
-            exp = exp - costoSenior;
-            seniorComprada = true;
+            exp = exp - costosSenior[numero];
+            seniorComprados[numero] = true;
             ActualizarPantalla();
         }
 
@@ -73,20 +87,73 @@ public class SkillTree : MonoBehaviour
 
     }
 
+    bool SeniorCompleto()
+    {
+        for (int i = 0; i < seniorComprados.Length; i++)
+        {
+            if (!seniorComprados[i]) return false;
+        }
+        return true;
+
+    }
+
+    int CuadrosCompradosCantidad()
+    {
+        int cantidad = 0;
+        for (int i= 0; i < cuadrosComprados.Length; i++)
+        {
+            if (cuadrosComprados[i]) cantidad++;
+        }
+        for (int i= 0; i < seniorComprados.Length; i++)
+        {
+            if (seniorComprados[i]) cantidad++;
+        }
+        return cantidad;
+
+
+    }
+
     void ActualizarPantalla()
     {
         textoExp.text = "EXP " + exp;
+        textoNivel.text = "Nivel " + (1 + CuadrosCompradosCantidad());
         
         for (int i = 0; i < cuadrosComprados.Length; i++)
         {
             PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costosCuadros[i]);
         }
 
+        for (int i = 0; i < seniorComprados.Length; i++)
+        {
+          PintarTarjeta(fondosSenior[i], botonesSenior[i], seniorComprados[i], JuniorCompleto() && exp >= costosSenior[i]);
+
+        }
+
+        
         if (JuniorCompleto()) fondoJunior.color = Color.yellow;
-        else fondoJunior.color = Color.green;
+
+        else fondoJunior.color= Color.green;
+
         botonJunior.interactable = true;
 
-        PintarTarjeta(fondoSenior, botonSenior, seniorComprada, JuniorCompleto() && exp >= costoSenior);
+
+        if (!JuniorCompleto())
+        {
+            fondoSenior.color = Color.gray;
+            botonSenior.interactable = false;
+        }
+        else if (SeniorCompleto())
+        {
+            fondoSenior.color = Color.yellow;
+            botonSenior.interactable = true;
+        }
+        else
+        {
+            fondoSenior.color = Color.green;
+            botonSenior.interactable = true;
+        }
+
+        
 
     }
 
