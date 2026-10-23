@@ -5,55 +5,56 @@ using UnityEngine.UI;
 public class SkillTree : MonoBehaviour
 {
     public int exp = 100;
-    public int costoJunior = 50;
-    public int costoMid = 100;
+    public int[] costosCuadros = {50,100,150};
     public int costoSenior = 150;
     public TextMeshProUGUI textoExp;
-
     public Button botonJunior;
-    public Button botonMid;
     public Button botonSenior;
-
     public Image fondoJunior;
-    public Image fondoMid;
     public Image fondoSenior;
+
+    public GameObject panelJunior;
+    public Button[] botonesCuadros;
+    public Image[] fondosCuadros;
 
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
     bool menuAbierto = false;
+    bool[] cuadrosComprados = new bool[3];
+    bool seniorComprada = false;
+    public Hacker hacker;
 
-    bool juniorComprada;
-    bool midComprada;
-    bool seniorComprada;
     void Start()
     {
+        hacker.enabled = false;
         ActualizarPantalla();
+        panelJunior.SetActive(false);
         panelSkills.SetActive(false);
     }
 
-    public void ComprarJunior()
+    public void AbrirJunior()
     {
-        if (!juniorComprada && exp >= costoJunior)
-        {
-            exp = exp - costoJunior;
-            juniorComprada = true;
-            ActualizarPantalla();
-        }
+        panelJunior.SetActive(true);
     }
 
-    public void ComprarMid()
+    public void CerrarJunior()
     {
-        if (!midComprada && exp >= costoMid)
+        panelJunior.SetActive(false);
+    }
+
+    public void ComprarCuadro(int numero)
+    {
+        if (!cuadrosComprados[numero] && exp >= costosCuadros[numero])
         {
-            exp = exp - costoMid;
-            midComprada = true;
+            exp = exp - costosCuadros[numero];
+            cuadrosComprados[numero] = true;
             ActualizarPantalla();
         }
     }
 
     public void ComprarSenior()
     {
-        if (!seniorComprada && exp >= costoSenior)
+        if (JuniorCompleto() && !seniorComprada && exp >= costoSenior)
         {
             exp = exp - costoSenior;
             seniorComprada = true;
@@ -61,13 +62,32 @@ public class SkillTree : MonoBehaviour
         }
 
     }
+     
+    bool JuniorCompleto()
+    {
+        for (int i = 0; i < cuadrosComprados.Length; i++)
+        {
+            if (!cuadrosComprados[i]) return false;
+        }
+        return true;
+
+    }
 
     void ActualizarPantalla()
     {
-        textoExp.text = "EXP" + exp;
-        PintarTarjeta(fondoJunior, botonJunior, juniorComprada, true);
-        PintarTarjeta(fondoMid, botonMid, midComprada, juniorComprada);
-        PintarTarjeta(fondoSenior,botonSenior,seniorComprada,midComprada);
+        textoExp.text = "EXP " + exp;
+        
+        for (int i = 0; i < cuadrosComprados.Length; i++)
+        {
+            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costosCuadros[i]);
+        }
+
+        if (JuniorCompleto()) fondoJunior.color = Color.yellow;
+        else fondoJunior.color = Color.green;
+        botonJunior.interactable = true;
+
+        PintarTarjeta(fondoSenior, botonSenior, seniorComprada, JuniorCompleto() && exp >= costoSenior);
+
     }
 
     void PintarTarjeta(Image fondo, Button boton, bool comprada, bool disponible)
@@ -103,6 +123,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = true;
         panelSkills.SetActive(true);
+        hacker.enabled = false;
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -113,6 +134,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = false;
         panelSkills.SetActive(false);
+        hacker.enabled = cuadrosComprados[0];
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
