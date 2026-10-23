@@ -3,42 +3,7 @@ guid: 690be106813657545afc65622207ec4c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Mech_LOD2
-    second: {fileID: 2100000, guid: 5cb2da7efbbd1e447bee4a7fccd36add, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Mech_LOD3
-    second: {fileID: 2100000, guid: 5cb2da7efbbd1e447bee4a7fccd36add, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Bake_Mech_LOD2_albedo
-    second: {fileID: 2800000, guid: b0e6e1bc644ebf646a8a57f85a1f0e4c, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Bake_Mech_LOD2_emissive
-    second: {fileID: 2800000, guid: ed1dab4fdbad71040872d00811645893, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Bake_Mech_LOD2_metalness
-    second: {fileID: 2800000, guid: 17f311d96dc28ad438ec9e2b6b15334a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Bake_Mech_LOD2_normal_base
-    second: {fileID: 2800000, guid: 809ebe123f5986340ac24a797d1d1fc2, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Bake_Mech_LOD2_roughness
-    second: {fileID: 2800000, guid: 7554acc2b62c0cf469e2ab8ef8ecb62d, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -145,10 +110,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 355418
-  packageName: Stylized Sci Fi Mech Robot Asset
-  packageVersion: 1.0
-  assetPath: Assets/RSG_UnderWater_Pack/ISO/HDRP/Models/Mech/SK_ISO_Mech.fbx
-  uploadId: 850312
