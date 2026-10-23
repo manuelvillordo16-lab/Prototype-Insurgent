@@ -3,21 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    [Header("Vida")]
+    [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    [Header("Game Over Settings")]
-    public string gameOverSceneName = "GameOver";
+    [Header("Game Over")]
+    [SerializeField] private string gameOverSceneName = "GameOver";
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+    public bool IsDead { get; private set; }
 
-    void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
+        IsDead = false;
     }
 
     public void TakeDamage(float amount)
     {
+        if (IsDead || amount <= 0f) return;
+
         currentHealth -= amount;
-        Debug.Log("¡Player received damage! Current health: " + currentHealth);
+        currentHealth = Mathf.Max(currentHealth, 0f);
+
+        Debug.Log($"Player received {amount} of damage. Current Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0f)
         {
@@ -25,9 +34,21 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (IsDead) return;
+
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+    }
+
     void Die()
     {
+        if (IsDead) return;
+
+        IsDead = true;
         Debug.Log("Player is dead. Loading game over scene...");
+
         SceneManager.LoadScene(gameOverSceneName);
     }
 
