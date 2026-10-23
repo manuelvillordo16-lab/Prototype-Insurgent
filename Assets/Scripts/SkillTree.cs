@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SkillTree : MonoBehaviour
 {
     public int exp = 100;
-    public int costoCuadro = 50;
+    public int[] costosCuadros = {50,100,150};
     public int costoSenior = 150;
     public TextMeshProUGUI textoExp;
     public Button botonJunior;
@@ -22,9 +22,11 @@ public class SkillTree : MonoBehaviour
     bool menuAbierto = false;
     bool[] cuadrosComprados = new bool[3];
     bool seniorComprada = false;
+    public Hacker hacker;
 
     void Start()
     {
+        hacker.enabled = false;
         ActualizarPantalla();
         panelJunior.SetActive(false);
         panelSkills.SetActive(false);
@@ -42,9 +44,9 @@ public class SkillTree : MonoBehaviour
 
     public void ComprarCuadro(int numero)
     {
-        if (!cuadrosComprados[numero] && exp >= costoCuadro)
+        if (!cuadrosComprados[numero] && exp >= costosCuadros[numero])
         {
-            exp = exp - costoCuadro;
+            exp = exp - costosCuadros[numero];
             cuadrosComprados[numero] = true;
             ActualizarPantalla();
         }
@@ -77,7 +79,7 @@ public class SkillTree : MonoBehaviour
         
         for (int i = 0; i < cuadrosComprados.Length; i++)
         {
-            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costoCuadro);
+            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costosCuadros[i]);
         }
 
         if (JuniorCompleto()) fondoJunior.color = Color.yellow;
@@ -121,6 +123,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = true;
         panelSkills.SetActive(true);
+        hacker.enabled = false;
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -131,6 +134,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = false;
         panelSkills.SetActive(false);
+        hacker.enabled = cuadrosComprados[0];
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillTree
   exp: 500
-  costoCuadro: 50
+  costosCuadros: 320000006400000096000000
   costoSenior: 150
   textoExp: {fileID: 1231157522}
   botonJunior: {fileID: 198311215}
@@ -2522,6 +2522,7 @@ MonoBehaviour:
   - {fileID: 1917231491}
   panelSkills: {fileID: 1241195098}
   teclaAbrir: 107
+  hacker: {fileID: 0}
 --- !u!4 &1143741600
 Transform:
   m_ObjectHideFlags: 0
