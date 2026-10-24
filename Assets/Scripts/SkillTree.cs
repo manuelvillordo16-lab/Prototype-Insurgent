@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SkillTree : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
     public int exp = 100;
     public int[] costosCuadros = {50,100,150};
     public int[] costosSenior = {200,250,300};
@@ -31,6 +32,7 @@ public class SkillTree : MonoBehaviour
     void Start()
     {
         hacker.enabled = false;
+        playerMovement.dobleSaltoDesbloqueado = false;
         ActualizarPantalla();
         panelJunior.SetActive(false);
         panelSenior.SetActive(false);
@@ -62,6 +64,11 @@ public class SkillTree : MonoBehaviour
         {
             exp = exp - costosCuadros[numero];
             cuadrosComprados[numero] = true;
+            if (numero == 1)
+            {
+                playerMovement.dobleSaltoDesbloqueado = true;
+            }
+
             ActualizarPantalla();
         }
     }

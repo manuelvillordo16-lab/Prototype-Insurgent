@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Hackeable : MonoBehaviour
 {
+    public static float duracionHack = 3f;
     private Renderer objectRenderer;
     private Color originalColor;
     private EnemyAI enemyAI;

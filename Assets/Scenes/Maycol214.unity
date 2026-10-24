@@ -1087,7 +1087,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233392569}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31194568, y: 0.12001116, z: -0.039756726, w: 0.94165105}
+  m_LocalRotation: {x: 0.31194568, y: 0.12001114, z: -0.039756723, w: 0.94165105}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1941,6 +1941,7 @@ MonoBehaviour:
   lookSensitivity: 2
   minVerticalAngle: -40
   maxVerticalAngle: 80
+  dobleSaltoDesbloqueado: 0
 --- !u!143 &448161206
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4499,6 +4500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b3c69bc6901554a90b607393bb0249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillTree
+  playerMovement: {fileID: 448161205}
   exp: 2000
   costosCuadros: 320000006400000096000000
   costosSenior: c8000000fa0000002c010000
@@ -5454,7 +5456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060031929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31194565, y: 0.12001115, z: -0.039756715, w: 0.94165105}
+  m_LocalRotation: {x: 0.31194565, y: 0.120011136, z: -0.03975671, w: 0.94165105}
   m_LocalPosition: {x: 0.85, y: 6.3926144, z: -3.7926693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

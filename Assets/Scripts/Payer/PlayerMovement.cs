@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minVerticalAngle = -40f;
     [SerializeField] private float maxVerticalAngle = 80f;
 
+    [Header("Doble salto (lo activa el SkillTree")]
+    public bool dobleSaltoDesbloqueado = false;
+    public bool tripleSaltoDesbloqueado = false;
+    private int saltosAereosUsados = 0;
     private float currentYaw;
     private float currentPitch;
 
@@ -108,12 +114,24 @@ public class PlayerMovement : MonoBehaviour
 
         // Jump and Gravity
         if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f;
-
-        if (jumpPressed && controller.isGrounded && !isCrouching)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = -2f;
+            saltosAereosUsados = 0;
         }
+           
+        if (jumpPressed && !isCrouching)
+        {
+            if (controller.isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+            else if (saltosAereosUsados < SaltosAereosPermitidos())
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                saltosAereosUsados++;
+            }
+        }
+       
         jumpPressed = false; // Always resets
 
         velocity.y += gravity * Time.deltaTime;
@@ -121,6 +139,13 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal and Vertical Movement
         Vector3 finalMove = move * targetSpeed + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
+    }
+
+    private int SaltosAereosPermitidos()
+    {
+        if (tripleSaltoDesbloqueado) return 2;
+        if (dobleSaltoDesbloqueado) return 1;
+        return 0;
     }
 
     private void HandleCrouch()
