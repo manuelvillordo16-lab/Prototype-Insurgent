@@ -6,7 +6,7 @@ public class EnemyAudioController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     [Header("Configuration")]
-    [Tooltip("Mark if this object is the final (Boss)")]
+    [Tooltip("Mark if this object is the (FinalBoss)")]
     [SerializeField] private bool isBoss = false;
 
     [Header("Voices and Attacks")]
