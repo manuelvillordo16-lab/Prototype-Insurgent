@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Hackeable : MonoBehaviour
 {
+    public static float duracionHack = 3f;
     private Renderer objectRenderer;
     private Color originalColor;
     private EnemyAI enemyAI;
@@ -37,10 +38,10 @@ public class Hackeable : MonoBehaviour
         if (enemyAI != null)
         {
             Debug.Log("EnemyAI encontrado. Aplicando stun. ");
-            enemyAI.Stun(3f);
+            enemyAI.Stun(duracionHack);
         }
        
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(duracionHack);
 
         objectRenderer.material.color = originalColor;
 
