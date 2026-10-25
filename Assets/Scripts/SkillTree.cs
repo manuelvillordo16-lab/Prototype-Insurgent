@@ -33,6 +33,8 @@ public class SkillTree : MonoBehaviour
     {
         hacker.enabled = false;
         playerMovement.dobleSaltoDesbloqueado = false;
+        playerMovement.tripleSaltoDesbloqueado = false;
+        Hackeable.duracionHack = 3f;
         ActualizarPantalla();
         panelJunior.SetActive(false);
         panelSenior.SetActive(false);
@@ -79,6 +81,15 @@ public class SkillTree : MonoBehaviour
         {
             exp = exp - costosSenior[numero];
             seniorComprados[numero] = true;
+            if (numero == 0)
+            {
+                Hackeable.duracionHack = 6f;
+            }
+
+            if (numero == 1)
+            {
+                playerMovement.tripleSaltoDesbloqueado = true;
+            }
             ActualizarPantalla();
         }
 
