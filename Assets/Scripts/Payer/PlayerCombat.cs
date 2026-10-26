@@ -5,6 +5,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private Animator animator;
+    [SerializeField] private SwordDamage swordDamage;
 
     [Header("Ataques")]
     [SerializeField] private float lightAttackCooldown = 0.6f;
@@ -59,5 +60,23 @@ public class PlayerCombat : MonoBehaviour
         lastHeavyAttackTime = Time.time;
         animator.SetTrigger("HeavyAttack");     // Heavy Attack Trigger
         Debug.Log("Ataque Pesado");
+    }
+
+    public void EnableSwordDamage()
+    {
+        if (swordDamage != null)
+            swordDamage.EnableDamage(false);
+    }
+
+    public void EnableSwordHeavyDamage()
+    {
+        if (swordDamage != null)
+            swordDamage.EnableDamage(true);
+    }
+
+    public void DisableSwordDamage()
+    {
+        if (swordDamage != null)
+            swordDamage.DisableDamage();
     }
 }
