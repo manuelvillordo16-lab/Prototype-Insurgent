@@ -9,7 +9,7 @@ public class SwordDamage : MonoBehaviour
     private bool canDealDamage = false;
     private bool isHeavyAttack = false;
 
-    public void EnableDamage(bool heavy) //Calls PlayerCombat
+    public void EnableDamage(bool heavy) //Summons PlayerCombat
     {
         canDealDamage = true;
         isHeavyAttack = heavy;
