@@ -7,10 +7,10 @@ public class FinalBoss : MonoBehaviour
     public BossState currentState = BossState.Sleeping;
 
     [Header("Two Bars Health")]
-    public float maxHealthBar1 = 100f;
-    public float maxHealthBar2 = 100f;
-    private float currentHealthBar1;
-    private float currentHealthBar2;
+    [SerializeField] private float maxHealthBar1 = 100f;
+    [SerializeField] private float maxHealthBar2 = 100f;
+    [SerializeField] private float currentHealthBar1;
+    [SerializeField] private float currentHealthBar2;
     private bool isSecondBarActive = false;
 
     [Header("Shield System")]
