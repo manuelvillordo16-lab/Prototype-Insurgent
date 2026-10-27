@@ -30,6 +30,7 @@ public class SwordDamage : MonoBehaviour
             float damage = isHeavyAttack ? heavyDamage : lightDamage;
             enemyHealth.TakeDamage(damage);
         }
+        canDealDamage = false;
     }
 
 }

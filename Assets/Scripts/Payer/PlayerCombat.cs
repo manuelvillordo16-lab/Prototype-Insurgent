@@ -7,6 +7,12 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SwordDamage swordDamage;
 
+    [Header("Tiempos de la ventana de daño")]
+    [SerializeField] private float lightDamageStart = 0.15f;   //When starts dealing damage
+    [SerializeField] private float lightDamageEnd = 0.4f;     //When finishes dealing damage
+    [SerializeField] private float heavyDamageStart = 0.25f;
+    [SerializeField] private float heavyDamageEnd = 0.6f;
+
     [Header("Ataques")]
     [SerializeField] private float lightAttackCooldown = 0.6f;
     [SerializeField] private float heavyAttackCooldown = 1.2f;
@@ -78,5 +84,30 @@ public class PlayerCombat : MonoBehaviour
     {
         if (swordDamage != null)
             swordDamage.DisableDamage();
+    }
+
+    private void LightAttack()
+    {
+        if (swordDamage == null) return;
+        animator.SetTrigger("Attack");
+        StartCoroutine(DamageWindow(lightDamageStart, lightDamageEnd, false));
+    }
+
+    private void HeavyAttack()
+    {
+        if (swordDamage == null) return;
+        animator.SetTrigger("HeavyAttack");
+        StartCoroutine(DamageWindow(heavyDamageStart, heavyDamageEnd, true));
+    }
+
+    private System.Collections.IEnumerator DamageWindow(float start, float end, bool isHeavy)
+    {
+        yield return new WaitForSeconds(start);
+
+        swordDamage.EnableDamage(isHeavy);
+
+        yield return new WaitForSeconds(end - start);
+
+        swordDamage.DisableDamage();
     }
 }
