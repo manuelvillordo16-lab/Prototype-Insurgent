@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,10 +32,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minVerticalAngle = -40f;
     [SerializeField] private float maxVerticalAngle = 80f;
 
-    [Header("Doble salto (lo activa el SkillTree")]
-    public bool dobleSaltoDesbloqueado = false;
-    public bool tripleSaltoDesbloqueado = false;
-    private int saltosAereosUsados = 0;
+    [Header("Animación")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform characterModel;
+
+
     private float currentYaw;
     private float currentPitch;
 
@@ -61,12 +60,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (lookTarget == null)
             lookTarget = transform.Find("LookTarget");
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         HandleMovement();
         HandleCrouch();
+        UpdateAnimator();
+        RotateCharacterModel();
     }
 
     //Inputs
@@ -80,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
             jumpPressed = true;
+        animator.SetTrigger("Jump");
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -114,24 +119,12 @@ public class PlayerMovement : MonoBehaviour
 
         // Jump and Gravity
         if (controller.isGrounded && velocity.y < 0f)
-        {
             velocity.y = -2f;
-            saltosAereosUsados = 0;
-        }
-           
-        if (jumpPressed && !isCrouching)
+
+        if (jumpPressed && controller.isGrounded && !isCrouching)
         {
-            if (controller.isGrounded)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
-            else if (saltosAereosUsados < SaltosAereosPermitidos())
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                saltosAereosUsados++;
-            }
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-       
         jumpPressed = false; // Always resets
 
         velocity.y += gravity * Time.deltaTime;
@@ -139,13 +132,22 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal and Vertical Movement
         Vector3 finalMove = move * targetSpeed + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
+
     }
 
-    private int SaltosAereosPermitidos()
+    private void RotateCharacterModel()
     {
-        if (tripleSaltoDesbloqueado) return 2;
-        if (dobleSaltoDesbloqueado) return 1;
-        return 0;
+        if (characterModel == null) return;
+
+        // Always looks at where camera points
+        float targetYRotation = Camera.main.transform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
+
+        characterModel.rotation = Quaternion.Slerp(
+            characterModel.rotation,
+            targetRotation,
+            8f * Time.deltaTime
+        );
     }
 
     private void HandleCrouch()
@@ -210,4 +212,39 @@ public class PlayerMovement : MonoBehaviour
             lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
         }
     }
+
+    private void UpdateAnimator()
+    {
+        if (animator == null) return;
+
+        Vector2 input = moveInput;
+        if (input.magnitude > 0.1f)
+        {
+            // Dominant direction
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+                input.y *= 0.4f;   // Reduces minor component
+            else
+                input.x *= 0.4f;
+        }
+
+        // Movement direction
+        animator.SetFloat("MoveX", moveInput.x);
+        animator.SetFloat("MoveY", moveInput.y);
+
+        // Speed
+        float speedPercent = 0f;
+
+        if (moveInput.magnitude > 0.1f)
+        {
+            if (isSprinting && !isCrouching)
+                speedPercent = 1f;      // Runs when not crouching
+            else
+                speedPercent = 0.5f;    // Walk
+        }
+
+        animator.SetFloat("Speed", speedPercent);
+        animator.SetBool("IsCrouching", isCrouching);
+        animator.SetBool("IsGrounded", controller.isGrounded);
+    }
+    private bool wasGrounded;
 }
