@@ -21,10 +21,23 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float lightAttackDamage = 15f;
     [SerializeField] private float heavyAttackDamage = 35f;
     [SerializeField] private float criticalChance = 0.15f;
-    [SerializeField] private float citicalMultiplier = 2f;
+    [SerializeField] private float criticalMultiplier = 2f;
 
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
+    private float CalculateDamage(bool isHeavy)
+    {
+        float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
+
+        // Probabilidad de crítico
+        if (Random.value <= criticalChance)
+        {
+            baseDamage *= criticalMultiplier;
+            Debug.Log("¡Golpe crítico!");
+        }
+
+        return baseDamage;
+    }
 
     private void Awake()
     {
@@ -55,7 +68,8 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastLightAttackTime < lightAttackCooldown) return;
 
         lastLightAttackTime = Time.time;
-        animator.SetTrigger("Attack");          // Light Attack Trigger
+        animator.SetTrigger("Attack");
+        StartCoroutine(DamageWindow(lightDamageStart, lightDamageEnd, false));
         Debug.Log("Ataque Rápido");
     }
 
@@ -64,47 +78,18 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastHeavyAttackTime < heavyAttackCooldown) return;
 
         lastHeavyAttackTime = Time.time;
-        animator.SetTrigger("HeavyAttack");     // Heavy Attack Trigger
+        animator.SetTrigger("HeavyAttack");
+        StartCoroutine(DamageWindow(heavyDamageStart, heavyDamageEnd, true));
         Debug.Log("Ataque Pesado");
     }
 
-    public void EnableSwordDamage()
-    {
-        if (swordDamage != null)
-            swordDamage.EnableDamage(false);
-    }
-
-    public void EnableSwordHeavyDamage()
-    {
-        if (swordDamage != null)
-            swordDamage.EnableDamage(true);
-    }
-
-    public void DisableSwordDamage()
-    {
-        if (swordDamage != null)
-            swordDamage.DisableDamage();
-    }
-
-    private void LightAttack()
-    {
-        if (swordDamage == null) return;
-        animator.SetTrigger("Attack");
-        StartCoroutine(DamageWindow(lightDamageStart, lightDamageEnd, false));
-    }
-
-    private void HeavyAttack()
-    {
-        if (swordDamage == null) return;
-        animator.SetTrigger("HeavyAttack");
-        StartCoroutine(DamageWindow(heavyDamageStart, heavyDamageEnd, true));
-    }
-
+   
     private System.Collections.IEnumerator DamageWindow(float start, float end, bool isHeavy)
     {
         yield return new WaitForSeconds(start);
 
-        swordDamage.EnableDamage(isHeavy);
+        float finalDamage = CalculateDamage(isHeavy);
+        swordDamage.EnableDamage(finalDamage);
 
         yield return new WaitForSeconds(end - start);
 
