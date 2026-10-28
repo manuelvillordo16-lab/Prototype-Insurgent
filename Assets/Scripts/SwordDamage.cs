@@ -2,35 +2,32 @@ using UnityEngine;
 
 public class SwordDamage : MonoBehaviour
 {
-    [Header("Daño")]
-    [SerializeField] private float lightDamage = 15f;
-    [SerializeField] private float heavyDamage = 35f;
-
     private bool canDealDamage = false;
-    private bool isHeavyAttack = false;
+    private float currentDamage = 0f;
 
-    public void EnableDamage(bool heavy) //Summons PlayerCombat
+    public void EnableDamage(float damage)
     {
         canDealDamage = true;
-        isHeavyAttack = heavy;
+        currentDamage = damage;
     }
 
     public void DisableDamage()
     {
         canDealDamage = false;
+        currentDamage = 0f;
     }
 
-    private void OnTriggerEnter(Collider other) // Hit detection        Mari debe tener script de los enemigos
+    private void OnTriggerEnter(Collider other)
     {
         if (!canDealDamage) return;
-        EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
 
-        if (enemyHealth != null)
+       
+        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+
+        if (enemy != null)
         {
-            float damage = isHeavyAttack ? heavyDamage : lightDamage;
-            enemyHealth.TakeDamage(damage);
+            enemy.TakeDamage(currentDamage);
+            canDealDamage = false; 
         }
-        canDealDamage = false;
     }
-
 }
