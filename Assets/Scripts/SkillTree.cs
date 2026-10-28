@@ -6,9 +6,7 @@ public class SkillTree : MonoBehaviour
     public int exp = 100;
     public TextMeshProUGUI textoExp;
     public TextMeshProUGUI textoNivel;
-    public NodoHabilidad[] nodosJunior;
-    public NodoHabilidad[] nodosSenior;
-    public GameObject candadoSenior;
+    public NodoHabilidad[] nodos;
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
     bool menuAbierto = false; 
@@ -26,8 +24,8 @@ public class SkillTree : MonoBehaviour
         playerMovement.dobleSaltoDesbloqueado = false;
         playerMovement.tripleSaltoDesbloqueado = false;
       
-        for (int i = 0; i < nodosJunior.Length; i++) nodosJunior[i].Iniciar(this);
-        for (int i = 0; i < nodosSenior.Length; i++) nodosSenior[i].Iniciar(this);
+        for (int i = 0; i < nodos.Length; i++) nodos[i].Iniciar(this);
+        
 
         ActualizarPantalla();
         panelSkills.SetActive(false);
@@ -69,6 +67,7 @@ public class SkillTree : MonoBehaviour
         if (poder == Poder.Stun)
         {
             hacker.stunDesbloqueado = true;
+            hackeoDesbloqueado = true;
         }
 
         if (poder == Poder.PuertasNivel2)
@@ -88,28 +87,14 @@ public class SkillTree : MonoBehaviour
         
     }
 
-    bool ArbolCompleto(NodoHabilidad[] nodos)
-    {
-        for (int i = 0; i < nodos.Length; i++)
-        {
-            if (!nodos[i].comprado) return false;
-        }
-        return true;
-
-    }
-
     int CantidadComprados()
     {
         int cantidad = 0;
-        for (int i = 0; i < nodosJunior.Length; i++)
+        for (int i = 0; i < nodos.Length; i++)
         {
-            if (nodosJunior[i].comprado) cantidad++;
+            if (nodos[i].comprado) cantidad++;
         }
 
-        for (int i = 0; i  < nodosSenior.Length; i++)
-        {
-            if (nodosSenior[i].comprado) cantidad++;
-        }
         return cantidad;
     }
 
@@ -118,11 +103,7 @@ public class SkillTree : MonoBehaviour
         textoExp.text = "EXP " + exp;
         textoNivel.text = "Nivel " + (1 + CantidadComprados());
 
-        bool juniorCompleto = ArbolCompleto(nodosJunior);
-        candadoSenior.SetActive(!juniorCompleto);
-
-        for (int i = 0; i < nodosJunior.Length; i++) nodosJunior[i].Actualizar(true, exp);
-        for (int i = 0; i < nodosSenior.Length; i++) nodosSenior[i].Actualizar(juniorCompleto, exp);
+        for (int i = 0; i < nodos.Length; i++) nodos[i].Actualizar(true, exp);
       
     }
 
