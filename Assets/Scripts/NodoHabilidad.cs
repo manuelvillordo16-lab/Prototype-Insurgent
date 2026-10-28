@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Poder { Ninguno, Hackeo, DobleSalto, HackeoMejorado, TripleSalto }
+public enum Poder { Ninguno, PuertasNivel1, DobleSalto, Stun, PuertasNivel2, TripleSalto, StunMejorado}
 public class NodoHabilidad : MonoBehaviour
 {
     public int costo = 50;
@@ -22,10 +22,10 @@ public class NodoHabilidad : MonoBehaviour
         boton = GetComponent<Button>();
         fondo = GetComponent<Image>();
         marco = GetComponent<Outline>();
-        boton.onClick.AddListener(Click);
+        
     }
 
-    void Click()
+    public void Click()
     {
         arbol.Comprar(this);
     }

@@ -20,9 +20,12 @@ public class SkillTree : MonoBehaviour
     void Start()
     {
         hacker.enabled = false;
+        hacker.duracionHack = 3f;
+        hacker.nivelPuertas = 0;
+        hacker.stunDesbloqueado = false;
         playerMovement.dobleSaltoDesbloqueado = false;
         playerMovement.tripleSaltoDesbloqueado = false;
-        Hackeable.duracionHack = 3f;
+      
         for (int i = 0; i < nodosJunior.Length; i++) nodosJunior[i].Iniciar(this);
         for (int i = 0; i < nodosSenior.Length; i++) nodosSenior[i].Iniciar(this);
 
@@ -52,57 +55,75 @@ public class SkillTree : MonoBehaviour
 
     void AplicarPoder(Poder poder)
     {
-        switch (poder)
+        if (poder == Poder.PuertasNivel1)
         {
-            case Poder.Hackeo:
-                hackeoDesbloqueado = true;
-                break;
-
+            hackeoDesbloqueado = true;
+            hacker.nivelPuertas = 1;
         }
+
+        if (poder == Poder.DobleSalto)
+        {
+            playerMovement.dobleSaltoDesbloqueado = true;
+        }
+
+        if (poder == Poder.Stun)
+        {
+            hacker.stunDesbloqueado = true;
+        }
+
+        if (poder == Poder.PuertasNivel2)
+        {
+            hacker.nivelPuertas = 2;
+        }
+        
+        if (poder == Poder.StunMejorado)
+        {
+            hacker.duracionHack = 6f;
+        }
+
+        if (poder == Poder.TripleSalto)
+        {
+            playerMovement.tripleSaltoDesbloqueado = true;
+        } 
+        
+    }
+
+    bool ArbolCompleto(NodoHabilidad[] nodos)
+    {
+        for (int i = 0; i < nodos.Length; i++)
+        {
+            if (!nodos[i].comprado) return false;
+        }
+        return true;
+
+    }
+
+    int CantidadComprados()
+    {
+        int cantidad = 0;
+        for (int i = 0; i < nodosJunior.Length; i++)
+        {
+            if (nodosJunior[i].comprado) cantidad++;
+        }
+
+        for (int i = 0; i  < nodosSenior.Length; i++)
+        {
+            if (nodosSenior[i].comprado) cantidad++;
+        }
+        return cantidad;
     }
 
     void ActualizarPantalla()
     {
         textoExp.text = "EXP " + exp;
-        textoNivel.text = "Nivel " + (1 + CuadrosCompradosCantidad());
-        
-        for (int i = 0; i < cuadrosComprados.Length; i++)
-        {
-            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costosCuadros[i]);
-        }
+        textoNivel.text = "Nivel " + (1 + CantidadComprados());
 
-        for (int i = 0; i < seniorComprados.Length; i++)
-        {
-          PintarTarjeta(fondosSenior[i], botonesSenior[i], seniorComprados[i], JuniorCompleto() && exp >= costosSenior[i]);
+        bool juniorCompleto = ArbolCompleto(nodosJunior);
+        candadoSenior.SetActive(!juniorCompleto);
 
-        }
-
-        
-        if (JuniorCompleto()) fondoJunior.color = Color.yellow;
-
-        else fondoJunior.color= Color.green;
-
-        botonJunior.interactable = true;
-
-
-        if (!JuniorCompleto())
-        {
-            fondoSenior.color = Color.gray;
-            botonSenior.interactable = false;
-        }
-        else if (SeniorCompleto())
-        {
-            fondoSenior.color = Color.yellow;
-            botonSenior.interactable = true;
-        }
-        else
-        {
-            fondoSenior.color = Color.green;
-            botonSenior.interactable = true;
-        }
-
-        
-
+        for (int i = 0; i < nodosJunior.Length; i++) nodosJunior[i].Actualizar(true, exp);
+        for (int i = 0; i < nodosSenior.Length; i++) nodosSenior[i].Actualizar(juniorCompleto, exp);
+      
     }
 
     void AbrirMenu()
@@ -120,7 +141,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = false;
         panelSkills.SetActive(false);
-        hacker.enabled = cuadrosComprados[0];
+        hacker.enabled = hackeoDesbloqueado;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -4,14 +4,13 @@ using UnityEngine.Rendering.Universal;
 
 public class Hackeable : MonoBehaviour
 {
-    public static float duracionHack = 3f;
+    public int nivelRequerido = 1;
     private Renderer objectRenderer;
     private Color originalColor;
     private EnemyAI enemyAI;
 
     [SerializeField] private DoorMovement doorMovement;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         objectRenderer = GetComponent<Renderer>();  
@@ -19,33 +18,42 @@ public class Hackeable : MonoBehaviour
         enemyAI= GetComponent<EnemyAI>();
     }
 
-   public void Hack()
+   public void Hack(float duracion, int nivelPuertas, bool puedeStun)
     {
-        Debug.Log("Hack activado en: " + gameObject.name);
+        bool abrePuerta = doorMovement != null && nivelPuertas >= nivelRequerido;
+        bool aturde = enemyAI != null && puedeStun;
 
-        if (doorMovement != null)
+        if (!abrePuerta && !aturde)
         {
-            Debug.Log("Puerta Encontrada. Abriendo puerta. ");
+            Debug.Log("No tenes el nivel para hackear: " + gameObject.name);
+            return;
+        }
+
+        Debug.Log("Hack activado en: " + gameObject.name + "duracion: " + duracion);
+
+        if (abrePuerta)
+        {
+            Debug.Log("Abriendo puerta. ");
             doorMovement.OpenDoor();
         }
 
-        StartCoroutine(HackEffect());
+        StartCoroutine(HackEffect(duracion, abrePuerta, aturde));
 
     }
-    private IEnumerator HackEffect()
+    private IEnumerator HackEffect(float duracion, bool abrePuerta, bool aturde)
     {
         objectRenderer.material.color = Color.green;
-        if (enemyAI != null)
+        if (aturde)
         {
-            Debug.Log("EnemyAI encontrado. Aplicando stun. ");
-            enemyAI.Stun(duracionHack);
+            Debug.Log("Aplicando stun. ");
+            enemyAI.Stun(duracion);
         }
        
-        yield return new WaitForSeconds(duracionHack);
+        yield return new WaitForSeconds(duracion);
 
         objectRenderer.material.color = originalColor;
 
-        if (doorMovement != null)
+        if (abrePuerta)
         {
             Debug.Log("Hack terminado. Cerrando puerta. ");
             doorMovement.CloseDoor();
