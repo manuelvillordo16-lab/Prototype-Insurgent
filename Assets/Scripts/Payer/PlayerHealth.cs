@@ -57,6 +57,12 @@ public class PlayerHealth : MonoBehaviour
         IsDead = true;
         Debug.Log("Player is dead. Loading game over scene...");
 
+        PlayerAudioController playerAudio = GetComponent<PlayerAudioController>();
+        if (playerAudio != null)
+        {
+            playerAudio.PlayPlayerDeath();
+        }
+
         if (animator != null)
         {
             animator.SetTrigger("Death");
