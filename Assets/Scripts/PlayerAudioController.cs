@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class PlayerAudioController : MonoBehaviour
 {
     [Header("Components")]
@@ -11,6 +10,8 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip stepSound;
     [SerializeField] private AudioClip playerVoiceDamage;
     [SerializeField] private AudioClip playerAttackSound;
+    [SerializeField] private AudioClip playerDeathSound;
+
     public void PlayJumpSound()
     {
         if (audioSource != null && jumpSound != null)
@@ -45,5 +46,15 @@ public class PlayerAudioController : MonoBehaviour
             audioSource.pitch = Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(playerAttackSound);
         }
+    }
+
+    public void PlayPlayerDeath()
+    {
+        if (audioSource != null && playerDeathSound != null)
+        {
+            audioSource.pitch = Random.Range(0.85f, 0.95f); 
+            audioSource.PlayOneShot(playerDeathSound);
+        }
+
     }
 }

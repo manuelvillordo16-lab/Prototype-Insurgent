@@ -33,7 +33,15 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         Debug.Log(gameObject.name + "The Enemy is dead");
 
-
         Destroy(gameObject);
+
+        EnemyAudioController audioCtrl = GetComponent<EnemyAudioController>();
+
+        if (audioCtrl != null)
+
+        {
+            audioCtrl.PlayDeathSound();
+        }
+
     }
 }
