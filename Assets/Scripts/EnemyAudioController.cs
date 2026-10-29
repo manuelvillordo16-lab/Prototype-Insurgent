@@ -12,6 +12,7 @@ public class EnemyAudioController : MonoBehaviour
     [Header("Voices and Attacks")]
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip deathSound; 
     [SerializeField] private AudioClip specialBossVoice; 
 
     public void PlayAttackSound()
@@ -33,7 +34,17 @@ public class EnemyAudioController : MonoBehaviour
         }
     }
 
-    
+    public void PlayDeathSound()
+    {
+        if (audioSource != null && deathSound != null)
+        {
+         
+            audioSource.pitch = isBoss ? Random.Range(0.75f, 0.85f) : Random.Range(0.85f, 0.95f);
+            audioSource.PlayOneShot(deathSound);
+        }
+    }
+
+
     public void PlayBossIntroVoice()
     {
         if (isBoss && audioSource != null && specialBossVoice != null)

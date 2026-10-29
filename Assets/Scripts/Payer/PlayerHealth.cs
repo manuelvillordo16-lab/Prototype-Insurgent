@@ -27,8 +27,17 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+       
+        PlayerAudioController playerAudio = GetComponent<PlayerAudioController>();
+        if (playerAudio != null)
+        {
+            playerAudio.PlayPlayerDeath();
+        }
+
+
         Debug.Log("Player is dead. Loading game over scene...");
         SceneManager.LoadScene(gameOverSceneName);
+
     }
 
 
