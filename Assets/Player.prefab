@@ -1570,7 +1570,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   lookTarget: {fileID: 0}
-  lookSensitivity: 0.8
+  lookSensitivity: 0.3
   minVerticalAngle: -40
   maxVerticalAngle: 80
   animator: {fileID: 1508518010506339496}
