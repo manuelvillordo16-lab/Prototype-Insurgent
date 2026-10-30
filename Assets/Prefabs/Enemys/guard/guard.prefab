@@ -2941,7 +2941,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   currentState: 0
   patrolMode: 1
-  spawner: {fileID: 4171331126765444160}
   randomPatrolRadius: 30
   player: {fileID: 0}
   patrolSpeed: 20
@@ -2961,7 +2960,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6918839327138456571}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14fc3a8f98ac8b64ba95d13aab4082c4, type: 3}
   m_Name: 
