@@ -23,6 +23,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float criticalChance = 0.15f;
     [SerializeField] private float criticalMultiplier = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private PlayerAudioController audioController;
+
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
     private float CalculateDamage(bool isHeavy)
@@ -71,6 +74,9 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("Attack");
         StartCoroutine(DamageWindow(lightDamageStart, lightDamageEnd, false));
         Debug.Log("Ataque Rápido");
+
+        if (audioController != null)
+            audioController.PlayPlayerAttack();
     }
 
     private void TryHeavyAttack()
@@ -81,6 +87,9 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("HeavyAttack");
         StartCoroutine(DamageWindow(heavyDamageStart, heavyDamageEnd, true));
         Debug.Log("Ataque Pesado");
+
+        if (audioController != null)
+            audioController.PlayPlayerHeavyAttack();
     }
 
    
