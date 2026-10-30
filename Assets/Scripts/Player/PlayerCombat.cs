@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -26,13 +28,21 @@ public class PlayerCombat : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private PlayerAudioController audioController;
 
+    [Header("Ataque Especial - Tornado Kick")]
+    [SerializeField] private float specialDamage = 9999f;
+    [SerializeField] private float sequenceTimeout = 0.8f;
+    [SerializeField] private float specialCoolDown = 8f;
+
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
+    private float lastSpecialTime;
+    private List<string> currentSequence = new List<string>();
+    private float lastInputTime;
     private float CalculateDamage(bool isHeavy)
     {
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
 
-        // Probabilidad de crítico
+        // Critical Chance
         if (Random.value <= criticalChance)
         {
             baseDamage *= criticalMultiplier;
@@ -53,6 +63,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
+            RegisterInput("Attack");
             TryLightAttack();
         }
     }
@@ -103,5 +114,58 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(end - start);
 
         swordDamage.DisableDamage();
+    }
+    private void RegisterInput(string input)
+    {
+        
+        if (Time.time - lastInputTime > sequenceTimeout)
+        {
+            currentSequence.Clear();
+        }
+
+        lastInputTime = Time.time;
+        currentSequence.Add(input);
+
+        if (currentSequence.Count < 4)
+            currentSequence.RemoveAt(0);
+
+        CheckSPecialSequence();
+    }
+
+    private void CheckSPecialSequence()
+    {
+        if (currentSequence.Count > 4) return;
+
+        bool match =
+            currentSequence[currentSequence.Count - 4] == "S" &&
+            currentSequence[currentSequence.Count - 3] == "SA" &&
+            currentSequence[currentSequence.Count - 2] == "A" &&
+            currentSequence[currentSequence.Count - 1] == "Attack";
+
+        if (match)
+        {
+            TryTornadoKick();
+            currentSequence.Clear();
+        }
+    }
+
+    private void TryTornadoKick()
+    {
+        if (Time.time - lastSpecialTime < specialCoolDown) return;
+
+        lastSpecialTime = Time.time;
+
+        animator.SetTrigger("TornadoKick");
+
+        if (audioController != null)
+            audioController.PlayPlayerHeavyAttack();
+
+        StartCoroutine(DamageWindow(0.2f, 0.7f, true));
+
+        Debug.Log("¡Tornado Kick activado!");
+    }
+    public void RegisterDirectionalInput(string dir)
+    {
+        RegisterInput(dir);
     }
 }
