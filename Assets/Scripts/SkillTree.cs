@@ -32,8 +32,8 @@ public class SkillTree : MonoBehaviour
     void Start()
     {
         hacker.enabled = false;
-        playerMovement.dobleSaltoDesbloqueado = false;
-        playerMovement.tripleSaltoDesbloqueado = false;
+       // playerMovement.dobleSaltoDesbloqueado = false;
+        //playerMovement.tripleSaltoDesbloqueado = false;
         Hackeable.duracionHack = 3f;
         ActualizarPantalla();
         panelJunior.SetActive(false);
@@ -68,7 +68,7 @@ public class SkillTree : MonoBehaviour
             cuadrosComprados[numero] = true;
             if (numero == 1)
             {
-                playerMovement.dobleSaltoDesbloqueado = true;
+               // playerMovement.dobleSaltoDesbloqueado = true;
             }
 
             ActualizarPantalla();
@@ -88,7 +88,7 @@ public class SkillTree : MonoBehaviour
 
             if (numero == 1)
             {
-                playerMovement.tripleSaltoDesbloqueado = true;
+              //  playerMovement.tripleSaltoDesbloqueado = true;
             }
             ActualizarPantalla();
         }
