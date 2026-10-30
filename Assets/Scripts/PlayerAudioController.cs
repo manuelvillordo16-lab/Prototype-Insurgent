@@ -10,6 +10,7 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip stepSound;
     [SerializeField] private AudioClip playerVoiceDamage;
     [SerializeField] private AudioClip playerAttackSound;
+    [SerializeField] private AudioClip playerHeavyAttackSound;
     [SerializeField] private AudioClip playerDeathSound;
 
   
@@ -47,6 +48,15 @@ public class PlayerAudioController : MonoBehaviour
         {
             audioSource.pitch = Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(playerAttackSound);
+        }
+    }
+
+    public void PlayPlayerHeavyAttack()
+    {
+        if (audioSource != null && playerHeavyAttackSound != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.0f);
+            audioSource.PlayOneShot(playerHeavyAttackSound);
         }
     }
 
