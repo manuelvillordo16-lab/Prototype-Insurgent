@@ -33,9 +33,12 @@ public class EnemyAI : MonoBehaviour
    
     private UnityEngine.AI.NavMeshAgent agent;
     private float attackTimer = 0f;
+    [Header("Animation")]
+    private Animator guardAnim; 
 
     void Awake()
     {
+        guardAnim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         if (player == null)
@@ -81,6 +84,7 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(targetPosition);
             currentState = State.Chase;
+
             Debug.Log("Enemy its on it way towards the player");
         }
     }
@@ -116,6 +120,7 @@ public class EnemyAI : MonoBehaviour
         {
             Vector3 newPos = GetRandomNavMeshPosition();
             agent.SetDestination(newPos);
+            guardAnim.SetBool("Chase", false);
         }
 
         if (ShouldStartChasing())
@@ -145,6 +150,7 @@ public class EnemyAI : MonoBehaviour
         agent.speed = chaseSpeed;
 
         float dist = Vector3.Distance(transform.position, player.position);
+        guardAnim.SetBool("Chase", true);
 
         if (dist > chaseDistance)
         {
@@ -192,6 +198,8 @@ public class EnemyAI : MonoBehaviour
             {
 
                 playerHealth.TakeDamage(10f);
+                guardAnim.SetBool("Chase", false);
+                guardAnim.SetBool("Attack", true);
 
             }
             else
