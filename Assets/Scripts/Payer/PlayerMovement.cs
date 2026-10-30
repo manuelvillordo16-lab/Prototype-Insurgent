@@ -36,7 +36,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform characterModel;
 
+    [Header("Audio")]
+    [SerializeField] private PlayerAudioController audioController;
+    [SerializeField] private float walkStepInterval = 0.45f;
+    [SerializeField] private float runStepInterval = 0.28f;
 
+    private float stepTimer;
     private float currentYaw;
     private float currentPitch;
 
@@ -63,6 +68,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        if (audioController == null)
+            audioController = GetComponent<PlayerAudioController>();
     }
 
     private void Update()
@@ -71,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         UpdateAnimator();
         RotateCharacterModel();
+        HandleFootSteps();
     }
 
     //Inputs
@@ -246,5 +255,24 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsGrounded", controller.isGrounded);
     }
-    private bool wasGrounded;
+    
+    private void HandleFootSteps()
+    {
+        if (audioController == null || !controller.isGrounded) return;
+        bool isMoving = moveInput.sqrMagnitude > 0.1f;
+        if (!isMoving)
+        {
+            stepTimer = 0f;
+            return;
+        }
+
+        float interval = isSprinting ? runStepInterval : walkStepInterval;
+        stepTimer += Time.deltaTime;
+
+        if (stepTimer >= interval)
+        {
+            audioController.PlayStepSound();
+            stepTimer = 0f;
+        }
+    }
 }

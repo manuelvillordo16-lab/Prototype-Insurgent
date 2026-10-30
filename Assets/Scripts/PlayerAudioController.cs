@@ -12,6 +12,8 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip playerAttackSound;
     [SerializeField] private AudioClip playerDeathSound;
 
+  
+
     public void PlayJumpSound()
     {
         if (audioSource != null && jumpSound != null)
