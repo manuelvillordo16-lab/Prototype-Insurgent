@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,12 +31,14 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float specialDamage = 9999f;        
     [SerializeField] private float sequenceTimeout = 1.2f;    
     [SerializeField] private float specialCooldown = 1f;
+    [SerializeField] private LegDamage legDamage;
 
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
     private float lastSpecialTime;
     private List<string> currentSequence = new List<string>();
     private float lastInputTime;
+    private bool specialJustActivated = false;
     private float CalculateDamage(bool isHeavy)
     {
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
@@ -61,6 +64,13 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
+            RegisterInput("Attack");
+
+            if (specialJustActivated)
+            {
+                specialJustActivated = false;
+                return;
+            }
             TryLightAttack();
         }
     }
@@ -156,12 +166,27 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastSpecialTime < specialCooldown) return;
 
         lastSpecialTime = Time.time;
+        specialJustActivated = true;
 
         animator.SetTrigger("TornadoKick");
         Debug.Log("¡TORNADO KICK ACTIVADO!");
 
         if (audioController != null)
-            audioController.PlayPlayerHeavyAttack();
+            audioController.PlayPlayerTornadoKick();
+
+        StartCoroutine(SpecialDamageWindow(0.15f, 0.75f));
+    }
+    private IEnumerator SpecialDamageWindow(float start, float end)
+    {
+        yield return new WaitForSeconds(start);
+
+        if (legDamage != null)
+            legDamage.EnableDamage(specialDamage);   // Activates damage that It's Over 9000!!!
+
+        yield return new WaitForSeconds(end - start);
+
+        if (legDamage != null)
+            legDamage.DisableDamage();
     }
     public void RegisterDirectionalInput(string dir)
     {

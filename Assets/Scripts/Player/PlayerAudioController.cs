@@ -12,6 +12,7 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip playerAttackSound;
     [SerializeField] private AudioClip playerHeavyAttackSound;
     [SerializeField] private AudioClip playerDeathSound;
+    [SerializeField] private AudioClip playerTornadoKickSound;
 
     void Awake()
     {
@@ -75,5 +76,13 @@ public class PlayerAudioController : MonoBehaviour
             audioSource.PlayOneShot(playerDeathSound);
         }
 
+    }
+    public void PlayPlayerTornadoKick()
+    {
+        if (audioSource != null && playerTornadoKickSound != null)
+        {
+            audioSource.pitch = Random.Range(0.95f, 1.05f);
+            audioSource.PlayOneShot(playerTornadoKickSound);
+        }
     }
 }
