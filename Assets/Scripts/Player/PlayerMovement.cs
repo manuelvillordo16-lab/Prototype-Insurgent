@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         else if (moveInput.y < -0.5f)
             dir = "S";           // Down
         else if (moveInput.x < -0.5f)
-            dir = "A";           // Back
+            dir = "A";           // Backy
 
         if (dir != "")
             playerCombat.RegisterDirectionalInput(dir);
