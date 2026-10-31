@@ -154,6 +154,7 @@ public class Enemy2 : MonoBehaviour
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
+            robotAnim.SetBool("kick", true);
             playerHealth.TakeDamage(meleeDamage);
         }
     }
