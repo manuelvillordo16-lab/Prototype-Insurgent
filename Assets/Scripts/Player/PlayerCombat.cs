@@ -1,7 +1,6 @@
-using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -27,11 +26,10 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private PlayerAudioController audioController;
-
-    [Header("Ataque Especial - Tornado Kick")]
-    [SerializeField] private float specialDamage = 9999f;
-    [SerializeField] private float sequenceTimeout = 0.8f;
-    [SerializeField] private float specialCoolDown = 8f;
+    [Header("Ataque Especial - Hurricane Kick")]
+    [SerializeField] private float specialDamage = 9999f;        
+    [SerializeField] private float sequenceTimeout = 0.8f;    
+    [SerializeField] private float specialCooldown = 8f;
 
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
@@ -42,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
     {
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
 
-        // Critical Chance
+        // Probabilidad de crítico
         if (Random.value <= criticalChance)
         {
             baseDamage *= criticalMultiplier;
@@ -63,7 +61,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
-            RegisterInput("Attack");
             TryLightAttack();
         }
     }
@@ -73,6 +70,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
+            RegisterInput("Attack");
             TryHeavyAttack();
         }
     }
@@ -117,7 +115,7 @@ public class PlayerCombat : MonoBehaviour
     }
     private void RegisterInput(string input)
     {
-        
+        // Cleans squence after some time
         if (Time.time - lastInputTime > sequenceTimeout)
         {
             currentSequence.Clear();
@@ -126,15 +124,16 @@ public class PlayerCombat : MonoBehaviour
         lastInputTime = Time.time;
         currentSequence.Add(input);
 
-        if (currentSequence.Count < 4)
+        // Limited list size
+        if (currentSequence.Count > 4)
             currentSequence.RemoveAt(0);
 
-        CheckSPecialSequence();
+        CheckSpecialSequence();
     }
 
-    private void CheckSPecialSequence()
+    private void CheckSpecialSequence()
     {
-        if (currentSequence.Count > 4) return;
+        if (currentSequence.Count < 4) return;
 
         bool match =
             currentSequence[currentSequence.Count - 4] == "S" &&
@@ -144,25 +143,27 @@ public class PlayerCombat : MonoBehaviour
 
         if (match)
         {
-            TryTornadoKick();
+            TryHurricaneKick();
             currentSequence.Clear();
         }
     }
 
-    private void TryTornadoKick()
+    private void TryHurricaneKick()
     {
-        if (Time.time - lastSpecialTime < specialCoolDown) return;
+        if (Time.time - lastSpecialTime < specialCooldown) return;
 
         lastSpecialTime = Time.time;
 
-        animator.SetTrigger("TornadoKick");
+        animator.SetTrigger("HurricaneKick");
 
+        // Optional Sound
         if (audioController != null)
-            audioController.PlayPlayerHeavyAttack();
+            audioController.PlayPlayerHeavyAttack(); // or special sound
 
-        StartCoroutine(DamageWindow(0.2f, 0.7f, true));
-
-        Debug.Log("¡Tornado Kick activado!");
+        // Activates big damage
+        StartCoroutine(DamageWindow(0.2f, 0.7f, true)); // special damage
+        
+        Debug.Log("¡Hurricane Kick activado!");
     }
     public void RegisterDirectionalInput(string dir)
     {

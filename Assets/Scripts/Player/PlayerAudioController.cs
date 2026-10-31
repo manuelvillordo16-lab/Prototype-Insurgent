@@ -1,9 +1,9 @@
 using UnityEngine;
 
 public class PlayerAudioController : MonoBehaviour
+
 {
-    [Header("Components")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
 
     [Header("Voices and Sounds of the Player")]
     [SerializeField] private AudioClip jumpSound;
@@ -13,7 +13,14 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip playerHeavyAttackSound;
     [SerializeField] private AudioClip playerDeathSound;
 
-  
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("The AudioSource component is missing from the Player");
+        }
+    }
 
     public void PlayJumpSound()
     {

@@ -1,9 +1,10 @@
 using UnityEngine;
 
 public class EnemyAudioController : MonoBehaviour
+
 {
-    [Header("Components")]
-    [SerializeField] private AudioSource audioSource;
+
+    private AudioSource audioSource;
 
     [Header("Configuration")]
     [Tooltip("Mark if this object is the (FinalBoss)")]
@@ -13,7 +14,18 @@ public class EnemyAudioController : MonoBehaviour
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip deathSound; 
-    [SerializeField] private AudioClip specialBossVoice; 
+    [SerializeField] private AudioClip specialBossVoice;
+
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("The AudioSource component is missing in " + gameObject.name);
+        }
+    }
+
 
     public void PlayAttackSound()
     {
