@@ -29,10 +29,14 @@ public class Enemy2 : MonoBehaviour
     public float meleeDamage = 10f;
 
     private NavMeshAgent agent;
-
+   
+    [Header("Animations")]
+    private Animator robotAnim;
+   
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        robotAnim = GetComponent<Animator>();
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -65,6 +69,7 @@ public class Enemy2 : MonoBehaviour
             case State.Chase:
                 agent.speed = chaseSpeed;
                 agent.SetDestination(player.position);
+                robotAnim.SetBool("aiming", true);
 
 
                 TryShootProjectile();
@@ -76,7 +81,7 @@ public class Enemy2 : MonoBehaviour
                 }
                 else if (distToPlayer > detectionRange * 1.5f)
                 {
-
+                    robotAnim.SetBool("Chase", false);
                     currentState = State.Guarding;
                 }
                 break;
@@ -133,6 +138,8 @@ public class Enemy2 : MonoBehaviour
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Debug.Log("¡Enemy2 fired a projectile!");
+            robotAnim.SetBool("shoot", true);
+            robotAnim.SetBool("shoot", false);
         }
         else
         {
