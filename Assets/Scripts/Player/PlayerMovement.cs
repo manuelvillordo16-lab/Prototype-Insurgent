@@ -41,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkStepInterval = 0.45f;
     [SerializeField] private float runStepInterval = 0.28f;
 
+    [Header("Referencias")]
+    [SerializeField] private PlayerCombat playerCombat;
+
     private float stepTimer;
     private float currentYaw;
     private float currentPitch;
@@ -71,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (audioController == null)
             audioController = GetComponent<PlayerAudioController>();
+
+        if (playerCombat == null)
+            playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void Update()
@@ -87,6 +93,20 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
+        if (playerCombat == null) return;
+
+        string dir = "";
+
+        if (moveInput.y < -0.5f && moveInput.x < -0.5f)
+            dir = "SA";          // Down + Back
+        else if (moveInput.y < -0.5f)
+            dir = "S";           // Down
+        else if (moveInput.x < -0.5f)
+            dir = "A";           // Back
+
+        if (dir != "")
+            playerCombat.RegisterDirectionalInput(dir);
     }
 
     public void OnJump(InputAction.CallbackContext context)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,9 +26,16 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private PlayerAudioController audioController;
+    [Header("Ataque Especial - Hurricane Kick")]
+    [SerializeField] private float specialDamage = 9999f;        
+    [SerializeField] private float sequenceTimeout = 0.8f;    
+    [SerializeField] private float specialCooldown = 8f;
 
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
+    private float lastSpecialTime;
+    private List<string> currentSequence = new List<string>();
+    private float lastInputTime;
     private float CalculateDamage(bool isHeavy)
     {
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
@@ -62,6 +70,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
+            RegisterInput("Attack");
             TryHeavyAttack();
         }
     }
@@ -103,5 +112,61 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(end - start);
 
         swordDamage.DisableDamage();
+    }
+    private void RegisterInput(string input)
+    {
+        // Cleans squence after some time
+        if (Time.time - lastInputTime > sequenceTimeout)
+        {
+            currentSequence.Clear();
+        }
+
+        lastInputTime = Time.time;
+        currentSequence.Add(input);
+
+        // Limited list size
+        if (currentSequence.Count > 4)
+            currentSequence.RemoveAt(0);
+
+        CheckSpecialSequence();
+    }
+
+    private void CheckSpecialSequence()
+    {
+        if (currentSequence.Count < 4) return;
+
+        bool match =
+            currentSequence[currentSequence.Count - 4] == "S" &&
+            currentSequence[currentSequence.Count - 3] == "SA" &&
+            currentSequence[currentSequence.Count - 2] == "A" &&
+            currentSequence[currentSequence.Count - 1] == "Attack";
+
+        if (match)
+        {
+            TryHurricaneKick();
+            currentSequence.Clear();
+        }
+    }
+
+    private void TryHurricaneKick()
+    {
+        if (Time.time - lastSpecialTime < specialCooldown) return;
+
+        lastSpecialTime = Time.time;
+
+        animator.SetTrigger("HurricaneKick");
+
+        // Optional Sound
+        if (audioController != null)
+            audioController.PlayPlayerHeavyAttack(); // or special sound
+
+        // Activates big damage
+        StartCoroutine(DamageWindow(0.2f, 0.7f, true)); // special damage
+        
+        Debug.Log("¡Hurricane Kick activado!");
+    }
+    public void RegisterDirectionalInput(string dir)
+    {
+        RegisterInput(dir);
     }
 }
