@@ -21,10 +21,11 @@ public class LegDamage : MonoBehaviour
     {
         if (!canDealDamage) return;
 
-        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
-        if (enemy != null)
+        IDamageable damageable = other.GetComponent<IDamageable>();
+
+        if (damageable != null)
         {
-            enemy.TakeDamage(currentDamage);
+            damageable.TakeDamage(currentDamage);
             canDealDamage = false; 
         }
     }

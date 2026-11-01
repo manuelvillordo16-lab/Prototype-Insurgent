@@ -21,13 +21,13 @@ public class SwordDamage : MonoBehaviour
     {
         if (!canDealDamage) return;
 
+        IDamageable damageable = other.GetComponent<IDamageable>();
        
-        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
-
-        if (enemy != null)
+        if (damageable != null)
         {
-            enemy.TakeDamage(currentDamage);
+            damageable.TakeDamage(currentDamage);
             canDealDamage = false; 
         }
     }
+
 }
