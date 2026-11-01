@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -41,7 +42,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkStepInterval = 0.45f;
     [SerializeField] private float runStepInterval = 0.28f;
 
+    [Header("Referencias")]
+    [SerializeField] private PlayerCombat playerCombat;
+
     private float stepTimer;
+    public bool dobleSaltoDesbloqueado = false;
+    private bool dobleSaltoUsado = false;
     private float currentYaw;
     private float currentPitch;
 
@@ -71,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (audioController == null)
             audioController = GetComponent<PlayerAudioController>();
+
+        if (playerCombat == null)
+            playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void Update()
@@ -87,7 +96,23 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
+        if (playerCombat == null) return;
+
+        string dir = "";
+
+        if (moveInput.y < -0.5f && moveInput.x < -0.5f)
+            dir = "SA";          // Down + Back
+        else if (moveInput.y < -0.5f)
+            dir = "S";           // Down
+        else if (moveInput.x < -0.5f)
+            dir = "A";           // Back
+
+        if (dir != "")
+            playerCombat.RegisterDirectionalInput(dir);
     }
+
+
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -107,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Movement
-
     private void HandleMovement()
     {
         // Camera relative movement
@@ -128,11 +152,25 @@ public class PlayerMovement : MonoBehaviour
 
         // Jump and Gravity
         if (controller.isGrounded && velocity.y < 0f)
+        {
             velocity.y = -2f;
+            dobleSaltoUsado = false;
+        }
+            
 
         if (jumpPressed && controller.isGrounded && !isCrouching)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            if (controller.isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+
+            else if (dobleSaltoDesbloqueado && !dobleSaltoUsado)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                dobleSaltoUsado = true;
+            }
+             
         }
         jumpPressed = false; // Always resets
 

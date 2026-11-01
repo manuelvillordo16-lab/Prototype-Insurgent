@@ -1,200 +1,40 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SkillTree : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
     public int exp = 100;
-    public int[] costosCuadros = {50,100,150};
-    public int[] costosSenior = {200,250,300};
     public TextMeshProUGUI textoExp;
     public TextMeshProUGUI textoNivel;
-    public Button botonJunior;
-    public Button botonSenior;
-    public Image fondoJunior;
-    public Image fondoSenior;
-
-    public GameObject panelJunior;
-    public Button[] botonesCuadros;
-    public Image[] fondosCuadros;
-    public GameObject panelSenior;
-    public Button[] botonesSenior;
-    public Image[] fondosSenior;
-
+    public NodoHabilidad[] nodos;
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
-    bool menuAbierto = false;
-    bool[] cuadrosComprados = new bool[3];
-    bool[] seniorComprados = new bool[3]; 
+    bool menuAbierto = false; 
     public Hacker hacker;
+
+    public PlayerMovement playerMovement;
+    public PlayerCombat playerCombat;
+    public PlayerHealth playerHealth;
+    bool regeneracionActiva = false;
+    public float curacionPorSegundo = 10f;
 
     void Start()
     {
-        hacker.enabled = false;
-       // playerMovement.dobleSaltoDesbloqueado = false;
-        //playerMovement.tripleSaltoDesbloqueado = false;
-        Hackeable.duracionHack = 3f;
+        hacker.enabled = true;
+        hacker.duracionHack = 3f;
+        hacker.nivelPuertas = 0;
+        hacker.stunDesbloqueado = false;
+        playerMovement.dobleSaltoDesbloqueado = false;
+        playerCombat.ataquePesadoDesbloqueado = false;
+        playerCombat.criticoDesbloqueado = false;
+      
+        for (int i = 0; i < nodos.Length; i++) nodos[i].Iniciar(this);
+        
+
         ActualizarPantalla();
-        panelJunior.SetActive(false);
-        panelSenior.SetActive(false);
         panelSkills.SetActive(false);
     }
 
-    public void AbrirJunior()
-    {
-        panelJunior.SetActive(true);
-    }
-
-    public void CerrarJunior()
-    {
-        panelJunior.SetActive(false);
-    }
-
-    public void AbrirSenior()
-    {
-        if (JuniorCompleto()) panelSenior.SetActive(true);
-    }
-
-    public void CerrarSenior()
-    {
-        panelSenior.SetActive(false);
-    }
-    public void ComprarCuadro(int numero)
-    {
-        if (!cuadrosComprados[numero] && exp >= costosCuadros[numero])
-        {
-            exp = exp - costosCuadros[numero];
-            cuadrosComprados[numero] = true;
-            if (numero == 1)
-            {
-               // playerMovement.dobleSaltoDesbloqueado = true;
-            }
-
-            ActualizarPantalla();
-        }
-    }
-
-    public void ComprarCuadroSenior(int numero)
-    {
-        if (JuniorCompleto() && !seniorComprados[numero] && exp >= costosSenior[numero])
-        {
-            exp = exp - costosSenior[numero];
-            seniorComprados[numero] = true;
-            if (numero == 0)
-            {
-                Hackeable.duracionHack = 6f;
-            }
-
-            if (numero == 1)
-            {
-              //  playerMovement.tripleSaltoDesbloqueado = true;
-            }
-            ActualizarPantalla();
-        }
-
-    }
-     
-    bool JuniorCompleto()
-    {
-        for (int i = 0; i < cuadrosComprados.Length; i++)
-        {
-            if (!cuadrosComprados[i]) return false;
-        }
-        return true;
-
-    }
-
-    bool SeniorCompleto()
-    {
-        for (int i = 0; i < seniorComprados.Length; i++)
-        {
-            if (!seniorComprados[i]) return false;
-        }
-        return true;
-
-    }
-
-    int CuadrosCompradosCantidad()
-    {
-        int cantidad = 0;
-        for (int i= 0; i < cuadrosComprados.Length; i++)
-        {
-            if (cuadrosComprados[i]) cantidad++;
-        }
-        for (int i= 0; i < seniorComprados.Length; i++)
-        {
-            if (seniorComprados[i]) cantidad++;
-        }
-        return cantidad;
-
-
-    }
-
-    void ActualizarPantalla()
-    {
-        textoExp.text = "EXP " + exp;
-        textoNivel.text = "Nivel " + (1 + CuadrosCompradosCantidad());
-        
-        for (int i = 0; i < cuadrosComprados.Length; i++)
-        {
-            PintarTarjeta(fondosCuadros[i], botonesCuadros[i], cuadrosComprados[i], exp >= costosCuadros[i]);
-        }
-
-        for (int i = 0; i < seniorComprados.Length; i++)
-        {
-          PintarTarjeta(fondosSenior[i], botonesSenior[i], seniorComprados[i], JuniorCompleto() && exp >= costosSenior[i]);
-
-        }
-
-        
-        if (JuniorCompleto()) fondoJunior.color = Color.yellow;
-
-        else fondoJunior.color= Color.green;
-
-        botonJunior.interactable = true;
-
-
-        if (!JuniorCompleto())
-        {
-            fondoSenior.color = Color.gray;
-            botonSenior.interactable = false;
-        }
-        else if (SeniorCompleto())
-        {
-            fondoSenior.color = Color.yellow;
-            botonSenior.interactable = true;
-        }
-        else
-        {
-            fondoSenior.color = Color.green;
-            botonSenior.interactable = true;
-        }
-
-        
-
-    }
-
-    void PintarTarjeta(Image fondo, Button boton, bool comprada, bool disponible)
-    {
-        if (comprada)
-        {
-            fondo.color = Color.yellow;
-            boton.interactable = false;
-        }
-        else if (disponible)
-        {
-            fondo.color = Color.green;
-            boton.interactable = true;
-
-        }
-        else
-        {
-            fondo.color = Color.gray;
-            boton.interactable = false;
-        }
-
-    }
     void Update()
     {
         if (Input.GetKeyDown(teclaAbrir))
@@ -202,6 +42,77 @@ public class SkillTree : MonoBehaviour
             if (menuAbierto) CerrarMenu();
             else AbrirMenu();
         }
+
+        if (regeneracionActiva)
+        {
+            playerHealth.Heal(curacionPorSegundo * Time.deltaTime);
+        }
+    }
+
+    public void Comprar(NodoHabilidad nodo)
+    {
+        if (!nodo.disponible) return;
+        if (exp < nodo.costo) return;
+
+        exp = exp - nodo.costo;
+        nodo.comprado = true;
+        AplicarPoder(nodo.poder);
+        ActualizarPantalla();
+    }
+
+    void AplicarPoder(Poder poder)
+    {
+       if (poder == Poder.Stun)
+       {
+            hacker.stunDesbloqueado = true;
+       }
+       if (poder == Poder.PuertasNivel2)
+       {
+            hacker.nivelPuertas = 2;
+       }
+
+       if (poder == Poder.Regeneracion)
+       {
+            regeneracionActiva = true;
+       }
+
+       if (poder == Poder.DobleSalto)
+       {
+            playerMovement.dobleSaltoDesbloqueado = true;
+       }
+
+       if (poder == Poder.AtaquePesado)
+       {
+            playerCombat.ataquePesadoDesbloqueado = true;
+       }
+
+       if (poder == Poder.Critico)
+       {
+            playerCombat.criticoDesbloqueado = true;
+       }
+
+
+        
+    }
+
+    int CantidadComprados()
+    {
+        int cantidad = 0;
+        for (int i = 0; i < nodos.Length; i++)
+        {
+            if (nodos[i].comprado) cantidad++;
+        }
+
+        return cantidad;
+    }
+
+    void ActualizarPantalla()
+    {
+        textoExp.text = "EXP " + exp;
+        textoNivel.text = "Nivel " + (1 + CantidadComprados());
+
+        for (int i = 0; i < nodos.Length; i++) nodos[i].Actualizar(true, exp);
+      
     }
 
     void AbrirMenu()
@@ -219,7 +130,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = false;
         panelSkills.SetActive(false);
-        hacker.enabled = cuadrosComprados[0];
+        hacker.enabled = true;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
