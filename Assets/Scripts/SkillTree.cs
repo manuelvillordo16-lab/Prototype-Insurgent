@@ -13,16 +13,20 @@ public class SkillTree : MonoBehaviour
     public Hacker hacker;
 
     public PlayerMovement playerMovement;
-    bool hackeoDesbloqueado = false;
+    public PlayerCombat playerCombat;
+    public PlayerHealth playerHealth;
+    bool regeneracionActiva = false;
+    public float curacionPorSegundo = 10f;
 
     void Start()
     {
-        hacker.enabled = false;
+        hacker.enabled = true;
         hacker.duracionHack = 3f;
         hacker.nivelPuertas = 0;
         hacker.stunDesbloqueado = false;
         playerMovement.dobleSaltoDesbloqueado = false;
-        playerMovement.tripleSaltoDesbloqueado = false;
+        playerCombat.ataquePesadoDesbloqueado = false;
+        playerCombat.criticoDesbloqueado = false;
       
         for (int i = 0; i < nodos.Length; i++) nodos[i].Iniciar(this);
         
@@ -37,6 +41,11 @@ public class SkillTree : MonoBehaviour
         {
             if (menuAbierto) CerrarMenu();
             else AbrirMenu();
+        }
+
+        if (regeneracionActiva)
+        {
+            playerHealth.Heal(curacionPorSegundo * Time.deltaTime);
         }
     }
 
@@ -53,37 +62,36 @@ public class SkillTree : MonoBehaviour
 
     void AplicarPoder(Poder poder)
     {
-        if (poder == Poder.PuertasNivel1)
-        {
-            hackeoDesbloqueado = true;
-            hacker.nivelPuertas = 1;
-        }
-
-        if (poder == Poder.DobleSalto)
-        {
-            playerMovement.dobleSaltoDesbloqueado = true;
-        }
-
-        if (poder == Poder.Stun)
-        {
+       if (poder == Poder.Stun)
+       {
             hacker.stunDesbloqueado = true;
-            hackeoDesbloqueado = true;
-        }
-
-        if (poder == Poder.PuertasNivel2)
-        {
+       }
+       if (poder == Poder.PuertasNivel2)
+       {
             hacker.nivelPuertas = 2;
-        }
-        
-        if (poder == Poder.StunMejorado)
-        {
-            hacker.duracionHack = 6f;
-        }
+       }
 
-        if (poder == Poder.TripleSalto)
-        {
-            playerMovement.tripleSaltoDesbloqueado = true;
-        } 
+       if (poder == Poder.Regeneracion)
+       {
+            regeneracionActiva = true;
+       }
+
+       if (poder == Poder.DobleSalto)
+       {
+            playerMovement.dobleSaltoDesbloqueado = true;
+       }
+
+       if (poder == Poder.AtaquePesado)
+       {
+            playerCombat.ataquePesadoDesbloqueado = true;
+       }
+
+       if (poder == Poder.Critico)
+       {
+            playerCombat.criticoDesbloqueado = true;
+       }
+
+
         
     }
 
@@ -122,7 +130,7 @@ public class SkillTree : MonoBehaviour
     {
         menuAbierto = false;
         panelSkills.SetActive(false);
-        hacker.enabled = hackeoDesbloqueado;
+        hacker.enabled = true;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

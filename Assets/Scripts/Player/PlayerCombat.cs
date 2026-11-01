@@ -33,6 +33,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float specialCooldown = 1f;
     [SerializeField] private LegDamage legDamage;
 
+    public bool ataquePesadoDesbloqueado = false;
+    public bool criticoDesbloqueado = false;
+
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
     private float lastSpecialTime;
@@ -44,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
 
         // Crit chance
-        if (Random.value <= criticalChance)
+        if (criticoDesbloqueado && Random.value <= criticalChance)
         {
             baseDamage *= criticalMultiplier;
             Debug.Log("¡Golpe crítico!");
@@ -100,7 +103,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void TryHeavyAttack()
     {
-        if (Time.time - lastHeavyAttackTime < heavyAttackCooldown) return;
+        if (!ataquePesadoDesbloqueado) return;
 
         lastHeavyAttackTime = Time.time;
         animator.SetTrigger("HeavyAttack");
