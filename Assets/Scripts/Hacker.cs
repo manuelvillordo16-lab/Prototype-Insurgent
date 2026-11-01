@@ -3,6 +3,9 @@ using UnityEngine;
 public class Hacker : MonoBehaviour
 {
     public Camera playerCamera;
+    public float duracionHack = 3f;
+    public int nivelPuertas = 0;
+    public bool stunDesbloqueado = false;
 
     void Update()
     {
@@ -17,7 +20,7 @@ public class Hacker : MonoBehaviour
 
                 if (hackeable != null)
                 {
-                    hackeable.Hack();
+                    hackeable.Hack(duracionHack, nivelPuertas, stunDesbloqueado);
                 }
 
             }

@@ -1,3 +1,4 @@
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +9,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SwordDamage swordDamage;
 
-    [Header("Tiempos de la ventana de daño")]
+    [Header("Tiempos de la ventana de daÃ±o")]
     [SerializeField] private float lightDamageStart = 0.15f;   //When starts dealing damage
     [SerializeField] private float lightDamageEnd = 0.4f;     //When finishes dealing damage
     [SerializeField] private float heavyDamageStart = 0.25f;
@@ -18,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float lightAttackCooldown = 0.6f;
     [SerializeField] private float heavyAttackCooldown = 1.2f;
 
-    [Header("Daño")]
+    [Header("DaÃ±o")]
     [SerializeField] private float lightAttackDamage = 15f;
     [SerializeField] private float heavyAttackDamage = 35f;
     [SerializeField] private float criticalChance = 0.15f;
@@ -26,25 +27,30 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private PlayerAudioController audioController;
-    [Header("Ataque Especial - Hurricane Kick")]
+    [Header("Ataque Especial - Tornado Kick")]
     [SerializeField] private float specialDamage = 9999f;        
-    [SerializeField] private float sequenceTimeout = 0.8f;    
-    [SerializeField] private float specialCooldown = 8f;
+    [SerializeField] private float sequenceTimeout = 1.2f;    
+    [SerializeField] private float specialCooldown = 1f;
+    [SerializeField] private LegDamage legDamage;
+
+    public bool ataquePesadoDesbloqueado = false;
+    public bool criticoDesbloqueado = false;
 
     private float lastLightAttackTime;
     private float lastHeavyAttackTime;
     private float lastSpecialTime;
     private List<string> currentSequence = new List<string>();
     private float lastInputTime;
+    private bool specialJustActivated = false;
     private float CalculateDamage(bool isHeavy)
     {
         float baseDamage = isHeavy ? heavyAttackDamage : lightAttackDamage;
 
-        // Probabilidad de crítico
-        if (Random.value <= criticalChance)
+        // Crit chance
+        if (criticoDesbloqueado && Random.value <= criticalChance)
         {
             baseDamage *= criticalMultiplier;
-            Debug.Log("¡Golpe crítico!");
+            Debug.Log("Â¡Golpe crÃ­tico!");
         }
 
         return baseDamage;
@@ -61,6 +67,13 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed)
         {
+            RegisterInput("Attack");
+
+            if (specialJustActivated)
+            {
+                specialJustActivated = false;
+                return;
+            }
             TryLightAttack();
         }
     }
@@ -82,7 +95,7 @@ public class PlayerCombat : MonoBehaviour
         lastLightAttackTime = Time.time;
         animator.SetTrigger("Attack");
         StartCoroutine(DamageWindow(lightDamageStart, lightDamageEnd, false));
-        Debug.Log("Ataque Rápido");
+        Debug.Log("Ataque RÃ¡pido");
 
         if (audioController != null)
             audioController.PlayPlayerAttack();
@@ -90,6 +103,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void TryHeavyAttack()
     {
+        if (!ataquePesadoDesbloqueado) return;
         if (Time.time - lastHeavyAttackTime < heavyAttackCooldown) return;
 
         lastHeavyAttackTime = Time.time;
@@ -115,18 +129,23 @@ public class PlayerCombat : MonoBehaviour
     }
     private void RegisterInput(string input)
     {
-        // Cleans squence after some time
+        if (string.IsNullOrEmpty(input)) return;
+
         if (Time.time - lastInputTime > sequenceTimeout)
-        {
             currentSequence.Clear();
-        }
 
         lastInputTime = Time.time;
+
+        // Avoids same reptead input often
+        if (currentSequence.Count > 0 && currentSequence[^1] == input)
+            return;
+
         currentSequence.Add(input);
 
-        // Limited list size
         if (currentSequence.Count > 4)
             currentSequence.RemoveAt(0);
+
+        Debug.Log("Secuencia actual: " + string.Join(" â†’ ", currentSequence)); // Important for debug
 
         CheckSpecialSequence();
     }
@@ -135,35 +154,43 @@ public class PlayerCombat : MonoBehaviour
     {
         if (currentSequence.Count < 4) return;
 
-        bool match =
-            currentSequence[currentSequence.Count - 4] == "S" &&
-            currentSequence[currentSequence.Count - 3] == "SA" &&
-            currentSequence[currentSequence.Count - 2] == "A" &&
-            currentSequence[currentSequence.Count - 1] == "Attack";
-
-        if (match)
+        // Sequence: S â†’ SA â†’ A â†’ Attack
+        if (currentSequence[0] == "S" &&
+            currentSequence[1] == "SA" &&
+            currentSequence[2] == "A" &&
+            currentSequence[3] == "Attack")
         {
-            TryHurricaneKick();
+            TryTornadoKick();
             currentSequence.Clear();
         }
     }
 
-    private void TryHurricaneKick()
+    private void TryTornadoKick()
     {
         if (Time.time - lastSpecialTime < specialCooldown) return;
 
         lastSpecialTime = Time.time;
+        specialJustActivated = true;
 
-        animator.SetTrigger("HurricaneKick");
+        animator.SetTrigger("TornadoKick");
+        Debug.Log("Â¡TORNADO KICK ACTIVADO!");
 
-        // Optional Sound
         if (audioController != null)
-            audioController.PlayPlayerHeavyAttack(); // or special sound
+            audioController.PlayPlayerTornadoKick();
 
-        // Activates big damage
-        StartCoroutine(DamageWindow(0.2f, 0.7f, true)); // special damage
-        
-        Debug.Log("¡Hurricane Kick activado!");
+        StartCoroutine(SpecialDamageWindow(0.15f, 0.75f));
+    }
+    private IEnumerator SpecialDamageWindow(float start, float end)
+    {
+        yield return new WaitForSeconds(start);
+
+        if (legDamage != null)
+            legDamage.EnableDamage(specialDamage);   // Activates damage that It's Over 9000!!!
+
+        yield return new WaitForSeconds(end - start);
+
+        if (legDamage != null)
+            legDamage.DisableDamage();
     }
     public void RegisterDirectionalInput(string dir)
     {
