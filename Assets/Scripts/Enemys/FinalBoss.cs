@@ -29,6 +29,8 @@ public class FinalBoss : MonoBehaviour
     private float attackTimer = 0f;
     private NavMeshAgent agent;
 
+    [Header("Animations")]
+    private Animator bossAnim;
 
     void Awake()
     {
@@ -37,6 +39,7 @@ public class FinalBoss : MonoBehaviour
         currentHealthBar2 = maxHealthBar2;
 
         nextShieldHealthTrigger = maxHealthBar1 - 25f;
+        bossAnim = GetComponent<Animator>();
 
         if (player == null) player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
@@ -73,6 +76,7 @@ public class FinalBoss : MonoBehaviour
 
         float dist = Vector3.Distance(transform.position, player.position);
         agent.SetDestination(player.position);
+        bossAnim.SetBool("aiming", true);
 
         if (dist <= attackRange)
         {
