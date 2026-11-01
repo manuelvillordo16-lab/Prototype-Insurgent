@@ -6,16 +6,17 @@ public class Enemy2 : MonoBehaviour
     public enum State { Guarding, Chase, Attack }
     public State currentState = State.Guarding;
 
-    [Header("Patrol")]
+    [Header("Patrol Settings")]
     public Transform guardPoint;
     public float guardRadius = 10f;
-    public float guardSpeed = 20f;   
-    public float chaseSpeed = 30f;   
+    public float guardSpeed = 20f;
+    public float chaseSpeed = 30f;
 
-    [Header("Combat and Ranges")]
+    [Header("Combat and Ranges (Configurables)")]
     public Transform player;
     public float detectionRange = 15f;
-    public float meleeAttackRange = 2f;
+    public float fireRange = 7f;         
+    public float meleeAttackRange = 2f;  
 
     [Header("Firing System")]
     public GameObject projectilePrefab;
@@ -23,16 +24,18 @@ public class Enemy2 : MonoBehaviour
     public float fireCooldown = 4f;
     private float fireTimer = 0f;
 
-    [Header("Attack")]
+    [Header("Melee Attack")]
     public float meleeCooldown = 1.5f;
     private float meleeTimer = 0f;
     public float meleeDamage = 10f;
 
     private NavMeshAgent agent;
+    private Animator robotAnim;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        robotAnim = GetComponent<Animator>();
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -46,7 +49,6 @@ public class Enemy2 : MonoBehaviour
 
         float distToPlayer = Vector3.Distance(transform.position, player.position);
 
-
         fireTimer -= Time.deltaTime;
         meleeTimer -= Time.deltaTime;
 
@@ -54,7 +56,6 @@ public class Enemy2 : MonoBehaviour
         {
             case State.Guarding:
                 GuardingBehavior();
-
 
                 if (distToPlayer <= detectionRange)
                 {
@@ -64,38 +65,51 @@ public class Enemy2 : MonoBehaviour
 
             case State.Chase:
                 agent.speed = chaseSpeed;
-                agent.SetDestination(player.position);
+                robotAnim.SetBool("aiming", true);
 
+                
+                if (distToPlayer > fireRange)
+                {
+                    agent.stoppingDistance = fireRange;
+                    agent.SetDestination(player.position);
+                }
+                else
+                {
+                    
+                    agent.SetDestination(transform.position);
+                    transform.LookAt(player);
+                    TryShootProjectile();
+                }
 
-                TryShootProjectile();
-
-
+                
                 if (distToPlayer <= meleeAttackRange)
                 {
                     currentState = State.Attack;
                 }
                 else if (distToPlayer > detectionRange * 1.5f)
                 {
-
+                    robotAnim.SetBool("aiming", false);
+                    robotAnim.SetBool("Chase", false);
                     currentState = State.Guarding;
                 }
                 break;
 
             case State.Attack:
                 agent.speed = 0f;
+                agent.stoppingDistance = 0f;
                 transform.LookAt(player);
 
+                
+                TryShootProjectile();
 
+                
                 if (meleeTimer <= 0f)
                 {
                     PerformMeleeAttack();
                     meleeTimer = meleeCooldown;
                 }
 
-
-                TryShootProjectile();
-
-
+                
                 if (distToPlayer > meleeAttackRange)
                 {
                     currentState = State.Chase;
@@ -107,6 +121,7 @@ public class Enemy2 : MonoBehaviour
     void GuardingBehavior()
     {
         agent.speed = guardSpeed;
+        agent.stoppingDistance = 0f;
         if (!agent.hasPath || agent.remainingDistance < 1f)
         {
             Vector3 randomPoint = guardPoint != null ? guardPoint.position + Random.insideUnitSphere * guardRadius : transform.position;
@@ -133,6 +148,7 @@ public class Enemy2 : MonoBehaviour
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Debug.Log("¡Enemy2 fired a projectile!");
+            robotAnim.SetTrigger("shoot");
         }
         else
         {
@@ -142,25 +158,42 @@ public class Enemy2 : MonoBehaviour
 
     void PerformMeleeAttack()
     {
-        Debug.Log("¡Enemy2 delivered a blow in close-quarters combat!");
+        Debug.Log("¡Enemy2 delivered a blow in close quarters combat!");
 
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
+        EnemyAudioController enemyAudio = GetComponent<EnemyAudioController>();
+        if (enemyAudio != null)
         {
-            playerHealth.TakeDamage(meleeDamage);
+            enemyAudio.PlayAttackSound();
+        }
+
+        if (player != null)
+        {
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                robotAnim.SetTrigger("kick");
+                playerHealth.TakeDamage(meleeDamage);
+            }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow; 
+        
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, fireRange);
 
        
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
 
+        
         Vector3 centerPosition = (guardPoint != null) ? guardPoint.position : transform.position;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(centerPosition, guardRadius);
-
     }
 }
