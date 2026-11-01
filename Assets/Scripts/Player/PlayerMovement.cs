@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
 
     private float stepTimer;
+    public bool dobleSaltoDesbloqueado = false;
+    private bool dobleSaltoUsado = false;
     private float currentYaw;
     private float currentPitch;
 
@@ -150,11 +152,25 @@ public class PlayerMovement : MonoBehaviour
 
         // Jump and Gravity
         if (controller.isGrounded && velocity.y < 0f)
+        {
             velocity.y = -2f;
+            dobleSaltoUsado = false;
+        }
+            
 
         if (jumpPressed && controller.isGrounded && !isCrouching)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            if (controller.isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+
+            else if (dobleSaltoDesbloqueado && !dobleSaltoUsado)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                dobleSaltoUsado = true;
+            }
+             
         }
         jumpPressed = false; // Always resets
 
