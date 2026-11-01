@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class IDamageable : MonoBehaviour
+public interface IDamageable
 {
-    public interface IDamageable
-    {
-        void TakeDamage(float amount);
-    }
+    void TakeDamage(float amount);
 }
