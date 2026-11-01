@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Audio.meta
 guid: 87226a06a63cc044a8d2a8cea4ad777b
+========
+guid: e3f5de88d4638984ba0eedb1ebea90ce
+>>>>>>>> manu:Assets/Prefabs/Enemys/Robots/engie.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
