@@ -104,6 +104,7 @@ public class PlayerCombat : MonoBehaviour
     private void TryHeavyAttack()
     {
         if (!ataquePesadoDesbloqueado) return;
+        if (Time.time - lastHeavyAttackTime < heavyAttackCooldown) return;
 
         lastHeavyAttackTime = Time.time;
         animator.SetTrigger("HeavyAttack");
