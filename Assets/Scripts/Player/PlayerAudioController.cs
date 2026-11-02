@@ -8,6 +8,7 @@ public class PlayerAudioController : MonoBehaviour
     [Header("Voices and Sounds of the Player")]
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip stepSound;
+    [SerializeField] private AudioClip runStepSound;
     [SerializeField] private AudioClip playerVoiceDamage;
     [SerializeField] private AudioClip playerAttackSound;
     [SerializeField] private AudioClip playerHeavyAttackSound;
@@ -32,12 +33,16 @@ public class PlayerAudioController : MonoBehaviour
         }
     }
 
-    public void PlayStepSound()
+    public void PlayStepSound(bool isRunning = false)
     {
-        if (audioSource != null && stepSound != null)
+        if (audioSource == null) return;
+
+        AudioClip clipToPlay = isRunning && runStepSound != null ? runStepSound : stepSound;
+
+        if (clipToPlay != null)
         {
             audioSource.pitch = Random.Range(0.95f, 1.05f);
-            audioSource.PlayOneShot(stepSound, 0.5f);
+            audioSource.PlayOneShot(clipToPlay, isRunning ? 0.7f : 0.5f);
         }
     }
 

@@ -309,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (stepTimer >= interval)
         {
-            audioController.PlayStepSound();
+            audioController.PlayStepSound(isSprinting);
             stepTimer = 0f;
         }
     }
