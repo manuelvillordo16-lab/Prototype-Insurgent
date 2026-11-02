@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-public class FinalBoss : MonoBehaviour
+public class FinalBoss : MonoBehaviour, IDamageable
 {
     public enum BossState { Sleeping, Active }
     public BossState currentState = BossState.Sleeping;
