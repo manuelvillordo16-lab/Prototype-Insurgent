@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (isDead) return;
 
         currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0f);
         Debug.Log(gameObject.name + " Took damage, Remaining health:" + currentHealth);
 
         if (currentHealth <= 0f)
