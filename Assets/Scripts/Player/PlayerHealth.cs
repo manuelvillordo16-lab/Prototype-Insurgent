@@ -1,6 +1,6 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Security.Cryptography;
+using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -8,15 +8,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    [Header("Game Over")]
-    [SerializeField] private string gameOverSceneName = "GameOver";
-    [SerializeField] private float delayBeforeGameOver = 2.5f;
-
     [Header("Referencias")]
     [SerializeField] private Animator animator;
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
     public bool IsDead { get; private set; }
+
+    [Header("Panel de derrota")]
+    [SerializeField] private GameObject defeatPanel;
+    [SerializeField] private float delayBeforeDefeatPanel = 2.5f;
+
 
     private void Awake()
     {
@@ -58,36 +59,33 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Debug.Log("Player is dead");
 
         PlayerAudioController playerAudio = GetComponent<PlayerAudioController>();
-        if (playerAudio != null)
-        {
-            playerAudio.PlayPlayerDeath();
-        }
+        if (playerAudio != null) playerAudio.PlayPlayerDeath();
 
-        if (animator != null) //Death animation
-        {
-            animator.SetTrigger("Death");
-        }
+        if (animator != null) animator.SetTrigger("Death");
 
-        PlayerMovement movement = GetComponent<PlayerMovement>(); //Deactivate controls
+        PlayerMovement movement = GetComponent<PlayerMovement>();
         if (movement != null) movement.enabled = false;
 
         PlayerCombat combat = GetComponent<PlayerCombat>();
         if (combat != null) combat.enabled = false;
 
         if (GameManager.Instance != null)
-        {
             GameManager.Instance.PlayerDied();
-        }
-        else
-        {
-            StartCoroutine(LoadGameOverAfterDelay());
-        }
+
+        StartCoroutine(ShowDefeatPanelAfterDelay());
+    }
+
+    private IEnumerator ShowDefeatPanelAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeDefeatPanel);
+
+        if (defeatPanel != null)
+            defeatPanel.SetActive(true);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
     }
-    private IEnumerator LoadGameOverAfterDelay()
-    {
-        yield return new WaitForSeconds(delayBeforeGameOver);
-        SceneManager.LoadScene(gameOverSceneName);
-    }
+    
 
 }

@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
+    [SerializeField] GameObject expDrop; // nuevo
     private bool isDead = false;
 
     [Header("Experience")]
@@ -20,6 +21,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (isDead) return;
 
         currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0f);
         Debug.Log(gameObject.name + " Took damage, Remaining health:" + currentHealth);
 
         if (currentHealth <= 0f)
@@ -34,6 +36,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Debug.Log(gameObject.name + "The Enemy is dead");
 
         Destroy(gameObject);
+
+        Instantiate(expDrop, transform.position, transform.rotation); // nuevo
 
         EnemyAudioController audioCtrl = GetComponent<EnemyAudioController>();
 

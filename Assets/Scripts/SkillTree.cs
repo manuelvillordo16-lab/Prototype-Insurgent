@@ -18,6 +18,8 @@ public class SkillTree : MonoBehaviour
     bool regeneracionActiva = false;
     public float curacionPorSegundo = 10f;
 
+    public MonoBehaviour CameraCollision; 
+
     void Start()
     {
         hacker.enabled = true;
@@ -117,9 +119,11 @@ public class SkillTree : MonoBehaviour
 
     void AbrirMenu()
     {
+        playerCombat.enabled = false; // nuevo
         menuAbierto = true;
         panelSkills.SetActive(true);
         hacker.enabled = false;
+        CameraCollision.enabled = false;   // nuevo
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -128,11 +132,24 @@ public class SkillTree : MonoBehaviour
 
     void CerrarMenu()
     {
+        playerCombat.enabled = true;
         menuAbierto = false;
         panelSkills.SetActive(false);
         hacker.enabled = true;
+        CameraCollision.enabled = true;    // nuevo
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+
+    public void AddExp()
+    { 
+        exp++;
+        textoExp.text = exp.ToString();
+     }
+
 }
+
+
+
