@@ -45,6 +45,19 @@ public class PlayerMovement : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private PlayerCombat playerCombat;
 
+    public SkillTree targetScript;
+
+     private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ExpDrop"))
+        {
+            targetScript.AddExp();
+       
+            Destroy(other.gameObject);
+        }
+    }
+
+
     private float stepTimer;
     public bool dobleSaltoDesbloqueado = false;
     private bool dobleSaltoUsado = false;
