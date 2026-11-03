@@ -89,7 +89,6 @@ public class Enemy2 : MonoBehaviour
                 else if (distToPlayer > detectionRange * 1.5f)
                 {
                     robotAnim.SetBool("aiming", false);
-                    robotAnim.SetBool("Chase", false);
                     currentState = State.Guarding;
                 }
                 break;
