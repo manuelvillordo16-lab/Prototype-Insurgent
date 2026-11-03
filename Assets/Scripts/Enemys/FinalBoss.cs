@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-public class FinalBoss : MonoBehaviour
+public class FinalBoss : MonoBehaviour, IDamageable
 {
     public enum BossState { Sleeping, Active }
     public BossState currentState = BossState.Sleeping;
@@ -29,7 +29,14 @@ public class FinalBoss : MonoBehaviour
     private float attackTimer = 0f;
     private NavMeshAgent agent;
 
-
+    [Header("Animation")]
+    private Animator bossAnim;
+    
+    void Start()
+    {
+        bossAnim = GetComponent<Animator>();
+    }
+  
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -73,7 +80,7 @@ public class FinalBoss : MonoBehaviour
 
         float dist = Vector3.Distance(transform.position, player.position);
         agent.SetDestination(player.position);
-
+        bossAnim.SetBool("walking", true);
         if (dist <= attackRange)
         {
             agent.speed = 0f;
@@ -180,10 +187,12 @@ public class FinalBoss : MonoBehaviour
         if (attackChoice == 0)
         {
             Debug.Log("The boss is attacking the player");
+            bossAnim.SetBool("attack", true);
         }
         else
         {
             Debug.Log("The boss is shooting");
+            bossAnim.SetBool("attack", false);
         }
     }
 
