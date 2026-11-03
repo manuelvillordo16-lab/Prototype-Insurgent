@@ -11,6 +11,11 @@ public class NodoHabilidad : MonoBehaviour
     public bool comprado = false;
     public bool disponible = false;
 
+    [Header("Colores (se cambian desde el Inspector)")]
+    public Color colorBloqueado = Color.red;
+    public Color colorDisponible = Color.yellow;
+    public Color colorComprado = Color.green;
+
     Button boton;
     Image fondo;
     Outline marco;
@@ -38,17 +43,18 @@ public class NodoHabilidad : MonoBehaviour
 
         disponible = arbolAbierto && previoComprado && !comprado;
 
-        if (comprado) fondo.color = Color.yellow;
-        else if (disponible) fondo.color = Color.white;
-        else fondo.color = Color.gray;
+        if (comprado) fondo.color = colorComprado;
+        else if (disponible) fondo.color = colorDisponible;
+        else fondo.color = colorBloqueado;
 
         boton.interactable = disponible && exp >= costo;
 
         if (marco != null) marco.enabled = disponible;
         if (linea != null)
         {
-            if (previoComprado) linea.color = Color.yellow;
-            else linea.color = Color.gray;
+            if (previoComprado) linea.color = colorComprado;
+            else if (disponible) linea.color = colorDisponible;
+            else linea.color = colorDisponible;
         }
     }
     
