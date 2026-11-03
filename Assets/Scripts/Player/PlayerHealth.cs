@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (IsDead) return;
 
         IsDead = true;
-        Debug.Log("Player is dead. Loading game over scene...");
+        Debug.Log("Player is dead");
 
         PlayerAudioController playerAudio = GetComponent<PlayerAudioController>();
         if (playerAudio != null)
@@ -63,24 +63,31 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             playerAudio.PlayPlayerDeath();
         }
 
-        if (animator != null)
+        if (animator != null) //Death animation
         {
             animator.SetTrigger("Death");
         }
 
-        PlayerMovement movement = GetComponent<PlayerMovement>();
+        PlayerMovement movement = GetComponent<PlayerMovement>(); //Deactivate controls
         if (movement != null) movement.enabled = false;
 
         PlayerCombat combat = GetComponent<PlayerCombat>();
         if (combat != null) combat.enabled = false;
 
-        StartCoroutine(LoadGameOverAfterDelay());
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PlayerDied();
+        }
+        else
+        {
+            StartCoroutine(LoadGameOverAfterDelay());
+        }
+
     }
     private IEnumerator LoadGameOverAfterDelay()
     {
         yield return new WaitForSeconds(delayBeforeGameOver);
         SceneManager.LoadScene(gameOverSceneName);
     }
-
 
 }
