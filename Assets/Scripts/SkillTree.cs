@@ -141,4 +141,19 @@ public class SkillTree : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ExpDrop"))
+        {
+            exp++;
+            textoExp.text = exp.ToString();
+            Destroy(other.gameObject);
+        }
+    }
+
+
 }
+
+
+
