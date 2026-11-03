@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
    
     private UnityEngine.AI.NavMeshAgent agent;
     private float attackTimer = 0f;
+   
     [Header("Animation")]
     private Animator guardAnim; 
 
