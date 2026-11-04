@@ -6,6 +6,7 @@ public class Hacker : MonoBehaviour
     public float duracionHack = 3f;
     public int nivelPuertas = 0;
     public bool stunDesbloqueado = false;
+    public bool camHackDesbloqueado = false;
 
     void Update()
     {
@@ -20,7 +21,7 @@ public class Hacker : MonoBehaviour
 
                 if (hackeable != null)
                 {
-                    hackeable.Hack(duracionHack, nivelPuertas, stunDesbloqueado);
+                    hackeable.Hack(duracionHack, nivelPuertas, stunDesbloqueado, camHackDesbloqueado);
                 }
 
             }

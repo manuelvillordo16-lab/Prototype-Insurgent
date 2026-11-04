@@ -26,6 +26,7 @@ public class SkillTree : MonoBehaviour
         hacker.duracionHack = 3f;
         hacker.nivelPuertas = 0;
         hacker.stunDesbloqueado = false;
+        hacker.camHackDesbloqueado = false;
         playerMovement.dobleSaltoDesbloqueado = false;
         playerCombat.ataquePesadoDesbloqueado = false;
         playerCombat.criticoDesbloqueado = false;
@@ -83,15 +84,17 @@ public class SkillTree : MonoBehaviour
             playerMovement.dobleSaltoDesbloqueado = true;
        }
 
-       if (poder == Poder.AtaquePesado)
+       if (poder == Poder.AtaquePesadoYCritico)
        {
             playerCombat.ataquePesadoDesbloqueado = true;
-       }
-
-       if (poder == Poder.Critico)
-       {
             playerCombat.criticoDesbloqueado = true;
        }
+
+       if (poder == Poder.CamHack)
+        {
+            hacker.camHackDesbloqueado = true;
+            Debug.Log("Cam Hack Desbloqueado");
+        }
 
 
         
