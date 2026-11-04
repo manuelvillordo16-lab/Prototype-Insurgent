@@ -29,12 +29,14 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private float attackTimer = 0f;
     private NavMeshAgent agent;
 
+
     [Header("Animation")]
     private Animator bossAnim;
     
     void Start()
     {
-        bossAnim = GetComponent<Animator>();
+        bossAnim = GetComponentInChildren<Animator>();
+       
     }
   
     void Awake()

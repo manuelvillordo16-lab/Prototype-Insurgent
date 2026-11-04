@@ -167,7 +167,7 @@ public class Enemy2 : MonoBehaviour
 
         if (player != null)
         {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
             if (playerHealth != null)
             {
                 robotAnim.SetTrigger("kick");

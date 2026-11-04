@@ -65,6 +65,8 @@ public class PlayerCombat : MonoBehaviour
     // Light Attack
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (!enabled) return;
+
         if (context.performed)
         {
             RegisterInput("Attack");
@@ -81,6 +83,8 @@ public class PlayerCombat : MonoBehaviour
     // Heavy Attack
     public void OnHeavyAttack(InputAction.CallbackContext context)
     {
+        if (!enabled) return;
+
         if (context.performed)
         {
             RegisterInput("Attack");
