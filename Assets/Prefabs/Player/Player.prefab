@@ -312,15 +312,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig1:Hips'\n\tTransform 'mixamorig1:LeftHandThumb1'\n\tTransform
-    'mixamorig1:LeftHandPinky2'\n\tTransform 'mixamorig1:RightHand'\n\tTransform
-    'mixamorig1:LeftHandMiddle2'\n\tTransform 'mixamorig1:RightFoot'\n\tTransform
-    'mixamorig1:Spine1'\n\tTransform 'mixamorig1:RightLeg'\n\tTransform 'mixamorig1:RightHandMiddle2'\n\tTransform
-    'mixamorig1:Hips'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
-    animation clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
-    clip 'Death'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1504,6 +1496,12 @@ MonoBehaviour:
   criticalChance: 0.15
   criticalMultiplier: 2
   audioController: {fileID: 3449322165028989394}
+  specialDamage: 9999
+  sequenceTimeout: 1.2
+  specialCooldown: 1
+  legDamage: {fileID: 0}
+  ataquePesadoDesbloqueado: 0
+  criticoDesbloqueado: 0
 --- !u!114 &7274514913053634434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,6 +1576,8 @@ MonoBehaviour:
   audioController: {fileID: 3449322165028989394}
   walkStepInterval: 0.45
   runStepInterval: 0.28
+  playerCombat: {fileID: 0}
+  dobleSaltoDesbloqueado: 0
 --- !u!114 &3449322165028989394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,13 +1590,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0841999fe9e544fb254cc666bc9b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioController
-  audioSource: {fileID: 3080100058058472339}
   jumpSound: {fileID: 0}
   stepSound: {fileID: 8300000, guid: ad1d2325ea80b0f4eade527b40f8608e, type: 3}
+  runStepSound: {fileID: 0}
   playerVoiceDamage: {fileID: 0}
   playerAttackSound: {fileID: 8300000, guid: 633467efe2a4aa14d954702fc94fc74e, type: 3}
   playerHeavyAttackSound: {fileID: 8300000, guid: 76ca808e68b5e464dba5431f0fd18bee, type: 3}
-  playerDeathSound: {fileID: 0}
+  playerDeathSound: {fileID: 8300000, guid: e974495cfcf6a4743aa310f609299413, type: 3}
+  playerTornadoKickSound: {fileID: 0}
 --- !u!81 &5515380313814821883
 AudioListener:
   m_ObjectHideFlags: 0
