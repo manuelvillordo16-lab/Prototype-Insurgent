@@ -28,8 +28,12 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         if (playOnlyOnce && hasPlayed) return;
-      
-        if (dialogueClips == null || dialogueClips.Length == 0) return;  // Makes sure list is not empty
+        if (dialogueClips == null || dialogueClips.Length == 0) return;
+
+        
+        transform.SetParent(other.transform);
+       
+        transform.localPosition = Vector3.zero;
 
         PlayDialogue();
     }
@@ -37,8 +41,8 @@ public class DialogueTrigger : MonoBehaviour
     public void PlayDialogue()
     {
         if (dialogueClips == null || dialogueClips.Length == 0) return;
-        
-        StartCoroutine(PlayAudioListRoutine()); // Corroutine starts the list
+
+        StartCoroutine(PlayAudioListRoutine());
 
         hasPlayed = true;
 
@@ -49,8 +53,7 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-   
-    private IEnumerator PlayAudioListRoutine() // Waits for current audio to finish before starting next one
+    private IEnumerator PlayAudioListRoutine()
     {
         audioSource.volume = volume;
 
@@ -61,7 +64,10 @@ public class DialogueTrigger : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
 
-            yield return new WaitForSeconds(clip.length); // Waits for clip to finish
+            yield return new WaitForSeconds(clip.length);
         }
+
+         transform.SetParent(null);
+         enabled = false; 
     }
 }
