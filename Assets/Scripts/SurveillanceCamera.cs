@@ -13,42 +13,54 @@ public class SurveillanceCamera : MonoBehaviour
     public LayerMask playerMask;
     public LayerMask obstacleMask;
 
-    private bool alarmTriggered = false;
+    [Header("Rendimiento")]
+    [SerializeField] private float checkInterval = 0.2f;   // revisa 5 veces por segundo en vez de cada frame
 
-   
+    private bool alarmTriggered = false;
+    private float nextCheckTime;
+    private readonly Collider[] hitsBuffer = new Collider[8];   // se reutiliza, no genera basura
+
     public static event Action<Vector3> OnAlarmRaised;
 
     void Update()
     {
         if (alarmTriggered) return;
 
+        if (Time.time < nextCheckTime) return;
+        nextCheckTime = Time.time + checkInterval;
+
         DetectPlayerIn3DCone();
     }
 
     void DetectPlayerIn3DCone()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, viewRange, playerMask);
-        foreach (Collider hit in hits)
+        int count = Physics.OverlapSphereNonAlloc(transform.position, viewRange, hitsBuffer, playerMask);
+
+        for (int i = 0; i < count; i++)
         {
-            Transform player = hit.transform;
-            Vector3 dirToPlayer = (player.position - transform.position);
-            float distToPlayer = dirToPlayer.magnitude;
-            dirToPlayer.Normalize();
+            Collider hit = hitsBuffer[i];
 
-            Vector3 horizontalDirToPlayer = new Vector3(dirToPlayer.x, 0, dirToPlayer.z);
-            Vector3 horizontalForward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-            float horizontalAngleToPlayer = Vector3.Angle(horizontalForward, horizontalDirToPlayer);
+           
+            Vector3 toTarget = hit.bounds.center - transform.position;
+            float dist = toTarget.magnitude;
+            if (dist < 0.01f) continue;
+            Vector3 dir = toTarget / dist;
 
-            float verticalAngleToPlayer = Vector3.Angle(transform.forward, dirToPlayer);
+            
+            Vector3 local = transform.InverseTransformDirection(dir);
+            if (local.z <= 0f) continue;  
 
-            if (horizontalAngleToPlayer <= horizontalAngle / 2f && verticalAngleToPlayer <= verticalAngle / 2f)
+            float h = Mathf.Atan2(local.x, local.z) * Mathf.Rad2Deg;   // angulo horizontal
+            float v = Mathf.Atan2(local.y, Mathf.Sqrt(local.x * local.x + local.z * local.z)) * Mathf.Rad2Deg;   // angulo vertical
+
+            if (Mathf.Abs(h) > horizontalAngle / 2f || Mathf.Abs(v) > verticalAngle / 2f) continue;
+
+            
+            if (!Physics.Raycast(transform.position, dir, dist, obstacleMask))
             {
                 
-                if (!Physics.Raycast(transform.position, dirToPlayer, distToPlayer, obstacleMask))
-                {
-                    TriggerAlarm(player.position);
-                    break;
-                }
+                TriggerAlarm(hit.transform.position);
+                return;
             }
         }
     }
@@ -59,28 +71,24 @@ public class SurveillanceCamera : MonoBehaviour
         alarmTriggered = true;
         Debug.Log("Player detected");
 
-        
         OnAlarmRaised?.Invoke(playerPosition);
     }
 
-
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0f, 1.0f, 1.0f, 0.3f); 
-
-       
-        Vector3 upLeft = Quaternion.Euler(-verticalAngle / 2f, -horizontalAngle / 2f, 0) * transform.forward * viewRange;
-        Vector3 upRight = Quaternion.Euler(-verticalAngle / 2f, horizontalAngle / 2f, 0) * transform.forward * viewRange;
-        Vector3 downLeft = Quaternion.Euler(verticalAngle / 2f, -horizontalAngle / 2f, 0) * transform.forward * viewRange;
-        Vector3 downRight = Quaternion.Euler(verticalAngle / 2f, horizontalAngle / 2f, 0) * transform.forward * viewRange;
+        Gizmos.color = new Color(0f, 1.0f, 1.0f, 0.3f);
 
         
+        Vector3 upLeft = transform.rotation * Quaternion.Euler(-verticalAngle / 2f, -horizontalAngle / 2f, 0) * Vector3.forward * viewRange;
+        Vector3 upRight = transform.rotation * Quaternion.Euler(-verticalAngle / 2f, horizontalAngle / 2f, 0) * Vector3.forward * viewRange;
+        Vector3 downLeft = transform.rotation * Quaternion.Euler(verticalAngle / 2f, -horizontalAngle / 2f, 0) * Vector3.forward * viewRange;
+        Vector3 downRight = transform.rotation * Quaternion.Euler(verticalAngle / 2f, horizontalAngle / 2f, 0) * Vector3.forward * viewRange;
+
         Gizmos.DrawLine(transform.position, transform.position + upLeft);
         Gizmos.DrawLine(transform.position, transform.position + upRight);
         Gizmos.DrawLine(transform.position, transform.position + downLeft);
         Gizmos.DrawLine(transform.position, transform.position + downRight);
 
-       
         Gizmos.DrawLine(transform.position + upLeft, transform.position + upRight);
         Gizmos.DrawLine(transform.position + upRight, transform.position + downRight);
         Gizmos.DrawLine(transform.position + downRight, transform.position + downLeft);

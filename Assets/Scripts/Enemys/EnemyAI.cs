@@ -193,7 +193,7 @@ public class EnemyAI : MonoBehaviour
             Debug.Log("Enemy attacked the player!");
 
 
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
 
             if (playerHealth != null)
             {
