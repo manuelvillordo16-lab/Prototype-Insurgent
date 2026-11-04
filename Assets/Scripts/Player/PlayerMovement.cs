@@ -176,21 +176,19 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
             dobleSaltoUsado = false;
         }
-            
 
-        if (jumpPressed && controller.isGrounded && !isCrouching)
+
+        if (jumpPressed && !isCrouching)
         {
             if (controller.isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
-
             else if (dobleSaltoDesbloqueado && !dobleSaltoUsado)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 dobleSaltoUsado = true;
             }
-             
         }
         jumpPressed = false; // Always resets
 
