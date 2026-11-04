@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
    
     private UnityEngine.AI.NavMeshAgent agent;
     private float attackTimer = 0f;
+    private bool isStunned = false;
    
     [Header("Animation")]
     private Animator guardAnim; 
@@ -93,6 +94,8 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+
+        if (isStunned) return;
 
         switch (currentState)
         {
@@ -279,16 +282,33 @@ public class EnemyAI : MonoBehaviour
 
     public void Stun(float duration)    
     {
-        StartCoroutine(StunCoroutine(duration));
+        if (!isStunned)
+        {
+            StartCoroutine(StunCoroutine(duration));
+        }
+        
     }
 
     private IEnumerator StunCoroutine(float duration)
     {
         State previousState = currentState;
+        isStunned = true;
         agent.isStopped = true;
+
+        if (guardAnim != null)
+        {
+            guardAnim.SetBool("Chase", false);
+            guardAnim.SetBool("Attack", false);
+        }
+
+        Debug.Log("Enemigo aturdido durante " + duration + " segundos ");
         yield return new WaitForSeconds(duration);
+
         agent.isStopped = false;
         currentState= previousState;
+        isStunned = false;
+
+        Debug.Log("El enemigo se recupero del Stun ");
 
 
 

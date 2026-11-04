@@ -25,11 +25,11 @@ public class Hackeable : MonoBehaviour
         surveillanceCamera = GetComponent<SurveillanceCamera>();
     }
 
-   public void Hack(float duracion, int nivelPuertas, bool puedeStun)
+   public void Hack(float duracion, int nivelPuertas, bool puedeStun, bool puedeHackearCamara)
     {
         bool abrePuerta = doorMovement != null && nivelPuertas >= nivelRequerido;
         bool aturde = enemyAI != null && puedeStun;
-        bool desactivaCamara = surveillanceCamera != null;
+        bool desactivaCamara = surveillanceCamera != null && puedeHackearCamara;
 
         if (!abrePuerta && !aturde && !desactivaCamara)
         {
