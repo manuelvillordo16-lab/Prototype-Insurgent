@@ -83,15 +83,16 @@ public class SkillTree : MonoBehaviour
             playerMovement.dobleSaltoDesbloqueado = true;
        }
 
-       if (poder == Poder.AtaquePesado)
+       if (poder == Poder.AtaquePesadoYCritico)
        {
             playerCombat.ataquePesadoDesbloqueado = true;
-       }
-
-       if (poder == Poder.Critico)
-       {
             playerCombat.criticoDesbloqueado = true;
        }
+
+       if (poder == Poder.CamHack)
+        {
+            Debug.Log("Cam Hack Desbloqueado");
+        }
 
 
         

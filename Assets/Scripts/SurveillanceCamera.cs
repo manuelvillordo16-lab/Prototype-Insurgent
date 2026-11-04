@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class SurveillanceCamera : MonoBehaviour
 {
@@ -19,12 +20,13 @@ public class SurveillanceCamera : MonoBehaviour
     private bool alarmTriggered = false;
     private float nextCheckTime;
     private readonly Collider[] hitsBuffer = new Collider[8];   // se reutiliza, no genera basura
+    private bool isHacked = false;
 
     public static event Action<Vector3> OnAlarmRaised;
 
     void Update()
     {
-        if (alarmTriggered) return;
+        if (isHacked || alarmTriggered) return;
 
         if (Time.time < nextCheckTime) return;
         nextCheckTime = Time.time + checkInterval;
@@ -94,4 +96,24 @@ public class SurveillanceCamera : MonoBehaviour
         Gizmos.DrawLine(transform.position + downRight, transform.position + downLeft);
         Gizmos.DrawLine(transform.position + downLeft, transform.position + upLeft);
     }
+
+    public void Hack (float duration)
+    {
+        StartCoroutine(HackCoroutine(duration));
+    }
+
+    private IEnumerator HackCoroutine(float duration)
+    {
+        isHacked = true;
+        alarmTriggered = false;
+
+        Debug.Log("Camara hackeada, Deteccion desactivada");
+
+        yield return new WaitForSeconds(duration);
+
+        isHacked = false;
+
+        Debug.Log("Camara recuperada, Deteccion activada");
+    }
+        
 }
