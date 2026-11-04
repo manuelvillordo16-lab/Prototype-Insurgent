@@ -119,6 +119,7 @@ public class SkillTree : MonoBehaviour
 
     void AbrirMenu()
     {
+        ActualizarPantalla();
         playerCombat.enabled = false; // nuevo
         menuAbierto = true;
         panelSkills.SetActive(true);
@@ -130,7 +131,7 @@ public class SkillTree : MonoBehaviour
 
     }
 
-    void CerrarMenu()
+    public void CerrarMenu()
     {
         playerCombat.enabled = true;
         menuAbierto = false;
@@ -144,10 +145,10 @@ public class SkillTree : MonoBehaviour
 
 
     public void AddExp()
-    { 
+    {
         exp++;
-        textoExp.text = exp.ToString();
-     }
+        ActualizarPantalla();   
+    }
 
 }
 

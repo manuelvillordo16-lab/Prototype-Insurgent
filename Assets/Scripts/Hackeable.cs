@@ -13,9 +13,12 @@ public class Hackeable : MonoBehaviour
 
     void Start()
     {
-        objectRenderer = GetComponent<Renderer>();  
-        originalColor = objectRenderer.material.color;
-        enemyAI= GetComponent<EnemyAI>();
+        objectRenderer = GetComponentInChildren<Renderer>();
+
+        if (objectRenderer != null)
+            originalColor = objectRenderer.material.color;
+
+        enemyAI = GetComponent<EnemyAI>();
     }
 
    public void Hack(float duracion, int nivelPuertas, bool puedeStun)
@@ -42,16 +45,19 @@ public class Hackeable : MonoBehaviour
     }
     private IEnumerator HackEffect(float duracion, bool abrePuerta, bool aturde)
     {
-        objectRenderer.material.color = Color.green;
+        if (objectRenderer != null)
+            objectRenderer.material.color = Color.green;
+
         if (aturde)
         {
             Debug.Log("Aplicando stun. ");
             enemyAI.Stun(duracion);
         }
-       
+
         yield return new WaitForSeconds(duracion);
 
-        objectRenderer.material.color = originalColor;
+        if (objectRenderer != null)
+            objectRenderer.material.color = originalColor;
 
         if (abrePuerta)
         {
