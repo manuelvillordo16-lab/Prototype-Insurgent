@@ -20,7 +20,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (isDead) return;
 
         currentHealth -= amount;
+
         currentHealth = Mathf.Max(currentHealth, 0f);
+        
+        PlayerAudioController audio = GetComponent<PlayerAudioController>();
+
+        if (audio != null)
+
+            audio.PlayPlayerDamageVoice();
+
         Debug.Log(gameObject.name + " Took damage, Remaining health:" + currentHealth);
 
         if (currentHealth <= 0f)
@@ -32,6 +40,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     void Die()
     {
         isDead = true;
+
+        PlayerAudioController audio = GetComponent<PlayerAudioController>();
+
+        if (audio != null)
+
+            audio.PlayPlayerDeath();
+
         Debug.Log(gameObject.name + "The Enemy is dead");
 
         Destroy(gameObject);

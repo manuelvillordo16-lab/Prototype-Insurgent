@@ -117,8 +117,15 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             jumpPressed = true;
-        animator.SetTrigger("Jump");
+
+            animator.SetTrigger("Jump");
+
+            if (audioController != null)
+
+                audioController.PlayJumpSound();
+        }
     }
 
     public void OnSprint(InputAction.CallbackContext context)
