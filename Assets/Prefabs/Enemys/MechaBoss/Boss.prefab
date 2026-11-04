@@ -1051,7 +1051,7 @@ MonoBehaviour:
   maxHealthBar2: 100
   currentHealthBar1: 0
   currentHealthBar2: 0
-  shieldVisual: {fileID: 2906116991436775253, guid: d0bd7482581e6624a9144adbff7de729, type: 3}
+  shieldVisual: {fileID: 0}
   player: {fileID: 0}
   enemy2Prefab: {fileID: 0}
   attackRange: 50

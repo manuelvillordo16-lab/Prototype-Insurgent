@@ -189,12 +189,12 @@ public class FinalBoss : MonoBehaviour, IDamageable
         if (attackChoice == 0)
         {
             Debug.Log("The boss is attacking the player");
-            bossAnim.SetTrigger("attack", true);
+            bossAnim.SetBool("attack", true);
         }
         else
         {
             Debug.Log("The boss is shooting");
-            
+            bossAnim.SetBool("attack", false);
         }
     }
 
