@@ -1392,7 +1392,7 @@ MonoBehaviour:
   detectionRange: 15
   fireRange: 7
   meleeAttackRange: 2
-  projectilePrefab: {fileID: 739499437383461111, guid: 9c7a563852359284ba22fb7f54a43011, type: 3}
+  projectilePrefab: {fileID: 1005321012000136381, guid: 62844ae1923dd6c449fc6a9b2ea29291, type: 3}
   firePoint: {fileID: 730694904479313895}
   fireCooldown: 4
   meleeCooldown: 1.5
