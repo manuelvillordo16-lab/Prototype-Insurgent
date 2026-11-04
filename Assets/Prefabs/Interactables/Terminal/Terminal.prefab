@@ -105,7 +105,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710707, z: -0, w: 0.70710653}
   m_LocalPosition: {x: 52.77, y: 0.28, z: 31.5839}
-  m_LocalScale: {x: 1.8831741, y: 1.9367281, z: 1.6894}
+  m_LocalScale: {x: 1.3838128, y: 1.4231659, z: 1.2414218}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5692172856507293540}
@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 860f4f35a14d4994a94dabfbf749d743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hackeable
+  nivelRequerido: 1
   doorMovement: {fileID: 0}
 --- !u!1 &6760339543629021150
 GameObject:
