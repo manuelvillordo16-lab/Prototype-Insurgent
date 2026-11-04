@@ -96,6 +96,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
                 StartCoroutine(ActivateShieldForSeconds(3f)); 
 
                 attackTimer = attackCooldown;
+                bossAnim.SetBool("attack", true);
             }
         }
         else
@@ -164,6 +165,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     void TriggerShieldByHealthLoss()
     {
         Debug.Log("¡Shield activated!");
+        bossAnim.SetBool("lowhealth", true);
         StartCoroutine(ActivateShieldForSeconds(5f));
         nextShieldHealthTrigger -= 25f; 
     }
@@ -189,7 +191,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
         if (attackChoice == 0)
         {
             Debug.Log("The boss is attacking the player");
-           // bossAnim.SetTrigger("attack", true);
+            bossAnim.SetBool("attack", true);
         }
         else
         {
@@ -213,7 +215,9 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
     void BossDie()
     {
+        
         Debug.Log("¡The Final Boss has been defeated!");
+        bossAnim.SetBool("death", true);
         Destroy(gameObject);
     }
 }
