@@ -17,17 +17,22 @@ public class DialogueTrigger : MonoBehaviour
     {
 
         audioSource = GetComponent<AudioSource>();
+
         if (audioSource == null)
+
             audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f; 
+
+        audioSource.spatialBlend = 0f; 
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
         if (playOnlyOnce && hasPlayed) return;
+
         if (dialogueClip == null) return;
 
         PlayDialogue();
