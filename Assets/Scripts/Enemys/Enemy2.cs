@@ -167,7 +167,7 @@ public class Enemy2 : MonoBehaviour
 
     void Shoot()
     {
-        if (projectilePrefab == null && firePoint == null)
+        if (projectilePrefab != null && firePoint != null)
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Debug.Log("¡Enemy2 fired a projectile!");
