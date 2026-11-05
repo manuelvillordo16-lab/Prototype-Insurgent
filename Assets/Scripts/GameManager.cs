@@ -17,16 +17,10 @@ public class GameManager : MonoBehaviour
     [Header("Scenes")]
     [SerializeField] private string gameOverSceneName = "GameOver";
     [SerializeField] private string mainMenuSceneName = "MainMenu";
-    
-    [Header("Victoria")]
-    [SerializeField] private AudioClip[] victoryDialogueClips;
-    [SerializeField] private string victorySceneName = "Victory";
-    [SerializeField] private float delayBeforeVictoryScreen = 4f;
-    
-    private AudioSource audioSource;
-    
+
     private void Awake()
     {
+        // Singleton simple
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -35,13 +29,6 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.spatialBlend = 0f;
-        audioSource.playOnAwake = false;
     }
 
     public void SetState(GameState newState)
@@ -92,29 +79,5 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Saliendo del juego...");
-    }
-    
-    public void Victory()
-    {
-        SetState(GameState.GameOver);
-        StartCoroutine(PlayVictorySequence());
-    }
-
-    private IEnumerator PlayVictorySequence()
-    {
-        // Reproducir diálogo de los guías
-        if (victoryDialogueClips != null)
-        {
-            foreach (AudioClip clip in victoryDialogueClips)
-            {
-                if (clip == null) continue;
-
-                audioSource.clip = clip;
-                audioSource.Play();
-                yield return new WaitForSeconds(clip.length + 0.15f);
-            }
-        }
-        yield return new WaitForSeconds(delayBeforeVictoryScreen);
-        SceneManager.LoadScene(victorySceneName);
     }
 }
