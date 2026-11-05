@@ -19,6 +19,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private bool isShieldActive = false;
     private float nextShieldTriggerBar1;
     private float nextShieldTriggerBar2;
+    private Coroutine shieldRoutine; 
 
     [Header("Spawns")]
     public Transform player;
@@ -26,7 +27,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private bool hasSpawnedReinforcements = false;
 
     [Header("Attacks and Movement")]
-    public float attackRange = 50f;
+    public float attackRange = 10f; 
     public float attackCooldown = 2f;
     private float attackTimer = 0f;
     private NavMeshAgent agent;
@@ -72,7 +73,8 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
         Debug.Log("¡The Final Boss is Awake!");
 
-        StartCoroutine(ActivateShieldForSeconds(10f));
+      
+        ActivateShield(10f);
     }
 
     void Update()
@@ -92,7 +94,10 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (attackTimer <= 0f)
             {
                 PerformBossAttacks();
-                StartCoroutine(ActivateShieldForSeconds(3f));
+
+                
+                ActivateShield(1f);
+
                 attackTimer = attackCooldown;
             }
         }
@@ -102,6 +107,13 @@ public class FinalBoss : MonoBehaviour, IDamageable
         }
 
         attackTimer -= Time.deltaTime;
+    }
+
+    
+    void ActivateShield(float duration)
+    {
+        if (shieldRoutine != null) StopCoroutine(shieldRoutine);
+        shieldRoutine = StartCoroutine(ActivateShieldForSeconds(duration));
     }
 
     public void TakeDamage(float amount)
@@ -126,10 +138,10 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (currentHealthBar1 <= 0f)
             {
                 isSecondBarActive = true;
-                nextShieldTriggerBar2 = maxHealthBar2 - 25f; 
+                nextShieldTriggerBar2 = maxHealthBar2 - 25f;
                 Debug.Log("¡The Boss has entered it's SECOND HEALTH BAR!");
 
-                StartCoroutine(ActivateShieldForSeconds(5f));
+                ActivateShield(5f);
             }
         }
         else
@@ -158,10 +170,9 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
     void TriggerShieldByHealthLoss()
     {
-        Debug.Log("¡Shield activated!");
-        StartCoroutine(ActivateShieldForSeconds(5f));
+        Debug.Log("¡Shield activated by health loss!");
+        ActivateShield(5f);
     }
-
 
     IEnumerator ActivateShieldForSeconds(float duration)
     {
@@ -174,6 +185,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
         isShieldActive = false;
         if (shieldVisual != null) shieldVisual.SetActive(false);
+        shieldRoutine = null;
 
         Debug.Log("Shield deactivated");
     }
