@@ -132,8 +132,7 @@ public class SkillTree : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        cameraLook.enabled = false;
-        playerMovement.puedeMoverCamera = false;
+        playerMovement.puedeMoverCamara = false;
 
     }
 
@@ -147,8 +146,7 @@ public class SkillTree : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        cameraLook.enabled = true;
-        playerMovement.puedeMoverCamera = true;
+        playerMovement.puedeMoverCamara = true;
     }
 
 
