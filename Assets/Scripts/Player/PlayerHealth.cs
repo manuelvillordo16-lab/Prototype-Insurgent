@@ -20,6 +20,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private float delayBeforeDefeatPanel = 2.5f;
 
+    [Header("Diálogo de Muerte")]
+    [SerializeField] private AudioClip[] deathDialogueClips;
+    [SerializeField] private AudioSource dialogueAudioSource;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
@@ -70,7 +74,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth = Mathf.Min(currentHealth, maxHealth);
     }
 
-    void Die()
+    private void Die()
     {
         if (IsDead) return;
 
@@ -90,7 +94,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (GameManager.Instance != null)
             GameManager.Instance.PlayerDied();
-
+       
+        if (deathDialogueClips != null && deathDialogueClips.Length > 0)
+        {
+            StartCoroutine(PlayDeathDialogue());
+        }
+        
         StartCoroutine(ShowDefeatPanelAfterDelay());
     }
 
