@@ -291,24 +291,43 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator StunCoroutine(float duration)
     {
-        State previousState = currentState;
         isStunned = true;
-        agent.isStopped = true;
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
 
-        if (guardAnim != null)
+        if(guardAnim != null)
         {
             guardAnim.SetBool("Chase", false);
             guardAnim.SetBool("Attack", false);
         }
+        Debug.Log("Enemigo aturdido ");
 
-        Debug.Log("Enemigo aturdido durante " + duration + " segundos ");
         yield return new WaitForSeconds(duration);
 
-        agent.isStopped = false;
-        currentState= previousState;
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = false;
+        }
+
+        
         isStunned = false;
 
-        Debug.Log("El enemigo se recupero del Stun ");
+        if (PlayerInChaseRange())
+        {
+            currentState = State.Chase;
+            guardAnim.SetBool("Chase", true);
+        }
+        else
+        {
+            currentState = State.Patrol;
+            guardAnim.SetBool("Chase", false);
+        }
+
+         Debug.Log("Stun terminado, Enemigo recuperado ");
 
 
 

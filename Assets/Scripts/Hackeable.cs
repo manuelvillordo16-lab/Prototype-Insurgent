@@ -31,6 +31,9 @@ public class Hackeable : MonoBehaviour
         bool aturde = enemyAI != null && puedeStun;
         bool desactivaCamara = surveillanceCamera != null && puedeHackearCamara;
 
+        Debug.Log("EnemyAI encontrado: " + (enemyAI != null));
+        Debug.Log("Stun desbloqueado: " + puedeStun);
+
         if (!abrePuerta && !aturde && !desactivaCamara)
         {
             Debug.Log("No tenes el nivel para hackear: " + gameObject.name);

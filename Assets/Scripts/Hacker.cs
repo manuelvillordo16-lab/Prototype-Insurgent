@@ -3,7 +3,7 @@ using UnityEngine;
 public class Hacker : MonoBehaviour
 {
     public Camera playerCamera;
-    public float duracionHack = 3f;
+    public float duracionHack = 6f;
     public int nivelPuertas = 0;
     public bool stunDesbloqueado = false;
     public bool camHackDesbloqueado = false;
@@ -21,7 +21,12 @@ public class Hacker : MonoBehaviour
 
                 if (hackeable != null)
                 {
+                    Debug.Log("Hackeable encontrado: " + hackeable.gameObject.name);
                     hackeable.Hack(duracionHack, nivelPuertas, stunDesbloqueado, camHackDesbloqueado);
+                }
+                else
+                {
+                    Debug.Log("El objeto detectado no tiene Hackeable en sus padres");
                 }
 
             }

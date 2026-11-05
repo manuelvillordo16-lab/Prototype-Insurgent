@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
 
     public SkillTree targetScript;
+    public bool puedeMoverCamera = true;
 
      private void OnTriggerEnter(Collider other)
     {
@@ -267,17 +268,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
         public void OnLook(InputAction.CallbackContext context)
-    {
-        Vector2 lookInput = context.ReadValue<Vector2>();
-        currentYaw += lookInput.x * lookSensitivity;
-        currentPitch -= lookInput.y * lookSensitivity;
-        currentPitch = Mathf.Clamp(currentPitch, minVerticalAngle, maxVerticalAngle);
-        if (lookTarget != null)
         {
-            lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
-        }
-    }
+          if (!puedeMoverCamera) return;
 
+          Vector2 lookInput = context.ReadValue<Vector2>();
+
+          currentYaw += lookInput.x * lookSensitivity;
+          currentPitch += lookInput.y * lookSensitivity;
+          currentPitch = Mathf.Clamp(currentPitch, minVerticalAngle, maxVerticalAngle);
+
+          if (lookTarget != null)
+          {
+            lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
+          } 
+        }
+   
     private void UpdateAnimator()
     {
         if (animator == null) return;
