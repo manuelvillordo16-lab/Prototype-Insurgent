@@ -81,7 +81,6 @@ public class EnemyAI : MonoBehaviour
 
     void HandleAlarm(Vector3 targetPosition)
     {
-
         if (currentState == State.Patrol || currentState == State.Patrol)
         {
             agent.SetDestination(targetPosition);

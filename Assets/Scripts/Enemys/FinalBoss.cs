@@ -217,6 +217,12 @@ public class FinalBoss : MonoBehaviour, IDamageable
     void BossDie()
     {
         Debug.Log("¡The Final Boss has been defeated!");
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Victory();
+        }
+        bossAnim
         Destroy(gameObject);
+
     }
 } 
