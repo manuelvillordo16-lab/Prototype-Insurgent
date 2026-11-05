@@ -521,7 +521,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "M\xB4\xFAsica"
+  m_Name: "M\xFAsica"
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: cb52ce451208f454b9dfd885831ae63d
   m_Children: []
