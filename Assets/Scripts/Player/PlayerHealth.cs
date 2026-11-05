@@ -114,6 +114,21 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Cursor.visible = true;
 
     }
-    
+    private IEnumerator PlayDeathDialogue()
+    {
+        if (dialogueAudioSource == null)
+            dialogueAudioSource = GetComponent<AudioSource>();
+
+        foreach (AudioClip clip in deathDialogueClips)
+        {
+            if (clip == null) continue;
+
+            dialogueAudioSource.clip = clip;
+            dialogueAudioSource.spatialBlend = 0f; 
+            dialogueAudioSource.Play();
+
+            yield return new WaitForSeconds(clip.length + 0.1f);
+        }
+    }
 
 }
