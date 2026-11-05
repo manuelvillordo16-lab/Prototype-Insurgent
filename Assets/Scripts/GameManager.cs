@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -95,11 +96,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
         Debug.Log("Saliendo del juego...");
     }
-    public void Victory()
-    {
-        SetState(GameState.GameOver);
-        StartCoroutine(PlayVictorySequence());
-    }
+   
     public void Victory()
     {
         SetState(GameState.GameOver);
