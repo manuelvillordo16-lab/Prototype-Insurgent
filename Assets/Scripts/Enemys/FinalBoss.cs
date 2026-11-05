@@ -213,10 +213,17 @@ public class FinalBoss : MonoBehaviour, IDamageable
             Debug.Log("¡The boss spawned three enemies right at the start of bar 2!");
         }
     }
-
+    
     void BossDie()
     {
         Debug.Log("¡The Final Boss has been defeated!");
+
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Victory();
+        }
+
         Destroy(gameObject);
     }
 } 
