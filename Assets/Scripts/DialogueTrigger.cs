@@ -21,7 +21,7 @@ public class DialogueTrigger : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f;
+        audioSource.spatialBlend = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
