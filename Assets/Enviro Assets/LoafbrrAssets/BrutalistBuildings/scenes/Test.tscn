@@ -1,0 +1,105 @@
+[gd_scene load_steps=20 format=3 uid="uid://d4kt2flcfrcew"]
+
+[ext_resource type="PackedScene" uid="uid://dj3qh4yt4urcm" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_001.tscn" id="1_v2rk4"]
+[ext_resource type="PackedScene" uid="uid://cepnx2raxh0lt" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_002.tscn" id="2_2y3f3"]
+[ext_resource type="PackedScene" uid="uid://fra7aq7jr30" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_003.tscn" id="3_6113s"]
+[ext_resource type="PackedScene" uid="uid://dh1t71w12mff8" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_004.tscn" id="4_3n827"]
+[ext_resource type="PackedScene" uid="uid://c6tbdu6gf7t7r" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_005.tscn" id="5_rnxdd"]
+[ext_resource type="PackedScene" uid="uid://dnkddr2r0xar3" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_006.tscn" id="6_vm5d4"]
+[ext_resource type="PackedScene" uid="uid://dci3r37wpld3q" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_007.tscn" id="7_v4na3"]
+[ext_resource type="PackedScene" uid="uid://d08ahvpnxj7rl" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_008.tscn" id="8_nig1o"]
+[ext_resource type="PackedScene" uid="uid://qcx786o0fygj" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_009.tscn" id="9_s0rc0"]
+[ext_resource type="PackedScene" uid="uid://wk3lxeodhrq3" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_010.tscn" id="10_8fkcn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x76hb"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_tml3d"]
+sky_material = SubResource("ProceduralSkyMaterial_x76hb")
+
+[sub_resource type="Environment" id="Environment_bws5n"]
+background_mode = 2
+sky = SubResource("Sky_tml3d")
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+ssil_intensity = 0.5
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.5
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 3.0
+sdfgi_energy = 1.5
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iefso"]
+size = Vector2(256, 256)
+
+[sub_resource type="Gradient" id="Gradient_h5m6n"]
+colors = PackedColorArray(0.44, 0.27984, 0.0968, 1, 0.383321, 0.22364, 0.0529398, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rrb2t"]
+noise_type = 3
+frequency = 1.0
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jteaj"]
+color_ramp = SubResource("Gradient_h5m6n")
+noise = SubResource("FastNoiseLite_rrb2t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuo8a"]
+albedo_color = Color(0.290196, 0.164706, 0.0313726, 1)
+detail_enabled = true
+detail_albedo = SubResource("NoiseTexture2D_jteaj")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d6hlg"]
+data = PackedVector3Array(128, 0, 128, -128, 0, 128, 128, 0, -128, -128, 0, 128, -128, 0, -128, 128, 0, -128)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bws5n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.23114, 0.710288, -0.66488, -0.209598, 0.703692, 0.678886, 0.950075, -0.0175606, 0.311526, 0, 25.5176, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_iefso")
+surface_material_override/0 = SubResource("StandardMaterial3D_vuo8a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_d6hlg")
+
+[node name="Build_001" parent="." instance=ExtResource("1_v2rk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.176, 3.8147e-06, -37.2106)
+
+[node name="Build_002" parent="." instance=ExtResource("2_2y3f3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.3851, 0, -33.4161)
+
+[node name="Build_003" parent="." instance=ExtResource("3_6113s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6654, 0, 9.48923)
+
+[node name="Build_004" parent="." instance=ExtResource("4_3n827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3357, 0, -1.30559)
+
+[node name="Build_005" parent="." instance=ExtResource("5_rnxdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.7667, 0, 35.4103)
+
+[node name="Build_006" parent="." instance=ExtResource("6_vm5d4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0805, 3.8147e-06, 39.0022)
+
+[node name="Build_007" parent="." instance=ExtResource("7_v4na3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34257, 0, 41.5845)
+
+[node name="Build_008" parent="." instance=ExtResource("8_nig1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.369, 3.8147e-06, 2.39606)
+
+[node name="Build_009" parent="." instance=ExtResource("9_s0rc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.4658, 0, 46.0974)
+
+[node name="Build_010" parent="." instance=ExtResource("10_8fkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.0276, 0, -47.1744)

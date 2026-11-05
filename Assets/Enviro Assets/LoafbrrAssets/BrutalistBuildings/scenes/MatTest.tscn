@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlt46x8jaj17"]
+
+[ext_resource type="Material" uid="uid://87hkw2yg6vt7" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Concrete_Floor_Polished.material" id="1_a1p6r"]
+[ext_resource type="Material" uid="uid://df4u4pa6t70k0" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Concrete_Floor.material" id="2_ap1f8"]
+[ext_resource type="Material" uid="uid://dfirn0od12go" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Concrete_Trim.material" id="3_voot3"]
+[ext_resource type="Material" uid="uid://d3i63d182p0yf" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Glass.material" id="4_yrkhy"]
+[ext_resource type="PackedScene" uid="uid://bkj2dnc8qo55c" path="res://Assets/LoafbrrAssets/BrutalistBuildings/glb/Buildings.glb" id="7_epesq"]
+[ext_resource type="Material" uid="uid://ptbt502vb64m" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Concrete_Wall_1.material" id="9_42yp6"]
+[ext_resource type="Material" uid="uid://5i4qblhbiljg" path="res://Assets/LoafbrrAssets/BrutalistBuildings/material/Concrete_Wall_2.material" id="10_qvsnu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i5cuw"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, -0.00724626, 0.11934, 0)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("1_a1p6r")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, 1.6983, 0.11934, 0)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("2_ap1f8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, -2.35543, 0.11934, 2.48972)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("3_voot3")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, 0.523956, 0.11934, 2.48972)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("4_yrkhy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, -3.69048, 0.11934, 0)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("9_42yp6")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928764, -0.370671, 0, 0.370671, 0.928764, -1.85814, 0.11934, 0)
+mesh = SubResource("BoxMesh_i5cuw")
+surface_material_override/0 = ExtResource("10_qvsnu")
+
+[node name="Buildings" parent="." instance=ExtResource("7_epesq")]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=11 format=3 uid="uid://l37slwkttljk"]
+
+[ext_resource type="PackedScene" uid="uid://dj3qh4yt4urcm" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_001.tscn" id="1_21qiq"]
+[ext_resource type="PackedScene" uid="uid://cepnx2raxh0lt" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_002.tscn" id="2_btv58"]
+[ext_resource type="PackedScene" uid="uid://dh1t71w12mff8" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_004.tscn" id="3_6gwmm"]
+[ext_resource type="PackedScene" uid="uid://c6tbdu6gf7t7r" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_005.tscn" id="4_qjbpg"]
+[ext_resource type="PackedScene" uid="uid://fra7aq7jr30" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_003.tscn" id="5_raj2k"]
+[ext_resource type="PackedScene" uid="uid://dnkddr2r0xar3" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_006.tscn" id="6_rkkjn"]
+[ext_resource type="PackedScene" uid="uid://dci3r37wpld3q" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_007.tscn" id="7_hhmmg"]
+[ext_resource type="PackedScene" uid="uid://d08ahvpnxj7rl" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_008.tscn" id="8_4t31d"]
+[ext_resource type="PackedScene" uid="uid://qcx786o0fygj" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_009.tscn" id="9_7n30j"]
+[ext_resource type="PackedScene" uid="uid://wk3lxeodhrq3" path="res://Assets/LoafbrrAssets/BrutalistBuildings/scenes/Buildings/build_010.tscn" id="10_b7qmt"]
+
+[node name="Buildings" type="Node3D"]
+
+[node name="Build_001" parent="." instance=ExtResource("1_21qiq")]
+
+[node name="Build_002" parent="." instance=ExtResource("2_btv58")]
+
+[node name="Build_004" parent="." instance=ExtResource("3_6gwmm")]
+
+[node name="Build_005" parent="." instance=ExtResource("4_qjbpg")]
+
+[node name="Build_003" parent="." instance=ExtResource("5_raj2k")]
+
+[node name="Build_006" parent="." instance=ExtResource("6_rkkjn")]
+
+[node name="Build_007" parent="." instance=ExtResource("7_hhmmg")]
+
+[node name="Build_008" parent="." instance=ExtResource("8_4t31d")]
+
+[node name="Build_009" parent="." instance=ExtResource("9_7n30j")]
+
+[node name="Build_010" parent="." instance=ExtResource("10_b7qmt")]
