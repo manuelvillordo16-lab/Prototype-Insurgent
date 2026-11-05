@@ -3,7 +3,7 @@ using UnityEngine;
 public class bulletScript : MonoBehaviour
 {
 
-    [SerializeField] int bulletspeed;
+    [SerializeField] float bulletspeed = 20;
     [SerializeField] int bullettime;
 
     void Start()
@@ -14,6 +14,6 @@ public class bulletScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, 0, 1 * Time.deltaTime * bulletspeed, 0);
+        transform.Translate(Vector3.forward * bulletspeed * Time.deltaTime);
     }
 }
