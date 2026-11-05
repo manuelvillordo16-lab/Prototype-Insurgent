@@ -1,8 +1,19 @@
+<<<<<<<< HEAD:Assets/AK Studio Art.meta
 fileFormatVersion: 2
-guid: 2e768e6299c666548b3c76f39b45bacf
+guid: 7f37c7bb475203841baa31eff0ab0157
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+========
+fileFormatVersion: 2
+guid: 81ab747d19a72ac42a8433c48f1d61c0
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>>> Maycol:Assets/Scenes/Maycol.meta
