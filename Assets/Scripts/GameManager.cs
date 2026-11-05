@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         SetState(GameState.GameOver);
         StartCoroutine(PlayVictorySequence());
     }
-
+    
     private IEnumerator PlayVictorySequence()
     {
         // Reproducir diálogo de los guías
