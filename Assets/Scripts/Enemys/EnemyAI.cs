@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
    
     private UnityEngine.AI.NavMeshAgent agent;
     private float attackTimer = 0f;
+    private bool isStunned = false;
    
     [Header("Animation")]
     private Animator guardAnim; 
@@ -93,6 +94,8 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+
+        if (isStunned) return;
 
         switch (currentState)
         {
@@ -279,16 +282,52 @@ public class EnemyAI : MonoBehaviour
 
     public void Stun(float duration)    
     {
-        StartCoroutine(StunCoroutine(duration));
+        if (!isStunned)
+        {
+            StartCoroutine(StunCoroutine(duration));
+        }
+        
     }
 
     private IEnumerator StunCoroutine(float duration)
     {
-        State previousState = currentState;
-        agent.isStopped = true;
+        isStunned = true;
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
+
+        if(guardAnim != null)
+        {
+            guardAnim.SetBool("Chase", false);
+            guardAnim.SetBool("Attack", false);
+        }
+        Debug.Log("Enemigo aturdido ");
+
         yield return new WaitForSeconds(duration);
-        agent.isStopped = false;
-        currentState= previousState;
+
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = false;
+        }
+
+        
+        isStunned = false;
+
+        if (PlayerInChaseRange())
+        {
+            currentState = State.Chase;
+            guardAnim.SetBool("Chase", true);
+        }
+        else
+        {
+            currentState = State.Patrol;
+            guardAnim.SetBool("Chase", false);
+        }
+
+         Debug.Log("Stun terminado, Enemigo recuperado ");
 
 
 

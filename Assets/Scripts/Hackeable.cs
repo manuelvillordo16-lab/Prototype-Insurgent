@@ -9,24 +9,32 @@ public class Hackeable : MonoBehaviour
     private Color originalColor;
     private EnemyAI enemyAI;
 
+    private SurveillanceCamera surveillanceCamera;
+
     [SerializeField] private DoorMovement doorMovement;
 
     void Start()
     {
         objectRenderer = GetComponentInChildren<Renderer>();
+       
 
         if (objectRenderer != null)
             originalColor = objectRenderer.material.color;
 
         enemyAI = GetComponent<EnemyAI>();
+        surveillanceCamera = GetComponent<SurveillanceCamera>();
     }
 
-   public void Hack(float duracion, int nivelPuertas, bool puedeStun)
+   public void Hack(float duracion, int nivelPuertas, bool puedeStun, bool puedeHackearCamara)
     {
         bool abrePuerta = doorMovement != null && nivelPuertas >= nivelRequerido;
         bool aturde = enemyAI != null && puedeStun;
+        bool desactivaCamara = surveillanceCamera != null && puedeHackearCamara;
 
-        if (!abrePuerta && !aturde)
+        Debug.Log("EnemyAI encontrado: " + (enemyAI != null));
+        Debug.Log("Stun desbloqueado: " + puedeStun);
+
+        if (!abrePuerta && !aturde && !desactivaCamara)
         {
             Debug.Log("No tenes el nivel para hackear: " + gameObject.name);
             return;
@@ -38,6 +46,12 @@ public class Hackeable : MonoBehaviour
         {
             Debug.Log("Abriendo puerta. ");
             doorMovement.OpenDoor();
+        }
+
+        if (desactivaCamara)
+        {
+            Debug.Log("Desactivando camara mediante hackeo");
+            surveillanceCamera.Hack(duracion);
         }
 
         StartCoroutine(HackEffect(duracion, abrePuerta, aturde));
@@ -64,5 +78,7 @@ public class Hackeable : MonoBehaviour
             Debug.Log("Hack terminado. Cerrando puerta. ");
             doorMovement.CloseDoor();
         }
+
+
     }
 }

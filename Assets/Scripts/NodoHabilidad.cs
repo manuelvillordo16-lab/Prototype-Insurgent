@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Poder { Ninguno, Stun, PuertasNivel2, Regeneracion, DobleSalto, AtaquePesado, Critico}
+public enum Poder { Ninguno, Stun, PuertasNivel2, Regeneracion, DobleSalto, AtaquePesadoYCritico, CamHack}
 public class NodoHabilidad : MonoBehaviour
 {
     public int costo = 50;

@@ -18,14 +18,16 @@ public class SkillTree : MonoBehaviour
     bool regeneracionActiva = false;
     public float curacionPorSegundo = 10f;
 
-    public MonoBehaviour CameraCollision; 
+    public MonoBehaviour CameraCollision;
+    public MonoBehaviour cameraLook;
 
     void Start()
     {
         hacker.enabled = true;
-        hacker.duracionHack = 3f;
+        hacker.duracionHack = 6f;
         hacker.nivelPuertas = 0;
         hacker.stunDesbloqueado = false;
+        hacker.camHackDesbloqueado = false;
         playerMovement.dobleSaltoDesbloqueado = false;
         playerCombat.ataquePesadoDesbloqueado = false;
         playerCombat.criticoDesbloqueado = false;
@@ -83,15 +85,17 @@ public class SkillTree : MonoBehaviour
             playerMovement.dobleSaltoDesbloqueado = true;
        }
 
-       if (poder == Poder.AtaquePesado)
+       if (poder == Poder.AtaquePesadoYCritico)
        {
             playerCombat.ataquePesadoDesbloqueado = true;
-       }
-
-       if (poder == Poder.Critico)
-       {
             playerCombat.criticoDesbloqueado = true;
        }
+
+       if (poder == Poder.CamHack)
+        {
+            hacker.camHackDesbloqueado = true;
+            Debug.Log("Cam Hack Desbloqueado");
+        }
 
 
         
@@ -128,6 +132,7 @@ public class SkillTree : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        playerMovement.puedeMoverCamara = false;
 
     }
 
@@ -141,6 +146,7 @@ public class SkillTree : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerMovement.puedeMoverCamara = true;
     }
 
 

@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Cámara")]
     [SerializeField] private Transform lookTarget; //LookTarget Object
-    [SerializeField] private float lookSensitivity = 2f;
+    [SerializeField] private float lookSensitivity = 1.2f;
     [SerializeField] private float minVerticalAngle = -40f;
     [SerializeField] private float maxVerticalAngle = 80f;
 
@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
 
     public SkillTree targetScript;
+    public bool puedeMoverCamara = true;
 
      private void OnTriggerEnter(Collider other)
     {
@@ -267,17 +268,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
         public void OnLook(InputAction.CallbackContext context)
-    {
-        Vector2 lookInput = context.ReadValue<Vector2>();
-        currentYaw += lookInput.x * lookSensitivity;
-        currentPitch -= lookInput.y * lookSensitivity;
-        currentPitch = Mathf.Clamp(currentPitch, minVerticalAngle, maxVerticalAngle);
-        if (lookTarget != null)
         {
-            lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
-        }
-    }
+          if (!puedeMoverCamara) return;
 
+          Vector2 lookInput = context.ReadValue<Vector2>();
+
+          currentYaw += lookInput.x * lookSensitivity;
+          currentPitch -= lookInput.y * lookSensitivity;
+          currentPitch = Mathf.Clamp(currentPitch, minVerticalAngle, maxVerticalAngle);
+
+          if (lookTarget != null)
+          {
+            lookTarget.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
+          } 
+        }
+   
     private void UpdateAnimator()
     {
         if (animator == null) return;
