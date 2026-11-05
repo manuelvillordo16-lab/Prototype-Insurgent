@@ -13,11 +13,30 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
     public bool IsDead { get; private set; }
+    [SerializeField] float bulletDamage;
+    [SerializeField] float bossBulletDamage;
 
     [Header("Panel de derrota")]
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private float delayBeforeDefeatPanel = 2.5f;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            currentHealth -= bulletDamage;
+            Destroy(other.gameObject);
+            Debug.Log(currentHealth);
+        }
+        else
+        {
+            if (other.gameObject.CompareTag("Bullet"))
+            {
+                currentHealth -= bossBulletDamage;
+                Destroy(other.gameObject);
+            }
+        }
+    }
 
     private void Awake()
     {

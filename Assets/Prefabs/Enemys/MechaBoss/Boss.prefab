@@ -967,6 +967,8 @@ GameObject:
   - component: {fileID: 2556948562409911735}
   - component: {fileID: 5673267127690162233}
   - component: {fileID: 5582033939619993456}
+  - component: {fileID: 4609829978185261739}
+  - component: {fileID: -7132215985692877113}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1049,13 +1051,50 @@ MonoBehaviour:
   currentState: 0
   maxHealthBar1: 100
   maxHealthBar2: 100
-  currentHealthBar1: 0
-  currentHealthBar2: 0
-  shieldVisual: {fileID: 0}
+  currentHealthBar1: 5
+  currentHealthBar2: 5
+  shieldVisual: {fileID: 2906116991436775253, guid: d0bd7482581e6624a9144adbff7de729, type: 3}
   player: {fileID: 0}
   enemy2Prefab: {fileID: 0}
   attackRange: 50
   attackCooldown: 2
+--- !u!65 &4609829978185261739
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3347155603281033640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 5, z: 7}
+  m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &-7132215985692877113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3347155603281033640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67be2a33211743d46b763f26a56e0fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 5
+  currentHealth: 5
+  expDrop: {fileID: 0}
+  expReward: 10
 --- !u!1 &3439941504941050863
 GameObject:
   m_ObjectHideFlags: 0
