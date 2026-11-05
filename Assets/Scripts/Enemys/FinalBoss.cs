@@ -17,9 +17,11 @@ public class FinalBoss : MonoBehaviour, IDamageable
     [Header("Shield System")]
     public GameObject shieldVisual;
     private bool isShieldActive = false;
+
+    [SerializeField] private float shieldDamageThreshold = 25f; 
     private float nextShieldTriggerBar1;
     private float nextShieldTriggerBar2;
-    private Coroutine shieldRoutine; 
+    private Coroutine shieldRoutine;
 
     [Header("Spawns")]
     public Transform player;
@@ -27,7 +29,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private bool hasSpawnedReinforcements = false;
 
     [Header("Attacks and Movement")]
-    public float attackRange = 10f; 
+    public float attackRange = 10f;
     public float attackCooldown = 2f;
     private float attackTimer = 0f;
     private NavMeshAgent agent;
@@ -46,8 +48,8 @@ public class FinalBoss : MonoBehaviour, IDamageable
         currentHealthBar1 = maxHealthBar1;
         currentHealthBar2 = maxHealthBar2;
 
-        nextShieldTriggerBar1 = maxHealthBar1 - 25f;
-        nextShieldTriggerBar2 = maxHealthBar2 - 25f;
+        nextShieldTriggerBar1 = maxHealthBar1 - shieldDamageThreshold;
+        nextShieldTriggerBar2 = maxHealthBar2 - shieldDamageThreshold;
 
         if (player == null) player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
@@ -68,13 +70,10 @@ public class FinalBoss : MonoBehaviour, IDamageable
     void WakeUpBoss()
     {
         currentState = BossState.Active;
-
         if (agent != null) agent.enabled = true;
 
         Debug.Log("¡The Final Boss is Awake!");
-
-      
-        ActivateShield(10f);
+         
     }
 
     void Update()
@@ -94,10 +93,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (attackTimer <= 0f)
             {
                 PerformBossAttacks();
-
-                
-                ActivateShield(1f);
-
+              
                 attackTimer = attackCooldown;
             }
         }
@@ -109,7 +105,6 @@ public class FinalBoss : MonoBehaviour, IDamageable
         attackTimer -= Time.deltaTime;
     }
 
-    
     void ActivateShield(float duration)
     {
         if (shieldRoutine != null) StopCoroutine(shieldRoutine);
@@ -132,18 +127,24 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (currentHealthBar1 <= nextShieldTriggerBar1 && currentHealthBar1 > 0f)
             {
                 TriggerShieldByHealthLoss();
-                nextShieldTriggerBar1 -= 25f;
+                nextShieldTriggerBar1 -= shieldDamageThreshold;
             }
 
             if (currentHealthBar1 <= 0f)
             {
                 isSecondBarActive = true;
-                nextShieldTriggerBar2 = maxHealthBar2 - 25f;
+                nextShieldTriggerBar2 = maxHealthBar2 - shieldDamageThreshold;
                 Debug.Log("¡The Boss has entered it's SECOND HEALTH BAR!");
 
-                ActivateShield(5f);
+                ActivateShield(10f); 
+
+                if (!hasSpawnedReinforcements)
+                {
+                    SpawnBossMinions();
+                    hasSpawnedReinforcements = true;
+                }
             }
-        }
+        } 
         else
         {
             currentHealthBar2 -= amount;
@@ -152,13 +153,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (currentHealthBar2 <= nextShieldTriggerBar2 && currentHealthBar2 > 0f)
             {
                 TriggerShieldByHealthLoss();
-                nextShieldTriggerBar2 -= 25f;
-            }
-
-            if (!hasSpawnedReinforcements && currentHealthBar2 <= (maxHealthBar2 - 25f))
-            {
-                SpawnBossMinions();
-                hasSpawnedReinforcements = true;
+                nextShieldTriggerBar2 -= shieldDamageThreshold;
             }
 
             if (currentHealthBar2 <= 0f)
@@ -171,7 +166,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     void TriggerShieldByHealthLoss()
     {
         Debug.Log("¡Shield activated by health loss!");
-        ActivateShield(5f);
+        ActivateShield(10f); 
     }
 
     IEnumerator ActivateShieldForSeconds(float duration)
@@ -189,6 +184,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
         Debug.Log("Shield deactivated");
     }
+
 
     void PerformBossAttacks()
     {
@@ -214,7 +210,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
                 Vector3 offset = new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
                 Instantiate(enemy2Prefab, transform.position + offset, Quaternion.identity);
             }
-            Debug.Log("¡The boss spawned three enemies!");
+            Debug.Log("¡The boss spawned three enemies right at the start of bar 2!");
         }
     }
 
@@ -223,4 +219,4 @@ public class FinalBoss : MonoBehaviour, IDamageable
         Debug.Log("¡The Final Boss has been defeated!");
         Destroy(gameObject);
     }
-}
+} 
