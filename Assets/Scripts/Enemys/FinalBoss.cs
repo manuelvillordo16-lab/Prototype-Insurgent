@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+
 public class FinalBoss : MonoBehaviour, IDamageable
 {
     public enum BossState { Sleeping, Active }
@@ -14,13 +15,14 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private bool isSecondBarActive = false;
 
     [Header("Shield System")]
-    public GameObject shieldVisual; 
+    public GameObject shieldVisual;
     private bool isShieldActive = false;
-    private float nextShieldHealthTrigger; 
+    private float nextShieldTriggerBar1;
+    private float nextShieldTriggerBar2;
 
     [Header("Spawns")]
     public Transform player;
-    public GameObject enemy2Prefab; 
+    public GameObject enemy2Prefab;
     private bool hasSpawnedReinforcements = false;
 
     [Header("Attacks and Movement")]
@@ -29,32 +31,29 @@ public class FinalBoss : MonoBehaviour, IDamageable
     private float attackTimer = 0f;
     private NavMeshAgent agent;
 
-
     [Header("Animation")]
     private Animator bossAnim;
-    
+
     void Start()
     {
         bossAnim = GetComponentInChildren<Animator>();
-       
     }
-  
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         currentHealthBar1 = maxHealthBar1;
         currentHealthBar2 = maxHealthBar2;
 
-        nextShieldHealthTrigger = maxHealthBar1 - 25f;
+        nextShieldTriggerBar1 = maxHealthBar1 - 25f;
+        nextShieldTriggerBar2 = maxHealthBar2 - 25f;
 
         if (player == null) player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-       
         if (agent != null) agent.enabled = false;
         if (shieldVisual != null) shieldVisual.SetActive(false);
     }
 
-    
     void OnEnable()
     {
         BossRoomTrigger.OnBossRoomTriggered += WakeUpBoss;
@@ -73,16 +72,18 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
         Debug.Log("¡The Final Boss is Awake!");
 
-        
         StartCoroutine(ActivateShieldForSeconds(10f));
     }
+
     void Update()
     {
         if (currentState == BossState.Sleeping || agent == null || !agent.enabled || player == null) return;
 
         float dist = Vector3.Distance(transform.position, player.position);
         agent.SetDestination(player.position);
-        bossAnim.SetBool("walking", true);
+
+        if (bossAnim != null) bossAnim.SetBool("walking", true);
+
         if (dist <= attackRange)
         {
             agent.speed = 0f;
@@ -91,10 +92,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
             if (attackTimer <= 0f)
             {
                 PerformBossAttacks();
-
-               
-                StartCoroutine(ActivateShieldForSeconds(3f)); 
-
+                StartCoroutine(ActivateShieldForSeconds(3f));
                 attackTimer = attackCooldown;
             }
         }
@@ -108,7 +106,6 @@ public class FinalBoss : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
-        
         if (isShieldActive)
         {
             Debug.Log("¡The attack was blocked by the boss's shield!");
@@ -120,19 +117,18 @@ public class FinalBoss : MonoBehaviour, IDamageable
             currentHealthBar1 -= amount;
             Debug.Log("Boss Health Bar 1: " + currentHealthBar1);
 
-            
-            if (currentHealthBar1 <= nextShieldHealthTrigger)
+            if (currentHealthBar1 <= nextShieldTriggerBar1 && currentHealthBar1 > 0f)
             {
                 TriggerShieldByHealthLoss();
+                nextShieldTriggerBar1 -= 25f;
             }
 
             if (currentHealthBar1 <= 0f)
             {
                 isSecondBarActive = true;
-                nextShieldHealthTrigger = maxHealthBar2 - 25f; 
-                Debug.Log("¡The Boss has entered its  SECOND HEALTH BAR!");
+                nextShieldTriggerBar2 = maxHealthBar2 - 25f; 
+                Debug.Log("¡The Boss has entered it's SECOND HEALTH BAR!");
 
-                
                 StartCoroutine(ActivateShieldForSeconds(5f));
             }
         }
@@ -141,13 +137,12 @@ public class FinalBoss : MonoBehaviour, IDamageable
             currentHealthBar2 -= amount;
             Debug.Log("Boss Health Bar 2: " + currentHealthBar2);
 
-            
-            if (currentHealthBar2 <= nextShieldHealthTrigger)
+            if (currentHealthBar2 <= nextShieldTriggerBar2 && currentHealthBar2 > 0f)
             {
                 TriggerShieldByHealthLoss();
+                nextShieldTriggerBar2 -= 25f;
             }
 
-            
             if (!hasSpawnedReinforcements && currentHealthBar2 <= (maxHealthBar2 - 25f))
             {
                 SpawnBossMinions();
@@ -165,8 +160,8 @@ public class FinalBoss : MonoBehaviour, IDamageable
     {
         Debug.Log("¡Shield activated!");
         StartCoroutine(ActivateShieldForSeconds(5f));
-        nextShieldHealthTrigger -= 25f; 
     }
+
 
     IEnumerator ActivateShieldForSeconds(float duration)
     {
@@ -189,12 +184,12 @@ public class FinalBoss : MonoBehaviour, IDamageable
         if (attackChoice == 0)
         {
             Debug.Log("The boss is attacking the player");
-            bossAnim.SetBool("attack", true);
+            if (bossAnim != null) bossAnim.SetBool("attack", true);
         }
         else
         {
             Debug.Log("The boss is shooting");
-            bossAnim.SetBool("attack", false);
+            if (bossAnim != null) bossAnim.SetBool("attack", false);
         }
     }
 
