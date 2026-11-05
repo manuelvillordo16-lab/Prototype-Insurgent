@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
-    [SerializeField] GameObject expDrop; // nuevo
+    [SerializeField] GameObject expDrop; 
     private bool isDead = false;
 
     [Header("Experience")]
@@ -52,7 +52,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         Destroy(gameObject);
 
-        Instantiate(expDrop, transform.position, transform.rotation); // nuevo
+        Instantiate(expDrop, transform.position, transform.rotation); 
 
         EnemyAudioController audioCtrl = GetComponent<EnemyAudioController>();
 
