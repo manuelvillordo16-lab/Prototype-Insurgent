@@ -6,6 +6,11 @@ public class SkillTree : MonoBehaviour
    
     public TextMeshProUGUI textoExp;
     public TextMeshProUGUI textoNivel;
+    
+    [Header("exp")]
+    [SerializeField] int expValue;
+    [SerializeField] int exp;
+
     public NodoHabilidad[] nodos;
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
@@ -21,9 +26,6 @@ public class SkillTree : MonoBehaviour
     public MonoBehaviour CameraCollision;
     public MonoBehaviour cameraLook;
 
-    [Header("exp")]
-    [SerializeField] int expValue;
-    [SerializeField] int exp;
    
     void Start()
     {
