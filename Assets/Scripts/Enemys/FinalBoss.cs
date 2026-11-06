@@ -199,7 +199,24 @@ public class FinalBoss : MonoBehaviour, IDamageable
             Debug.Log("The boss is shooting");
             if (bossAnim != null) bossAnim.SetBool("attack", false);
         }
+        if (player != null)
+        {
+            PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(15f); 
+                Debug.Log("¡El jefe hirió al jugador!");
+            }
+            else
+            {
+                Debug.LogError("¡El objeto del jugador no tiene el script PlayerHealth!");
+            }
+        }
+
     }
+
+
+   
 
     void SpawnBossMinions()
     {
