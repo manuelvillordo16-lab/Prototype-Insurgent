@@ -6,8 +6,8 @@ public class SkillTree : MonoBehaviour
    
     public TextMeshProUGUI textoExp;
     public TextMeshProUGUI textoNivel;
-    
-    [Header("exp")]
+
+    [Header("Exp")]
     [SerializeField] int expValue;
     [SerializeField] int exp;
 
@@ -155,7 +155,7 @@ public class SkillTree : MonoBehaviour
 
     public void AddExp()
     {
-        exp + expValue;
+        exp += expValue;
         ActualizarPantalla();   
     }
 
