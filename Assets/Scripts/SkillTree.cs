@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class SkillTree : MonoBehaviour
 {
-    public int exp = 100;
+   
     public TextMeshProUGUI textoExp;
     public TextMeshProUGUI textoNivel;
+
+    [Header("Exp")]
+    [SerializeField] int expValue;
+    [SerializeField] int exp;
+
     public NodoHabilidad[] nodos;
     public GameObject panelSkills;
     public KeyCode teclaAbrir = KeyCode.K;
@@ -21,6 +26,7 @@ public class SkillTree : MonoBehaviour
     public MonoBehaviour CameraCollision;
     public MonoBehaviour cameraLook;
 
+   
     void Start()
     {
         hacker.enabled = true;
@@ -92,13 +98,10 @@ public class SkillTree : MonoBehaviour
        }
 
        if (poder == Poder.CamHack)
-        {
+       {
             hacker.camHackDesbloqueado = true;
             Debug.Log("Cam Hack Desbloqueado");
-        }
-
-
-        
+       }   
     }
 
     int CantidadComprados()
@@ -152,7 +155,7 @@ public class SkillTree : MonoBehaviour
 
     public void AddExp()
     {
-        exp++;
+        exp += expValue;
         ActualizarPantalla();   
     }
 

@@ -15,19 +15,25 @@ public class Enemy2 : MonoBehaviour
     [Header("Combat and Ranges (Configurables)")]
     public Transform player;
     public float detectionRange = 15f;
-    public float fireRange = 7f;         
+    public float fireRange = 7f;
+    public float keepDistance = 4f;
     public float meleeAttackRange = 2f;  
 
     [Header("Firing System")]
     public GameObject projectilePrefab;
     public Transform firePoint;
+    public float aimHeight = 1.2f;
     public float fireCooldown = 4f;
     private float fireTimer = 0f;
-
+   
     [Header("Melee Attack")]
     public float meleeCooldown = 1.5f;
     private float meleeTimer = 0f;
     public float meleeDamage = 10f;
+
+    [Header("Optimization")]
+    [SerializeField] private float repathInterval = 0.25f;
+    private float repathTimer = 0f;
 
     private NavMeshAgent agent;
     private Animator robotAnim;
@@ -51,6 +57,7 @@ public class Enemy2 : MonoBehaviour
 
         fireTimer -= Time.deltaTime;
         meleeTimer -= Time.deltaTime;
+        repathTimer -= Time.deltaTime;
 
         switch (currentState)
         {
@@ -64,24 +71,31 @@ public class Enemy2 : MonoBehaviour
                 break;
 
             case State.Chase:
+                agent.updateRotation = false;
                 agent.speed = chaseSpeed;
+                agent.stoppingDistance = keepDistance;
                 robotAnim.SetBool("aiming", true);
+                 
+                FacePlayer();
 
-                
-                if (distToPlayer > fireRange)
+                if (distToPlayer > keepDistance)
                 {
-                    agent.stoppingDistance = fireRange;
-                    agent.SetDestination(player.position);
+                    agent.isStopped = false;
+                    if (repathTimer <= 0f)
+                    {
+                        agent.SetDestination(player.position);
+                        repathTimer = repathInterval;
+                    }
                 }
                 else
                 {
-                    
-                    agent.SetDestination(transform.position);
-                    transform.LookAt(player);
+                    agent.isStopped = true;
+                }
+                if(distToPlayer <= fireRange)
+                {
                     TryShootProjectile();
                 }
 
-                
                 if (distToPlayer <= meleeAttackRange)
                 {
                     currentState = State.Attack;
@@ -91,7 +105,7 @@ public class Enemy2 : MonoBehaviour
                     robotAnim.SetBool("aiming", false);
                     currentState = State.Guarding;
                 }
-                break;
+                 break;
 
             case State.Attack:
                 agent.speed = 0f;
@@ -115,6 +129,16 @@ public class Enemy2 : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    void FacePlayer()
+    {
+        Vector3 flat = player.position - transform.position;
+        flat.y = 0f;
+        if (flat.sqrMagnitude < 0.001f) return;
+
+        Quaternion target = Quaternion.LookRotation(flat);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, 10f * Time.deltaTime);
     }
 
     void GuardingBehavior()
