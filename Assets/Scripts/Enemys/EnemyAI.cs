@@ -82,14 +82,21 @@ public class EnemyAI : MonoBehaviour
     void HandleAlarm(Vector3 targetPosition)
     {
 
-        if (currentState == State.Patrol || currentState == State.Patrol)
+        if (currentState == State.Patrol)
         {
-            agent.SetDestination(targetPosition);
+          if (player != null)
+          {
+            
+            agent.SetDestination(player.position);
+
+          }
             currentState = State.Chase;
 
-            Debug.Log("Enemy its on it way towards the player");
-        }
+          Debug.Log("Enemy its on it way towards the player");
+            
+        }   
     }
+
 
     void Update()
     {
@@ -153,6 +160,13 @@ public class EnemyAI : MonoBehaviour
     {
         agent.speed = chaseSpeed;
 
+        if (agent != null && agent.isOnNavMesh && player != null)
+        {
+            agent.isStopped = false;
+            
+            agent.SetDestination(player.position);
+        }
+
         float dist = Vector3.Distance(transform.position, player.position);
         guardAnim.SetBool("Chase", true);
 
@@ -161,8 +175,6 @@ public class EnemyAI : MonoBehaviour
             currentState = State.Patrol;
             return;
         }
-
-        agent.SetDestination(player.position);
 
         if (dist <= attackDistance)
         {
