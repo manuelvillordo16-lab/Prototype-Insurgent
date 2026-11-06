@@ -191,7 +191,16 @@ public class EnemyAI : MonoBehaviour
 
         if (dist > attackDistance || !PlayerInChaseRange())
         {
-            currentState = State.Patrol;
+            if (PlayerInChaseRange())
+            {
+                currentState = State.Chase;
+            }
+            else
+            {
+                currentState = State.Patrol;
+            }
+
+            guardAnim.SetBool("Attack", false);
             return;
         }
 
@@ -331,15 +340,19 @@ public class EnemyAI : MonoBehaviour
         if (PlayerInChaseRange())
         {
             currentState = State.Chase;
-            guardAnim.SetBool("Chase", true);
+
+            if (guardAnim != null)
+                guardAnim.SetBool("Chase", true);
         }
         else
         {
             currentState = State.Patrol;
-            guardAnim.SetBool("Chase", false);
+
+            if (guardAnim != null)
+                guardAnim.SetBool("Chase", false);
         }
 
-         Debug.Log("Stun terminado, Enemigo recuperado ");
+        Debug.Log("Stun terminado, Enemigo recuperado ");
 
 
 
