@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 2122899575676446871}
   - component: {fileID: 7485506455812329928}
   - component: {fileID: 1676885769755485269}
-  - component: {fileID: 2071681951615383827}
-  - component: {fileID: 9062381981360552492}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -136,42 +134,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.056918457, y: 0.04027164, z: 0.1462936}
   m_Center: {x: -0.00062188506, y: 0.041136, z: -0.033175476}
---- !u!114 &2071681951615383827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4318254994855167482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 684b198ed906ab2438b555bd853266b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SurveillanceCamera
-  viewRange: 15
-  horizontalAngle: 90
-  verticalAngle: 60
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 0
-  checkInterval: 0.2
---- !u!114 &9062381981360552492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4318254994855167482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860f4f35a14d4994a94dabfbf749d743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hackeable
-  nivelRequerido: 1
-  doorMovement: {fileID: 0}
 --- !u!1 &4563459568915873646
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +147,8 @@ GameObject:
   - component: {fileID: 2617812101501673147}
   - component: {fileID: 686574528823362247}
   - component: {fileID: 7889437279654332269}
+  - component: {fileID: 4967074857483034725}
+  - component: {fileID: 6664895437497853168}
   m_Layer: 0
   m_Name: Surveillance Camera
   m_TagString: Untagged
@@ -307,6 +271,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.084564224, y: 0.17700548, z: 0.017759569}
   m_Center: {x: 0, y: 0, z: 0.0088797845}
+--- !u!114 &4967074857483034725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4563459568915873646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684b198ed906ab2438b555bd853266b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurveillanceCamera
+  viewRange: 15
+  horizontalAngle: 90
+  verticalAngle: 60
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  checkInterval: 0.2
+--- !u!114 &6664895437497853168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4563459568915873646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860f4f35a14d4994a94dabfbf749d743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hackeable
+  nivelRequerido: 1
+  doorMovement: {fileID: 0}
 --- !u!1 &7428213431903784499
 GameObject:
   m_ObjectHideFlags: 0

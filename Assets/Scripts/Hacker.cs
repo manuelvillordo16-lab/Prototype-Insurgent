@@ -17,7 +17,8 @@ public class Hacker : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Debug.Log("Detecte: " + hit.collider.name);
-                Hackeable hackeable = hit.collider.GetComponent<Hackeable>();
+                // InParent: el rayo puede pegar en un hijo (ej. "Base" o "Camera" del prefab)
+                Hackeable hackeable = hit.collider.GetComponentInParent<Hackeable>();
 
                 if (hackeable != null)
                 {
