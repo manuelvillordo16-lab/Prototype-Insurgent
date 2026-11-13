@@ -3,7 +3,8 @@ using UnityEngine.AI;
 using System.Collections;
 public class EnemyAI : MonoBehaviour
 {
-    public enum State { Patrol, Chase, Attack }
+    // Alert va al final para no cambiar los valores numericos de los estados que ya existen
+    public enum State { Patrol, Chase, Attack, Alert }
     public State currentState = State.Patrol;
 
     public enum PatrolMode { Waypoints, RandomNavMesh }
@@ -23,6 +24,11 @@ public class EnemyAI : MonoBehaviour
     public float attackDistance = 5f;
     public float attackCooldown = 2f;
 
+    [Header("Alert Settings")]
+    public float alertSpeed = 25f;          // velocidad al ir hacia la alarma
+    public float alertStopDistance = 2f;    // a que distancia del punto de alarma se considera que llego
+    public float alertTimeout = 15f;        // si no llega en este tiempo, vuelve a patrullar
+
     [Header("Detection Settings")]
     public float chaseDistance = 40f;
     public float viewDistance = 50f;
@@ -30,13 +36,14 @@ public class EnemyAI : MonoBehaviour
     public float viewAngle = 120f;
     public LayerMask obstacleMask;
 
-   
+
     private UnityEngine.AI.NavMeshAgent agent;
     private float attackTimer = 0f;
     private bool isStunned = false;
-   
+    private float alertTimer = 0f;
+
     [Header("Animation")]
-    private Animator guardAnim; 
+    private Animator guardAnim;
 
     void Awake()
     {
@@ -79,22 +86,31 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    void HandleAlarm(Vector3 targetPosition)
+    // Se ejecuta cuando CUALQUIER camara dispara la alarma.
+    // Cada enemigo decide solo si le corresponde acudir.
+    void HandleAlarm(Vector3 cameraPosition, Vector3 alarmPosition, float radius)
     {
+        if (isStunned) return;
 
-        if (currentState == State.Patrol)
-        {
-          if (player != null)
-          {
-            
-            agent.SetDestination(player.position);
+        // Si ya esta persiguiendo o atacando, no lo distraemos
+        if (currentState == State.Chase || currentState == State.Attack) return;
 
-          }
-            currentState = State.Chase;
+        // Solo acuden los enemigos cercanos a la camara
+        if (Vector3.Distance(transform.position, cameraPosition) > radius) return;
 
-          Debug.Log("Enemy its on it way towards the player");
-            
-        }   
+        if (agent == null || !agent.isOnNavMesh) return;
+
+        // El punto de alarma puede no estar justo sobre el NavMesh, buscamos el mas cercano
+        NavMeshHit navHit;
+        if (!NavMesh.SamplePosition(alarmPosition, out navHit, 5f, NavMesh.AllAreas)) return;
+
+        agent.isStopped = false;
+        agent.SetDestination(navHit.position);
+
+        alertTimer = alertTimeout;
+        currentState = State.Alert;
+
+        Debug.Log(name + " acude a la alarma");
     }
 
 
@@ -116,6 +132,10 @@ public class EnemyAI : MonoBehaviour
 
             case State.Attack:
                 Attack();
+                break;
+
+            case State.Alert:
+                Alert();
                 break;
         }
 
@@ -163,7 +183,7 @@ public class EnemyAI : MonoBehaviour
         if (agent != null && agent.isOnNavMesh && player != null)
         {
             agent.isStopped = false;
-            
+
             agent.SetDestination(player.position);
         }
 
@@ -179,6 +199,38 @@ public class EnemyAI : MonoBehaviour
         if (dist <= attackDistance)
         {
             currentState = State.Attack;
+        }
+    }
+
+    //ALERT
+    // Va hacia el punto donde la camara vio al jugador.
+    // A diferencia de Chase, NO se cancela por chaseDistance: justamente
+    // los enemigos que estan lejos son los que necesitan acudir.
+    void Alert()
+    {
+        agent.speed = alertSpeed;
+
+        if (guardAnim != null)
+            guardAnim.SetBool("Chase", true);   // reutiliza la animacion de correr
+
+        alertTimer -= Time.deltaTime;
+
+        // Si en el camino ve al jugador, pasa a la persecucion normal
+        if (PlayerInChaseRange())
+        {
+            currentState = State.Chase;
+            return;
+        }
+
+        bool arrived = !agent.pathPending && agent.remainingDistance <= alertStopDistance;
+
+        if (arrived || alertTimer <= 0f)
+        {
+            // Llego y no hay nadie: vuelve a patrullar
+            currentState = State.Patrol;
+
+            if (guardAnim != null)
+                guardAnim.SetBool("Chase", false);
         }
     }
 
@@ -301,13 +353,13 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }
 
-    public void Stun(float duration)    
+    public void Stun(float duration)
     {
         if (!isStunned)
         {
             StartCoroutine(StunCoroutine(duration));
         }
-        
+
     }
 
     private IEnumerator StunCoroutine(float duration)
@@ -320,7 +372,7 @@ public class EnemyAI : MonoBehaviour
             agent.velocity = Vector3.zero;
         }
 
-        if(guardAnim != null)
+        if (guardAnim != null)
         {
             guardAnim.SetBool("Chase", false);
             guardAnim.SetBool("Attack", false);
@@ -334,7 +386,7 @@ public class EnemyAI : MonoBehaviour
             agent.isStopped = false;
         }
 
-        
+
         isStunned = false;
 
         if (PlayerInChaseRange())
