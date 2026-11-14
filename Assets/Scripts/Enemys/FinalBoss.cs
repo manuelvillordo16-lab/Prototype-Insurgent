@@ -33,6 +33,8 @@ public class FinalBoss : MonoBehaviour, IDamageable
     public float attackCooldown = 2f;
     private float attackTimer = 0f;
     private NavMeshAgent agent;
+    [SerializeField] float enemyDamage;
+
 
     [Header("Animation")]
     private Animator bossAnim;
@@ -214,7 +216,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
             PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(15f);
+                playerHealth.TakeDamage(enemyDamage);
                 Debug.Log("¡El jefe hirió al jugador!");
             }
             else
