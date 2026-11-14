@@ -12,10 +12,4 @@ public class audiotrigger : MonoBehaviour
             Debug.Log("cambió la pista de audio");
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
