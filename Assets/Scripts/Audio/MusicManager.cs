@@ -4,21 +4,24 @@ using System.Collections;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] AudioSource aS1, aS2,aS3;
+    [SerializeField] AudioSource menu, background, bossBattle, victory, defeat;
     private float defaultVolume = 0.4f;
     private float transitionTime = 1.25F;
+
+    public void StartGame()
+    {
+        AudioSource nowPlaying = menu;
+        AudioSource target = background;
+        
+        StartCoroutine(MixSources(nowPlaying, target));
     
+    }
     public void ChangeClip()
     {
-        AudioSource nowPlaying = aS1;
-        AudioSource target = aS2;
-        if (nowPlaying.isPlaying == false)
-        {
-           nowPlaying = aS2;
-           target = aS1;
-        }
-     StartCoroutine(MixSources(nowPlaying, target));
-    
+        AudioSource nowPlaying = background;
+        AudioSource target = bossBattle;
+
+        StartCoroutine(MixSources(nowPlaying, target));
     }
 
     IEnumerator MixSources(AudioSource nowPlaying, AudioSource target)
