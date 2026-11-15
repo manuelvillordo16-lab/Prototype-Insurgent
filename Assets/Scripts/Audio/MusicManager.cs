@@ -4,7 +4,7 @@ using System.Collections;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] AudioSource aS1, aS2;
+    [SerializeField] AudioSource aS1, aS2,aS3;
     private float defaultVolume = 0.4f;
     private float transitionTime = 1.25F;
     
