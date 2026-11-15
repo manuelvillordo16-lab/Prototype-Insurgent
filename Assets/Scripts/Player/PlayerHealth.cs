@@ -19,11 +19,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [Header("Panel de derrota")]
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private float delayBeforeDefeatPanel = 2.5f;
+    [SerializeField] MusicManager targetScript;
 
     [Header("Diálogo de Muerte")]
     [SerializeField] private AudioClip[] deathDialogueClips;
     [SerializeField] private AudioSource dialogueAudioSource;
 
+    
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
@@ -63,6 +66,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (currentHealth <= 0f)
         {
             Die();
+            targetScript.Defeat();
         }
     }
 
