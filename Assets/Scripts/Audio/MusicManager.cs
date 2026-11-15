@@ -33,13 +33,22 @@ public class MusicManager : MonoBehaviour
 
         StartCoroutine(MixSources(nowPlaying, target));
     }
-   
+
     public void Defeat()
     {
-        AudioSource nowPlaying background;
-        AudioSource target = defeat;
-
-        StartCoroutine(MixSources(nowPlaying, target));
+       if (bossMusicInPlay ==false) 
+       {
+            AudioSource nowPlaying = background;
+            AudioSource target = defeat;
+            StartCoroutine(MixSources(nowPlaying, target));
+       }
+        else
+        {
+            AudioSource nowPlaying = bossBattle;
+            AudioSource target = defeat;
+            StartCoroutine(MixSources(nowPlaying, target));
+        }
+       
     }
    
     IEnumerator MixSources(AudioSource nowPlaying, AudioSource target)
