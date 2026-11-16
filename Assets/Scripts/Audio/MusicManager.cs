@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioSource menu, background, bossBattle, victory, defeat;
     private float defaultVolume = 0.4f;
     private float transitionTime = 1.25F;
-    private bool bossMusicInPlay  = false;
+   
 
     public void StartGame()
     {
@@ -22,6 +22,7 @@ public class MusicManager : MonoBehaviour
     {
         AudioSource nowPlaying = background;
         AudioSource target = bossBattle;
+       
 
         StartCoroutine(MixSources(nowPlaying, target));
     }
@@ -36,19 +37,10 @@ public class MusicManager : MonoBehaviour
 
     public void Defeat()
     {
-       if (bossMusicInPlay ==false) 
-       {
-            AudioSource nowPlaying = background;
-            AudioSource target = defeat;
-            StartCoroutine(MixSources(nowPlaying, target));
-       }
-        else
-        {
-            AudioSource nowPlaying = bossBattle;
-            AudioSource target = defeat;
-            StartCoroutine(MixSources(nowPlaying, target));
-        }
-       
+        AudioSource nowPlaying = bossBattle;
+        AudioSource target = defeat;
+        StartCoroutine(MixSources(nowPlaying, target));
+
     }
    
     IEnumerator MixSources(AudioSource nowPlaying, AudioSource target)
