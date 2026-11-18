@@ -6,13 +6,13 @@ public class EnemyAudioController : MonoBehaviour
 
     [Header("Configuration")]
     [Tooltip("Mark if this object is the (FinalBoss)")]
-    [SerializeField] private bool isBoss = false;
+    [SerializeField]  bool isBoss = false;
 
     [Header("Voices and Attacks")]
-    [SerializeField] private AudioClip attackSound;
-    [SerializeField] private AudioClip damageSound;
-    [SerializeField] private AudioClip deathSound; 
-    [SerializeField] private AudioClip specialBossVoice;
+    [SerializeField]  AudioClip attackSound;
+    [SerializeField]  AudioClip damageSound;
+    [SerializeField]  AudioClip deathSound; 
+    [SerializeField]  AudioClip specialBossVoice;
 
     void Awake()
     {
