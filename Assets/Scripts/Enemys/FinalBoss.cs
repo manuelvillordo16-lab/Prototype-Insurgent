@@ -243,11 +243,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     {
         Debug.Log("¡The Final Boss has been defeated!");
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.Victory();
-        }
-
+        GameManager.Instance.Victory();
         Destroy(gameObject);
     }
 }
