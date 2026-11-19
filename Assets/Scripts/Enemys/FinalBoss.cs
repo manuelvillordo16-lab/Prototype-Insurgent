@@ -13,7 +13,7 @@ public class FinalBoss : MonoBehaviour, IDamageable
     [SerializeField] private float currentHealthBar1;
     [SerializeField] private float currentHealthBar2;
     private bool isSecondBarActive = false;
-
+    [SerializeField] GameObject victoryPanel;
     [Header("Shield System")]
     public GameObject shieldVisual;
     private bool isShieldActive = false;
@@ -243,7 +243,9 @@ public class FinalBoss : MonoBehaviour, IDamageable
     {
         Debug.Log("¡The Final Boss has been defeated!");
 
-        GameManager.Instance.Victory();
+        if (victoryPanel != null)
+            victoryPanel.SetActive(true);
+
         Destroy(gameObject);
     }
 }
