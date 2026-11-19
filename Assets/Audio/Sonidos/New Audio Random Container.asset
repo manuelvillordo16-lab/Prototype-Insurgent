@@ -10,6 +10,16 @@ AudioContainerElement:
   m_AudioClip: {fileID: 8300000, guid: ad1d2325ea80b0f4eade527b40f8608e, type: 3}
   m_Volume: 0
   m_Enabled: 1
+--- !u!1233149941 &4955437668980732728
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: yarzur_ofc-st3-footstep-sfx-323056_{4955437668980732728}
+  m_AudioClip: {fileID: 8300000, guid: 3afa26227eca40d4f9766ccbac481e8d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
 AudioRandomContainer:
   m_ObjectHideFlags: 0
@@ -27,8 +37,9 @@ AudioRandomContainer:
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
   - {fileID: -2548459473585079517}
+  - {fileID: 4955437668980732728}
   m_AvoidRepeatingLast: 0
-  m_PlaybackMode: 0
+  m_PlaybackMode: 1
   m_TriggerMode: 1
   m_AutomaticTriggerMode: 1
   m_LoopMode: 2
