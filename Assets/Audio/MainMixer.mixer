@@ -80,6 +80,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-5664424118657314513
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: b8b1edf3869ab004781161be1148b91d
+  m_EffectName: Attenuation
+  m_MixLevel: ab93d34dc8836ea479a4cc7dca20dbf7
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-5458120782894687146
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -166,6 +180,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 8104165735235183517}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &-4648282596553844078
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PosteDeLuz
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: d66c2b45261ff5e439cd04d6b79a18e9
+  m_Children: []
+  m_Volume: fee0187d793131c42bc390b0826d9a09
+  m_Pitch: cff6e6b8ad1caa943a1ff1580a4d45d8
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -2275103486946313317}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -282,6 +315,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-2275103486946313317
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 907bab32bb9c09348923ee12e6e0a95a
+  m_EffectName: Attenuation
+  m_MixLevel: 99e0206c352f8a84c8098c18ccb0dc38
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-764774155787831426
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -393,6 +440,8 @@ AudioMixerController:
     - 114eafd198c5a194387254108b1ebbd8
     - d93c72fa3a28470418d8155651854da5
     - 9221ae0ffff1364459f6de9553d3e4ce
+    - d66c2b45261ff5e439cd04d6b79a18e9
+    - a4f2fa68b5f05f04d94d9f441159e30f
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -503,7 +552,9 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: d93c72fa3a28470418d8155651854da5
   m_Children:
+  - {fileID: -4648282596553844078}
   - {fileID: 8131525853396091251}
+  - {fileID: 4718570439832234965}
   m_Volume: 404f73a8a326afe4e977fbc4781a6ad8
   m_Pitch: 40d2f185e387fbf4f86a60cc6ce42d7c
   m_Send: 00000000000000000000000000000000
@@ -773,6 +824,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &4718570439832234965
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Laboratorio
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a4f2fa68b5f05f04d94d9f441159e30f
+  m_Children: []
+  m_Volume: 79379bab8ac0cac439a55af8096e19fe
+  m_Pitch: ac016268b3da075498b9f82bfe4bcb2f
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -5664424118657314513}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &4976572016284244692
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
